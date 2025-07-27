@@ -7,19 +7,20 @@ plugins {
 }
 
 group = "com.github.mrjimin"
-version = "1.1.0"
+version = "1.1.2"
 
 repositories {
+    mavenCentral()
     maven {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 
-    mavenCentral()
     maven("https://repo.nexomc.com/releases")
     maven("https://jitpack.io")
     maven("https://repo.codemc.org/repository/maven-public/")
     maven("https://repo.nightexpressdev.com/releases")
+    maven("https://repo.momirealms.net/releases/")
     maven("https://repo.momirealms.net/releases/")
 }
 
@@ -32,6 +33,7 @@ dependencies {
     compileOnly("net.momirealms:craft-engine-bukkit:0.0.59")
     compileOnly("com.github.angeschossen:LandsAPI:7.15.20")
     // compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
+    compileOnly("net.momirealms:custom-crops:3.6.40")
 
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:10.1.0")
 
@@ -57,8 +59,8 @@ tasks.withType<ShadowJar> {
     }
 
     archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-    // destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\BQ\\plugins")
-    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\BQ_CraftEngine\\plugins")
+    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\BQ\\plugins")
+    // destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\BQ_CraftEngine\\plugins")
 }
 
 tasks.processResources {

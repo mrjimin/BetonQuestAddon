@@ -1,5 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
+import com.github.mrjimin.betonquestaddon.compatibility.advancedenchantments.AEIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.CoinsEngineIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.headdatabase.HDBIntegrator
@@ -52,5 +53,6 @@ class BQAddonIntegratorHandler(
         register("ItemsAdder") { ItemsAdderIntegrator }
         register("CraftEngine") { CraftEngineIntegrator }
         register("HeadDatabase") { HDBIntegrator }
+        register("AdvancedEnchantments") { AEIntegrator }
     }
 }

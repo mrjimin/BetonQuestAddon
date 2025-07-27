@@ -28,7 +28,7 @@ class NxBlockConditionFactory(
         return PrimaryServerThreadPlayerlessCondition(
             NullableConditionAdapter(parseInstruction(instruction)), data
         )
-    }
+    } 
 
     private fun parseInstruction(instruction: Instruction): NxBlock {
         val itemID: Variable<String> = instruction.get(NxParser)

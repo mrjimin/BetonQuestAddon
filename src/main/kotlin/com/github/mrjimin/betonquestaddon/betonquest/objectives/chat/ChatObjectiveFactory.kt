@@ -10,7 +10,7 @@ object ChatObjectiveFactory : TypeFactory<Objective> {
 
     override fun parseInstruction(instruction: Instruction): Objective {
         val cancel = instruction.hasArgument(Settings.OBJ_CHAT.toString())
-        val variable = instruction.getValue("variable", VariableParser.VARIABLE)
+        val variable = instruction.getValue("variable", VariableParser)
         return ChatObjective(instruction, cancel, variable)
     }
 }

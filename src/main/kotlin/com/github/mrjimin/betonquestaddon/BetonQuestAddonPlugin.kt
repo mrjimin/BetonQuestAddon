@@ -32,7 +32,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 
         logger.info("BetonQuestAddon v${pluginMeta.version} successfully enabled.")
 
-        TestPluginInit(this)
+        // TestPluginInit(this)
     }
 
     override fun onDisable() = CommandAPI.onDisable()

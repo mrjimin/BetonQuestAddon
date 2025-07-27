@@ -2,8 +2,8 @@ package com.github.mrjimin.betonquestaddon.compatibility.itemsadder
 
 import com.github.mrjimin.betonquestaddon.compatibility.BQAddonIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.conditions.IaBlockConditionFactory
-import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.IaPlayAnimationEventFactory
-import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.IaSetBlockAtEventFactory
+import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.animation.IaPlayAnimationEventFactory
+import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.block.IaSetBlockAtEventFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.items.IaItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.items.IaItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives.IaBlockBreakObjectiveFactory

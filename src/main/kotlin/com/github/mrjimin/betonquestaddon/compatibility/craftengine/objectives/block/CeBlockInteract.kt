@@ -15,11 +15,13 @@ class CeBlockInteract(
     instruction: Instruction,
     targetAmount: Variable<Number>,
     log: BetonQuestLogger,
-    itemID: Variable<String>
+    itemID: Variable<String>,
+    val isCancel: Boolean
 ) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, log, itemID), Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     fun CustomBlockInteractEvent.onCeBlockInteract() {
+        isCancelled = isCancel
         handle(customBlock().id().toIdOrNull(), player)
     }
 }

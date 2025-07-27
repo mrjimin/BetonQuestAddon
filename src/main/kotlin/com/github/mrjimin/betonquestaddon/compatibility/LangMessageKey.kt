@@ -11,5 +11,9 @@ enum class LangMessageKey(val key: String) {
 
     FURNITURE_BREAK("bqa_furniture_break"),
     FURNITURE_PLACE("bqa_furniture_place"),
-    FURNITURE_INTERACT("bqa_furniture_interact")
+    FURNITURE_INTERACT("bqa_furniture_interact"),
+
+    AE_BOOK_OPEN("bqa_ae_book_open"),
+    AE_ALCHEMIST_TRADE("bqa_ae_alchemist_trade"),
+    AE_TINKERER_TRADE("bqa_ae_tinkerer_trade")
 }

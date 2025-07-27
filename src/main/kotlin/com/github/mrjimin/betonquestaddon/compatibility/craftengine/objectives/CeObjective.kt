@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 
-import com.github.mrjimin.betonquestaddon.compatibility.AbstractObjective
+import com.github.mrjimin.betonquestaddon.compatibility.AbstractItemObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.instruction.Instruction
@@ -12,7 +12,7 @@ open class CeObjective(
     langMessageKey: LangMessageKey,
     log: BetonQuestLogger,
     itemID: Variable<String>
-) : AbstractObjective<String>(instruction, targetAmount, langMessageKey, log, itemID) {
+) : AbstractItemObjective<String>(instruction, targetAmount, langMessageKey, log, itemID) {
     override fun matches(expected: String, inputId: String?): Boolean {
         return expected == inputId
     }

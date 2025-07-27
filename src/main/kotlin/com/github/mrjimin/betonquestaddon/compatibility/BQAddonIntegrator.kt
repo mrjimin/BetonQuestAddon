@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
-import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestComp
-import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestComp.featureRegistries
+import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
+import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon.featureRegistries
 import org.betonquest.betonquest.item.QuestItemSerializer
 import org.betonquest.betonquest.item.QuestItemWrapper
 import org.betonquest.betonquest.kernel.registry.TypeFactory
@@ -12,11 +12,11 @@ import org.betonquest.betonquest.kernel.registry.quest.VariableTypeRegistry
 
 abstract class BQAddonIntegrator {
 
-    protected val loggerFactory = BetonQuestComp.loggerFactory
-    protected val data = BetonQuestComp.data
-    protected val pluginMessage = BetonQuestComp.instance.pluginMessage
-    protected val variableProcessor = BetonQuestComp.instance.variableProcessor
-    protected val registries = BetonQuestComp.questRegistries
+    protected val loggerFactory = BetonQuestAddon.loggerFactory
+    protected val data = BetonQuestAddon.data
+    protected val pluginMessage = BetonQuestAddon.instance.pluginMessage
+    protected val variableProcessor = BetonQuestAddon.instance.variableProcessor
+    protected val registries = BetonQuestAddon.questRegistries
 
     protected val condition: ConditionTypeRegistry = registries.condition
     protected val event: EventTypeRegistry = registries.event

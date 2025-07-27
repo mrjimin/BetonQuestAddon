@@ -37,7 +37,7 @@ class CoinsEventFactory(
         val amount = try {
             Variable(variableProcessor, instruction.getPackage(), numericPart, Argument.NUMBER)
         } catch (ex: QuestException) {
-            throw QuestException("Could not parse coin amount: '${rawAmount}' → ${ex.message}", ex)
+            throw QuestException("Failed to parse coin amount '$rawAmount': ${ex.message}", ex)
         }
 
         val notify = instruction.hasArgument("notify")

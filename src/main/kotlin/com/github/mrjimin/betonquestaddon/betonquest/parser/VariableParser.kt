@@ -6,12 +6,7 @@ import org.betonquest.betonquest.id.ObjectiveID
 import org.betonquest.betonquest.instruction.argument.PackageArgument
 import java.util.AbstractMap
 
-class VariableParser : PackageArgument<Map.Entry<ObjectiveID, String>> {
-
-    companion object {
-        val VARIABLE = VariableParser()
-    }
-
+object VariableParser : PackageArgument<Map.Entry<ObjectiveID, String>> {
     override fun apply(questPackage: QuestPackage, string: String): Map.Entry<ObjectiveID, String> {
         val split = string.split("#")
         if (split.size != 2) {
