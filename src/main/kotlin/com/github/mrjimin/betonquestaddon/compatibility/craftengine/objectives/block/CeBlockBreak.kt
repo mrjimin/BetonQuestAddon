@@ -8,7 +8,6 @@ import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.instruction.Instruction
 import org.betonquest.betonquest.instruction.variable.Variable
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 
 class CeBlockBreak(
@@ -18,7 +17,7 @@ class CeBlockBreak(
     itemID: Variable<String>
 ) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_BREAK, log, itemID), Listener {
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler
     fun CustomBlockBreakEvent.onCeBlockPlace() {
         handle(customBlock().id().toIdOrNull(), player)
     }
