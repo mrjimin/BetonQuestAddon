@@ -23,7 +23,9 @@ repositories {
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
-    maven("https://nexus.frengor.com/repository/public/")
+    // maven("https://nexus.frengor.com/repository/public/")
+    maven("https://maven.enginehub.org/repo/")
+    maven("https://repo.plasmoverse.com/releases")
 }
 
 dependencies {
@@ -38,10 +40,17 @@ dependencies {
     compileOnly("net.momirealms:custom-crops:3.6.40")
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.github.Angeschossen:LandsAPI:7.15.20")
+    // compileOnly("com.frengor:ultimateadvancementapi:2.6.0")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.14")
+    compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
+    compileOnly("su.plo.voice.api:server:2.1.5")
 
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:10.1.2")
     implementation("xyz.xenondevs.invui:invui:2.0.0-alpha.17")
     implementation("xyz.xenondevs.invui:invui-kotlin:2.0.0-alpha.17")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
@@ -59,6 +68,10 @@ tasks.withType<ShadowJar> {
     from("LICENSE")
 
     relocate("dev.jorel.commandapi", "com.github.mrjimin.betonquestaddon.lib.commandapi")
+
+//    relocate("kotlin", "su.plo.voice.libs.kotlin")
+//    relocate("kotlinx.coroutines", "su.plo.voice.libs.kotlinx.coroutines")
+//    relocate("kotlinx.serialization", "su.plo.voice.libs.kotlinx.serialization")
 
     manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"

@@ -40,9 +40,15 @@ dependencies:
     PlaceholderAPI:
       load: BEFORE
       required: false
-    UltimateAdvancementAPI:
+#    UltimateAdvancementAPI:
+#      load: BEFORE
+#      required: false
+    WorldGuard:
       load: BEFORE
       required: false
+#    PlasmoVoice:
+#      load: BEFORE
+#      required: false
 
 permissions:
   betonquestaddon.command:

@@ -4,3 +4,9 @@ objectives:
     # This must be set and cannot be left blank; leaving it empty may cause errors.
     # Default value: "cancel"
     argumentName: "cancel"
+
+#compatibility:
+#  plasmovoice:
+#    source_line_volume: 1
+#    source_line_weight: 10
+#    icon: "plasmovoice:textures/icons/speaker_priority.png"

@@ -15,8 +15,9 @@ class TestPluginInit(
     }
 
     fun registerEvents() {
-        plugin.server.pluginManager.registerEvents(TestListener(), plugin)
+        // plugin.server.pluginManager.registerEvents(TestListener(), plugin)
         // plugin.server.pluginManager.registerEvents(AEListener(), plugin)
         // plugin.server.pluginManager.registerEvents(LandsListener(), plugin)
+        // plugin.server.pluginManager.registerEvents(AdvancementListener(), plugin)
     }
 }

@@ -9,3 +9,10 @@ fun Instruction.getBoolean(name: String, default: Boolean): Variable<Boolean> =
 
 fun Instruction.getNumberNotLessThanZero(name: String, default: Int = 1): Variable<Number> =
     this.getValue(name, Argument.NUMBER_NOT_LESS_THAN_ZERO, default) ?: Variable(default)
+
+fun <T : Any> Instruction.getOrNull(arg: Argument<T>): Variable<T>? =
+    try {
+        get(arg)
+    } catch (e: Exception) {
+        null
+    }

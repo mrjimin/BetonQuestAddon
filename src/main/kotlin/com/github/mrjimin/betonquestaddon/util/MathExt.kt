@@ -1,5 +1,7 @@
 package com.github.mrjimin.betonquestaddon.util
 
+import org.betonquest.betonquest.api.quest.QuestException
+
 fun String.compareWith(op: String, other: String, ignoreCase: Boolean): Boolean {
     val opTrimmed = op.trim()
 
@@ -57,4 +59,15 @@ sealed class ParseResult {
     data class Num(val value: Number): ParseResult()
     data class Bool(val value: Boolean): ParseResult()
     object Invalid: ParseResult()
+}
+
+fun List<Boolean>.checkHas(type: String): Boolean {
+    return when (type) {
+        "has" -> this.firstOrNull() == true
+        "!has" -> this.firstOrNull() == false
+        "any" -> this.any { it }
+        "all" -> this.all { it }
+        "none" -> this.none { it }
+        else -> throw QuestException("Unknown has type: $type")
+    }
 }
