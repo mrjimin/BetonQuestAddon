@@ -83,6 +83,20 @@ object WorldGuardHook {
         return region.flagSet()
     }
 
+    private fun hasOwner(region: ProtectedRegion?): Boolean {
+        return region?.owners?.players?.isNotEmpty() == true || region?.owners?.uniqueIds?.isNotEmpty() == true
+    }
+
+    fun hasOwner(player: Player, regionId: String): Boolean {
+        val region = getRegionManager(player.location)?.getRegion(regionId)
+        return hasOwner(region)
+    }
+
+    fun hasOwnerHere(player: Player): Boolean {
+        val regions = getRegions(player.location)
+        return regions.any { hasOwner(it) }
+    }
+
     fun isInRegion(location: Location, region: String) =
         getRegions(location).any { it.id.equals(region, ignoreCase = true) }
 
