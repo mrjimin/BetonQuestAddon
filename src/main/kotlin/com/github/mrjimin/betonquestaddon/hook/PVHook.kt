@@ -1,18 +1,13 @@
 package com.github.mrjimin.betonquestaddon.hook
 
-import com.github.mrjimin.betonquestaddon.BuildConstants
-import com.github.mrjimin.betonquestaddon.config.Settings
+import com.github.mrjimin.betonquestaddon.compatibility.plasmovoice.addon.PVAddonPlugin
 import kotlinx.coroutines.*
 import kotlinx.coroutines.future.await
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import su.plo.slib.api.server.position.ServerPos3d
-import su.plo.voice.api.addon.AddonLoaderScope
 import su.plo.voice.api.addon.InjectPlasmoVoice
-import su.plo.voice.api.addon.annotation.Addon
-import su.plo.voice.api.addon.annotation.Dependency
 import su.plo.voice.api.server.PlasmoVoiceServer
-import su.plo.voice.api.server.audio.line.ServerSourceLine
 import su.plo.voice.api.server.audio.source.ServerProximitySource
 import su.plo.voice.api.server.player.VoiceServerPlayer
 import su.plo.voice.discs.PlasmoAudioPlayerManager
@@ -20,16 +15,7 @@ import su.plo.voice.discs.libraries.org.koin.core.Koin
 import su.plo.voice.discs.utils.PluginKoinComponent
 import su.plo.voice.discs.utils.PluginKoinComponentKt
 
-@Addon(
-    id = "pv-addon-betonquestaddon",
-    scope = AddonLoaderScope.SERVER,
-    version = BuildConstants.VERSION,
-    authors = ["MrJimin"],
-    dependencies = [Dependency(id = "pv-addon-lavaplayer-lib")]
-)
 object PVHook : PluginKoinComponent {
-
-    val addonName = "betonquestaddon"
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val trackMap = mutableMapOf<String, String>() // id -> url
@@ -39,18 +25,6 @@ object PVHook : PluginKoinComponent {
     lateinit var voiceServer: PlasmoVoiceServer
 
     private val audioManager by lazy { PlasmoAudioPlayerManager().apply { registerSources() } }
-
-    val sourceLine: ServerSourceLine by lazy {
-        voiceServer.sourceLineManager.createBuilder(
-            this,
-            addonName,
-            "pv.activation.$addonName",
-            Settings.PV_ICON.toString(),
-            Settings.PV_LINE_WEIGHT.toInt()
-        ).apply {
-            setDefaultVolume(Settings.PV_LINE_VOLUME.toDouble())
-        }.build()
-    }
 
     fun onLoad() = PlasmoVoiceServer.getAddonsLoader().load(this)
 
@@ -66,14 +40,14 @@ object PVHook : PluginKoinComponent {
 
     fun playTrack(player: Player, id: String, url: String, distance: Short = 16, loop: Boolean = false) {
         trackMap[id] = url
-        val voicePlayer = player.asVoicePlayer(voiceServer) ?: return
+        val voicePlayer = player.asVoicePlayer(voiceServer)
         val jobKey = getJobKey(player, id)
         playerTrackJobs[jobKey]?.cancel()
         val job = scope.launch {
             try {
                 do {
                     val track = audioManager.getTrack(url).await()
-                    val source = sourceLine.createPlayerSource(voicePlayer, false) as ServerProximitySource<*>
+                    val source = PVAddonPlugin.sourceLine.createPlayerSource(voicePlayer, false) as ServerProximitySource<*>
                     audioManager.startTrackJob(track, source, distance)
                 } while (loop)
             } catch (e: Exception) {
@@ -91,7 +65,7 @@ object PVHook : PluginKoinComponent {
                 val pos = ServerPos3d(mcWorld, location.x, location.y, location.z)
                 do {
                     val track = audioManager.getTrack(url).await()
-                    val source = sourceLine.createStaticSource(pos, false)
+                    val source = PVAddonPlugin.sourceLine.createStaticSource(pos, false)
                     audioManager.startTrackJob(track, source, distance)
                 } while (loop)
             } catch (e: Exception) {

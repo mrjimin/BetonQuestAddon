@@ -2,15 +2,12 @@ package com.github.mrjimin.betonquestaddon.config
 
 import com.github.mrjimin.betonquestaddon.BetonQuestAddonPlugin
 import com.github.mrjimin.betonquestaddon.api.BQAddonItems
-import com.github.mrjimin.betonquestaddon.compatibility.plasmovoice.AddonConfig
-import com.github.mrjimin.betonquestaddon.hook.PVHook
+import com.github.mrjimin.betonquestaddon.compatibility.plasmovoice.addon.PVAddonPlugin
 import com.github.mrjimin.betonquestaddon.item.ItemBuilder
 import com.github.mrjimin.betonquestaddon.item.ItemParser
 import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import org.bukkit.configuration.file.YamlConfiguration
-import su.plo.voice.api.server.PlasmoVoiceServer
 import java.io.File
-import java.io.InputStream
 
 class ConfigsManager(private val plugin: BetonQuestAddonPlugin) {
 
@@ -19,7 +16,11 @@ class ConfigsManager(private val plugin: BetonQuestAddonPlugin) {
     fun reload() {
         plugin.saveDefaultConfig()
         plugin.reloadConfig()
-        if ("PlasmoVoice".checkPlugin()) AddonConfig.loadConfig(PVHook.voiceServer)
+
+        if ("PlasmoVoice".checkPlugin() && PVAddonPlugin.isInitialized) {
+            PVAddonPlugin.instance.loadConfig()
+        }
+
         BQAddonItems.loadItems(this)
     }
 

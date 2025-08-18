@@ -13,7 +13,7 @@ class CommandsManger(private val plugin: BetonQuestAddonPlugin) {
 
     fun loadsCommands() {
         CommandAPICommand("betonquestaddon")
-            .withAliases("pv-bqa", "bqaddon")
+            .withAliases("bqa", "bqaddon")
             .withPermission("betonquestaddon.command")
             .withSubcommands(
                 ReloadCommand(plugin).build(),
