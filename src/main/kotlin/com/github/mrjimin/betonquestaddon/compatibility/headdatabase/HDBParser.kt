@@ -4,7 +4,7 @@ import com.github.mrjimin.betonquestaddon.util.server.NotFoundPlugin
 import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import me.arcaniax.hdb.api.HeadDatabaseAPI
 import org.betonquest.betonquest.api.quest.QuestException
-import org.betonquest.betonquest.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.argument.Argument
 
 object HDBParser : Argument<String> {
 

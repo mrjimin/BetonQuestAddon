@@ -3,10 +3,10 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine.events.furn
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook.toKeyOrNull
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.bukkit.Location
 
 class CeSetFurnitureAt(

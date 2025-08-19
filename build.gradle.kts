@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.mrjimin"
-version = "1.2.1-dev"
+version = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -64,8 +64,9 @@ tasks.build {
 }
 
 tasks.withType<ShadowJar> {
-//    exclude("kotlin/**")
-//    exclude("org/**")
+    exclude("kotlin/**")
+    exclude("kotlinx/**")
+    exclude("org/**")
 
     from("LICENSE")
 

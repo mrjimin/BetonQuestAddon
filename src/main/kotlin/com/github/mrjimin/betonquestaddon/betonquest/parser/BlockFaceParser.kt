@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.betonquest.parser
 
 import org.betonquest.betonquest.api.quest.QuestException
-import org.betonquest.betonquest.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.argument.Argument
 import org.bukkit.block.BlockFace
 
 object BlockFaceParser : Argument<BlockFace> {

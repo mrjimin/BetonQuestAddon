@@ -3,8 +3,8 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook
 import com.github.mrjimin.betonquestaddon.util.server.NotFoundPlugin
 import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
+import org.betonquest.betonquest.api.instruction.argument.Argument
 import org.betonquest.betonquest.api.quest.QuestException
-import org.betonquest.betonquest.instruction.argument.Argument
 
 object CeParser : Argument<String> {
 

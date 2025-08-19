@@ -13,8 +13,8 @@ class ConfigsManager(private val plugin: BetonQuestAddonPlugin) {
     private val itemsFolder = File(plugin.dataFolder, "items").apply { if (!exists()) mkdirs() }
 
     fun reload() {
-        plugin.saveDefaultConfig()
-        plugin.reloadConfig()
+//        plugin.saveDefaultConfig()
+//        plugin.reloadConfig()
 
 //        if ("PlasmoVoice".checkPlugin() && PVAddonPlugin.isInitialized) {
 //            PVConfigsManager(plugin).reload(PVAddonPlugin.voiceServer)

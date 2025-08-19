@@ -4,9 +4,9 @@ import com.github.mrjimin.betonquestaddon.hook.CoinsEngineHook
 import com.github.mrjimin.betonquestaddon.hook.CoinsEngineHook.getCurrencyOrNull
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.common.component.VariableReplacement
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.betonquest.betonquest.quest.event.IngameNotificationSender
 import kotlin.math.abs
 

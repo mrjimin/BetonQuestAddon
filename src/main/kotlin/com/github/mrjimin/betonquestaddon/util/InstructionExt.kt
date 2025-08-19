@@ -1,8 +1,8 @@
 package com.github.mrjimin.betonquestaddon.util
 
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.argument.Argument
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 fun Instruction.getBoolean(name: String, default: Boolean): Variable<Boolean> =
     this.getValue(name, Argument.BOOLEAN, default) ?: Variable(default)

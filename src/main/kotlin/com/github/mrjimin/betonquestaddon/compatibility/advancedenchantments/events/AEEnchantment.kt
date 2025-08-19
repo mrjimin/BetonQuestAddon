@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.advancedenchantments.ev
 import com.github.mrjimin.betonquestaddon.hook.AEHook
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 class AEEnchantment(
     private val name: Variable<String>,

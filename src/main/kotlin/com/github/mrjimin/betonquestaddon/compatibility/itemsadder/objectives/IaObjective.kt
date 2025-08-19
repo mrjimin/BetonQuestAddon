@@ -4,8 +4,8 @@ import com.github.mrjimin.betonquestaddon.compatibility.AbstractItemObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import dev.lone.itemsadder.api.CustomStack
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 open class IaObjective(
     instruction: Instruction,

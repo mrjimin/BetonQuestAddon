@@ -2,7 +2,6 @@ package com.github.mrjimin.betonquestaddon.betonquest
 
 import com.github.mrjimin.betonquestaddon.betonquest.items.BQAddonItemFactory
 import com.github.mrjimin.betonquestaddon.betonquest.items.BQAddonItemSerializer
-import com.github.mrjimin.betonquestaddon.betonquest.objectives.chat.ChatObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.BQAddonIntegratorHandler
 import org.betonquest.betonquest.BetonQuest
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
@@ -45,7 +44,6 @@ object BetonQuestAddon {
     }
 
     private fun registerObjectives() {
-        questRegistries.objective.register("chat", ChatObjectiveFactory)
     }
 
     val instance: BetonQuest by lazy { BetonQuest.getInstance() }

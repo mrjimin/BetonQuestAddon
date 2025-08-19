@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.betonquest.parser
 
 import org.betonquest.betonquest.api.quest.QuestException
-import org.betonquest.betonquest.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.argument.Argument
 
 object HasParser : Argument<String> {
     private val allowed = setOf("has", "!has", "any", "all", "none")

@@ -12,10 +12,10 @@ import net.momirealms.craftengine.bukkit.entity.furniture.BukkitFurniture
 import net.momirealms.craftengine.bukkit.world.BukkitBlockInWorld
 import net.momirealms.craftengine.core.item.CustomItem
 import net.momirealms.craftengine.core.util.Key
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.argument.Argument
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.betonquest.betonquest.quest.PrimaryServerThreadData
 import org.betonquest.betonquest.quest.event.PrimaryServerThreadEvent
 import org.bukkit.Location

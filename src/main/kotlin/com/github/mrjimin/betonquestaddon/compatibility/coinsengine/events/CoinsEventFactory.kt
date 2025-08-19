@@ -6,15 +6,15 @@ import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.betonquest.betonquest.api.quest.event.PlayerEventFactory
 import org.betonquest.betonquest.config.PluginMessage
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.argument.Argument
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.betonquest.betonquest.kernel.processor.quest.VariableProcessor
 import org.betonquest.betonquest.quest.PrimaryServerThreadData
 import org.betonquest.betonquest.quest.event.IngameNotificationSender
 import org.betonquest.betonquest.quest.event.NotificationLevel
 import org.betonquest.betonquest.quest.event.PrimaryServerThreadEvent
 import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.events.CoinsEvent.Operation
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.argument.Argument
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 class CoinsEventFactory(
     private val loggerFactory: BetonQuestLoggerFactory,
@@ -44,7 +44,7 @@ class CoinsEventFactory(
         val (givenSender, takenSender, resetSender) = if (notify) {
             val log = loggerFactory.create(CoinsEvent::class.java)
             val pack = instruction.getPackage()
-            val fullID = instruction.id.fullID
+            val fullID = instruction.id.full
             Triple(
                 IngameNotificationSender(log, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_GIVEN.key),
                 IngameNotificationSender(log, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_TAKEN.key),

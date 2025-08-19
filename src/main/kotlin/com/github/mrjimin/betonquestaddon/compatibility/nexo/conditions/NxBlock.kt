@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.nexo.conditions
 import com.nexomc.nexo.api.NexoBlocks
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.Location
 
 class NxBlock(

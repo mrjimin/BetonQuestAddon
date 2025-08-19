@@ -5,7 +5,7 @@ import com.github.mrjimin.betonquestaddon.util.compareWith
 import com.github.mrjimin.betonquestaddon.util.toOnlinePlayer
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 class PAPIConditions(
     private val first: Variable<String>,

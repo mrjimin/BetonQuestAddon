@@ -4,7 +4,7 @@ import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomStack
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.Location
 
 class IaBlock(

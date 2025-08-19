@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.anima
 import dev.lone.itemsadder.api.ItemsAdder
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.event.online.OnlineEvent
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.variable.Variable
 
 class IaPlayAnimation(
     private val name: Variable<String>

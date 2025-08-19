@@ -4,8 +4,8 @@ import org.betonquest.betonquest.BetonQuest
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.profile.OnlineProfile
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList

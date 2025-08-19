@@ -1,8 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
-import org.betonquest.betonquest.instruction.Instruction
-import org.betonquest.betonquest.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.entity.Player
 
 abstract class AbstractSimpleObjective(

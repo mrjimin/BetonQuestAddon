@@ -2,9 +2,9 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine.conditions
 
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook.toIdOrNull
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.bukkit.Location
 
 class CeBlock(

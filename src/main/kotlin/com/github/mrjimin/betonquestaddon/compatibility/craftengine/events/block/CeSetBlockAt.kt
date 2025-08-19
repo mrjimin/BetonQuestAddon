@@ -4,10 +4,10 @@ import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook.toKeyOrNull
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import net.momirealms.craftengine.libraries.nbt.CompoundTag
+import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
-import org.betonquest.betonquest.instruction.variable.Variable
 import org.bukkit.Location
 
 class CeSetBlockAt(
