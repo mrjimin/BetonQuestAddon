@@ -7,8 +7,4 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class BetonQuestAddonBootstrap : PluginBootstrap {
     override fun bootstrap(context: BootstrapContext) {}
-
-    override fun createPlugin(context: PluginProviderContext): JavaPlugin {
-        return BetonQuestAddonPlugin()
-    }
 }

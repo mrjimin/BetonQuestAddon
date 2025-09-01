@@ -5,7 +5,6 @@ import com.github.mrjimin.betonquestaddon.command.CommandsManger
 import com.github.mrjimin.betonquestaddon.config.ConfigsManager
 import com.github.mrjimin.betonquestaddon.lib.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
-import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import org.bukkit.plugin.java.JavaPlugin
@@ -20,15 +19,9 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 //            private set
     }
 
-    // private lateinit var pvAddonPlugin: PVAddonPlugin
 
     override fun onLoad() {
         CommandAPI.onLoad(CommandAPIBukkitConfig(this).verboseOutput(true))
-
-//        if ("PlasmoVoice".checkPlugin()) {
-//            pvAddonPlugin = PVAddonPlugin(this)
-//            pvAddonPlugin.load()
-//        }
     }
 
     override fun onEnable() {
@@ -40,8 +33,6 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         BetonQuestAddon.initialize()
         UpdateChecker.checkForUpdates(this, 120813)
 
-        // if ("PlasmoVoice".checkPlugin()) pvAddonPlugin.onEnableAddon()
-
         ConfigsManager(this).reload()
         CommandsManger(this).loadsCommands()
 
@@ -52,6 +43,5 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 
     override fun onDisable() {
         CommandAPI.onDisable()
-        // if ("PlasmoVoice".checkPlugin()) pvAddonPlugin.unload() // PVHook.onDisable()
     }
 }

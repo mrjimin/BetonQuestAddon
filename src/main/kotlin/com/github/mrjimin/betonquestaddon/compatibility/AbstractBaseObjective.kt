@@ -6,6 +6,7 @@ import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.profile.Profile
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList
@@ -17,14 +18,6 @@ abstract class AbstractBaseObjective(
     langMessageKey: LangMessageKey,
     protected val log: BetonQuestLogger
 ) : CountingObjective(instruction, targetAmount, langMessageKey.key), Listener {
-
-    override fun start() {
-        Bukkit.getPluginManager().registerEvents(this, BetonQuest.getInstance())
-    }
-
-    override fun stop() {
-        HandlerList.unregisterAll(this)
-    }
 
     protected fun getProfile(player: Player?): OnlineProfile =
         BetonQuest.getInstance().profileProvider.getProfile(player)
