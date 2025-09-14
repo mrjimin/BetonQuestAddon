@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.advancedenchantments.objectives
 
-import com.github.mrjimin.betonquestaddon.compatibility.AbstractSimpleObjective
+import com.github.mrjimin.betonquestaddon.compatibility.AbstractBaseObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import net.advancedplugins.ae.api.BookOpenEvent
 import org.betonquest.betonquest.api.instruction.Instruction
@@ -13,7 +13,7 @@ class AEBookOpenObjective(
     targetAmount: Variable<Number>,
     log: BetonQuestLogger,
     private val groups: Variable<List<String>>
-) : AbstractSimpleObjective(instruction, targetAmount, LangMessageKey.AE_BOOK_OPEN, log) {
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_BOOK_OPEN, log) {
 
     @EventHandler
     fun BookOpenEvent.onBookOpen() {

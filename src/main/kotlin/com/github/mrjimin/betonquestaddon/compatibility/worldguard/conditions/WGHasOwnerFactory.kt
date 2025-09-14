@@ -11,7 +11,6 @@ import org.betonquest.betonquest.quest.condition.PrimaryServerThreadPlayerCondit
 class WGHasOwnerFactory(
     private val data: PrimaryServerThreadData
 ) : PlayerConditionFactory {
-
     override fun parsePlayer(instruction: Instruction): PlayerCondition =
         PrimaryServerThreadPlayerCondition(WGHasOwner(instruction.getOrNull(Argument.STRING)), data)
 }

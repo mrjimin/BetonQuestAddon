@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.lands.objectives
 
-import com.github.mrjimin.betonquestaddon.compatibility.AbstractSimpleObjective
+import com.github.mrjimin.betonquestaddon.compatibility.AbstractBaseObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import me.angeschossen.lands.api.events.LandDeleteEvent
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
@@ -12,7 +12,7 @@ class LandDeleteObjective(
     instruction: Instruction,
     targetAmount: Variable<Number>,
     log: BetonQuestLogger
-) : AbstractSimpleObjective(instruction, targetAmount, LangMessageKey.LANDS_DELETE, log) {
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.LANDS_DELETE, log) {
 
     @EventHandler
     fun LandDeleteEvent.onDelete() {

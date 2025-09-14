@@ -8,7 +8,6 @@ api-version: "1.21"
 
 main: com.github.mrjimin.betonquestaddon.BetonQuestAddonPlugin
 loader: com.github.mrjimin.betonquestaddon.BetonQuestAddonLoader
-bootstrapper: com.github.mrjimin.betonquestaddon.BetonQuestAddonBootstrap
 
 dependencies:
   server:

@@ -3,7 +3,6 @@ package com.github.mrjimin.betonquestaddon.command
 import com.github.mrjimin.betonquestaddon.BetonQuestAddonPlugin
 import com.github.mrjimin.betonquestaddon.compatibility.BQAddonIntegratorHandler
 import com.github.mrjimin.betonquestaddon.util.server.MinecraftVersion
-import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import com.github.mrjimin.betonquestaddon.util.toMiniMessage
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.executors.CommandExecutor
@@ -12,16 +11,21 @@ import org.bukkit.command.ConsoleCommandSender
 class CommandsManger(private val plugin: BetonQuestAddonPlugin) {
 
     fun loadsCommands() {
+        val subcommands = mutableListOf(
+            ReloadCommand(plugin).build(),
+            GiveCommand().build()
+        ).apply {
+            addIf(MinecraftVersion.V1_21_8.isExact()) { GUICommand().build() }
+        }
+
         CommandAPICommand("betonquestaddon")
             .withAliases("bqa", "bqaddon")
             .withPermission("betonquestaddon.command")
-            .withSubcommands(
-                ReloadCommand(plugin).build(),
-                GiveCommand().build(),
-                if (MinecraftVersion.V1_21_8.isExact()) GUICommand().build() else null
-            )
+            .withSubcommands(*subcommands.toTypedArray())
             .executes(CommandExecutor { sender, _ ->
-                val hookedPlugins = BQAddonIntegratorHandler.getHookedPlugins().sorted().joinToString(", ")
+                val hookedPlugins = BQAddonIntegratorHandler.getHookedPlugins()
+                    .sorted()
+                    .joinToString(", ")
                 val docs = "https://jiminstudio.github.io/betonquestaddon/"
 
                 listOf(
@@ -37,4 +41,11 @@ class CommandsManger(private val plugin: BetonQuestAddonPlugin) {
             })
             .register()
     }
+}
+
+private fun MutableList<CommandAPICommand>.addIf(
+    condition: Boolean,
+    command: () -> CommandAPICommand
+) {
+    if (condition) this.add(command())
 }

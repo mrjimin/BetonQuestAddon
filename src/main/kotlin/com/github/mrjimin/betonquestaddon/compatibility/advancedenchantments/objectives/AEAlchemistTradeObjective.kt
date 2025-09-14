@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.advancedenchantments.objectives
 
-import com.github.mrjimin.betonquestaddon.compatibility.AbstractSimpleObjective
+import com.github.mrjimin.betonquestaddon.compatibility.AbstractBaseObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import net.advancedplugins.ae.api.AlchemistTradeEvent
 import org.betonquest.betonquest.api.instruction.Instruction
@@ -12,7 +12,7 @@ class AEAlchemistTradeObjective(
     instruction: Instruction,
     targetAmount: Variable<Number>,
     log: BetonQuestLogger
-) : AbstractSimpleObjective(instruction, targetAmount, LangMessageKey.AE_ALCHEMIST_TRADE, log) {
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_ALCHEMIST_TRADE, log) {
 
     @EventHandler
     fun AlchemistTradeEvent.onAlchemistTrade() {

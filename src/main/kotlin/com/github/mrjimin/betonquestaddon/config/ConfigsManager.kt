@@ -8,7 +8,7 @@ import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
-class ConfigsManager(private val plugin: BetonQuestAddonPlugin) {
+class ConfigsManager(plugin: BetonQuestAddonPlugin) {
 
     private val itemsFolder = File(plugin.dataFolder, "items").apply { if (!exists()) mkdirs() }
 

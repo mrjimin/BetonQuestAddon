@@ -17,16 +17,16 @@ abstract class AbstractItemObjective<T>(
 
     protected abstract fun matches(expected: T, inputId: String?): Boolean
 
-    protected fun handle(namespacedID: String?, player: Player?) {
-        val profile: OnlineProfile = getProfile(player)
-        try {
+    override fun checkMatch(profile: OnlineProfile, input: Any?): Boolean {
+        return try {
             val expected = itemID.getValue(profile)
-            if (containsPlayer(profile) && matches(expected, namespacedID) && checkConditions(profile)) {
-                getCountingData(profile).progress()
-                completeIfDoneOrNotify(profile)
-            }
+            matches(expected, input as? String)
         } catch (e: QuestException) {
             log.warn("Could not resolve Item Variable in objective '${instruction.id}': ${e.message}", e)
+            false
         }
     }
+
+    fun handle(namespacedID: String?, player: Player?) =
+        handle(player, namespacedID)
 }
