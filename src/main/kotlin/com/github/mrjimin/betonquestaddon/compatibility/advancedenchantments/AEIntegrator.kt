@@ -16,9 +16,9 @@ object AEIntegrator : BQAddonIntegrator() {
             register("aeEnchant", AEEnchantmentFactory(data))
         }
         objective.apply {
-            register("aeBookOpen", AEBookOpenObjectiveFactory(loggerFactory))
-            register("aeTinkererTrade", AETinkererTradeObjectiveFactory(loggerFactory))
-            register("aeAlchemistTrade", AEAlchemistTradeObjectiveFactory(loggerFactory))
+            register("aeBookOpen", AEBookOpenObjectiveFactory)
+            register("aeTinkererTrade", AETinkererTradeObjectiveFactory)
+            register("aeAlchemistTrade", AEAlchemistTradeObjectiveFactory)
         }
     }
 }

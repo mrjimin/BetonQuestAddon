@@ -8,15 +8,12 @@ import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.instruction.Instruction
 
-class CeFurnitureInteractObjectiveFactory(
-    private val loggerFactory: BetonQuestLoggerFactory
-) : ObjectiveFactory {
+object CeFurnitureInteractObjectiveFactory : ObjectiveFactory {
 
     override fun parseInstruction(instruction: Instruction): Objective {
         val itemID = instruction.get(CeParser)
         val targetAmount = instruction.getNumberNotLessThanZero("amount", 1)
         val isCancel = instruction.hasArgument("cancel")
-        val log = loggerFactory.create(CeObjective::class.java)
-        return CeFurnitureInteract(instruction, targetAmount, log, itemID, isCancel)
+        return CeFurnitureInteract(instruction, targetAmount, itemID, isCancel)
     }
 }

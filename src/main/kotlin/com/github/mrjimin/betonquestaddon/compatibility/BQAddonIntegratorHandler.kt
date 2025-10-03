@@ -11,17 +11,13 @@ import com.github.mrjimin.betonquestaddon.compatibility.placeholderapi.PAPIInteg
 import com.github.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardIntegrator
 import com.github.mrjimin.betonquestaddon.util.server.checkPlugin
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
-import org.betonquest.betonquest.api.quest.PrimaryServerThreadData
-import org.betonquest.betonquest.api.quest.QuestTypeRegistries
-import org.betonquest.betonquest.config.PluginMessage
-import org.betonquest.betonquest.kernel.processor.quest.VariableProcessor
 
 class BQAddonIntegratorHandler(
-    val loggerFactory: BetonQuestLogger,
-    val data: PrimaryServerThreadData,
-    val pluginMessage: PluginMessage,
-    val variableProcessor: VariableProcessor,
-    val questRegistries: QuestTypeRegistries
+    val logger: BetonQuestLogger
+//    val data: PrimaryServerThreadData,
+//    val pluginMessage: PluginMessage,
+//    val variableProcessor: VariableProcessor,
+//    val questRegistries: QuestTypeRegistries
 ) {
 
     companion object {
@@ -49,15 +45,15 @@ class BQAddonIntegratorHandler(
     private fun hookAll() {
         integrators.forEach { (pluginName, integrator) ->
             if (!pluginName.checkPlugin()) {
-                loggerFactory.debug("Plugin $pluginName not found, skipping integration.")
+                logger.debug("Plugin $pluginName not found, skipping integration.")
                 return@forEach
             }
             runCatching {
                 integrator.hook()
                 addHookedPlugin(pluginName)
-                loggerFactory.info("Successfully hooked into $pluginName.")
+                logger.info("Successfully hooked into $pluginName.")
             }.onFailure { ex ->
-                loggerFactory.warn("Failed to hook into $pluginName: ${ex.message}", ex)
+                logger.warn("Failed to hook into $pluginName: ${ex.message}", ex)
             }
         }
     }

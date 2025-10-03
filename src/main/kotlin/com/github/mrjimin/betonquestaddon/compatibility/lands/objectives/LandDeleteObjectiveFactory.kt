@@ -6,12 +6,9 @@ import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
 
-class LandDeleteObjectiveFactory(
-    private val loggerFactory: BetonQuestLoggerFactory
-) : ObjectiveFactory {
+object LandDeleteObjectiveFactory : ObjectiveFactory {
 
     override fun parseInstruction(instruction: Instruction): Objective {
-        val log = loggerFactory.create(LandDeleteObjective::class.java)
-        return LandDeleteObjective(instruction, Variable(1), log)
+        return LandDeleteObjective(instruction)
     }
 }

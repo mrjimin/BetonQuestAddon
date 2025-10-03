@@ -10,9 +10,8 @@ import org.bukkit.event.EventHandler
 
 class AETinkererTradeObjective(
     instruction: Instruction,
-    targetAmount: Variable<Number>,
-    log: BetonQuestLogger
-) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_TINKERER_TRADE, log) {
+    targetAmount: Variable<Number>
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_TINKERER_TRADE) {
 
     @EventHandler
     fun TinkererTradeEvent.onTinkererTrade() {

@@ -13,9 +13,8 @@ import org.bukkit.event.Listener
 class CeFurniturePlace(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>
-) : CeObjective(instruction, targetAmount, LangMessageKey.FURNITURE_PLACE, log, itemID), Listener {
+) : CeObjective(instruction, targetAmount, LangMessageKey.FURNITURE_PLACE, itemID), Listener {
 
     @EventHandler
     fun FurniturePlaceEvent.onCeFurniturePlace() {

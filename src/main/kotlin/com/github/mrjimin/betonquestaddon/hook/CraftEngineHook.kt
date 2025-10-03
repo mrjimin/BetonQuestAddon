@@ -9,7 +9,7 @@ import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems
 import net.momirealms.craftengine.bukkit.entity.furniture.BukkitFurniture
-import net.momirealms.craftengine.bukkit.world.BukkitBlockInWorld
+import net.momirealms.craftengine.bukkit.world.BukkitExistingBlock
 import net.momirealms.craftengine.core.item.CustomItem
 import net.momirealms.craftengine.core.util.Key
 import org.betonquest.betonquest.api.instruction.Instruction
@@ -65,7 +65,7 @@ object CraftEngineHook {
     fun isCustomBlock(key: Key): Boolean =
         key.let { CraftEngineBlocks.byId(it) != null }
 
-    fun customBlockAdapt(location: Location): BukkitBlockInWorld? {
+    fun customBlockAdapt(location: Location): BukkitExistingBlock? {
         return BukkitAdaptors.adapt(location.block)
     }
 

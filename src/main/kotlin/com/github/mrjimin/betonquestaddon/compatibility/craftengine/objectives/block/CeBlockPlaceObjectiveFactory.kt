@@ -8,14 +8,11 @@ import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.instruction.Instruction
 
-class CeBlockPlaceObjectiveFactory(
-    private val loggerFactory: BetonQuestLoggerFactory
-) : ObjectiveFactory {
+object CeBlockPlaceObjectiveFactory : ObjectiveFactory {
 
     override fun parseInstruction(instruction: Instruction): Objective {
         val itemID = instruction.get(CeParser)
         val targetAmount = instruction.getNumberNotLessThanZero("amount", 1)
-        val log = loggerFactory.create(CeObjective::class.java)
-        return CeBlockPlace(instruction, targetAmount, log, itemID)
+        return CeBlockPlace(instruction, targetAmount, itemID)
     }
 }

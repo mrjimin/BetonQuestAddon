@@ -11,9 +11,8 @@ import org.bukkit.event.EventHandler
 class AEBookOpenObjective(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     private val groups: Variable<List<String>>
-) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_BOOK_OPEN, log) {
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_BOOK_OPEN) {
 
     @EventHandler
     fun BookOpenEvent.onBookOpen() {

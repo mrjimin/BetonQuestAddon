@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility
 import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
 
 abstract class BQAddonIntegrator {
-    protected val loggerFactory = BetonQuestAddon.loggerFactory
+    protected val logger = BetonQuestAddon.logger
     protected val data = BetonQuestAddon.data
     protected val pluginMessage = BetonQuestAddon.instance.pluginMessage
     protected val variableProcessor = BetonQuestAddon.instance.variableProcessor

@@ -11,9 +11,8 @@ open class IaObjective(
     instruction: Instruction,
     targetAmount: Variable<Number>,
     langMessageKey: LangMessageKey,
-    log: BetonQuestLogger,
     itemID: Variable<CustomStack>
-) : AbstractItemObjective<CustomStack>(instruction, targetAmount, langMessageKey, log, itemID) {
+) : AbstractItemObjective<CustomStack>(instruction, targetAmount, langMessageKey, itemID) {
     override fun matches(expected: CustomStack, inputId: String?): Boolean {
         return expected.namespacedID == inputId
     }

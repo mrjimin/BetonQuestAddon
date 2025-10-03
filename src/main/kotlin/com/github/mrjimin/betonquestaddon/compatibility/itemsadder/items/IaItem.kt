@@ -11,18 +11,16 @@ class IaItem(
 ) : QuestItem {
 
     override fun getName(): Component {
-        return stack.itemStack.displayName()
+        return stack.itemStack.itemMeta.itemName()
     }
 
     override fun getLore(): List<Component?>? {
-        val itemStack = stack.itemStack
-        return itemStack.lore()?.map { it }
+        return stack.itemStack.lore()?.map { it }
     }
 
     override fun generate(stackSize: Int, profile: Profile?): ItemStack {
-        val itemStack = stack.itemStack.clone()
-        itemStack.amount = stackSize
-        return itemStack
+        stack.itemStack.amount = stackSize
+        return stack.itemStack
     }
 
     override fun matches(item: ItemStack?): Boolean {

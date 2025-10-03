@@ -12,10 +12,9 @@ import org.bukkit.event.Listener
 class NxBlockInteract(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>,
     val isCancel: Boolean
-) : NxObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, log, itemID), Listener {
+) : NxObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, itemID), Listener {
 
     @EventHandler
     fun NexoBlockInteractEvent.onNxBlockInteract() {

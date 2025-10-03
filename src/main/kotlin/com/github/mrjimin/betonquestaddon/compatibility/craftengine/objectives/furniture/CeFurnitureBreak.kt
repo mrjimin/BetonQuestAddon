@@ -13,9 +13,8 @@ import org.bukkit.event.Listener
 class CeFurnitureBreak(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>
-) : CeObjective(instruction, targetAmount, LangMessageKey.FURNITURE_BREAK, log, itemID), Listener {
+) : CeObjective(instruction, targetAmount, LangMessageKey.FURNITURE_BREAK, itemID), Listener {
 
     @EventHandler
     fun FurnitureBreakEvent.onCeFurniturePlace() {

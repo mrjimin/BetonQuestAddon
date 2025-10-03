@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon
 import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
 import com.github.mrjimin.betonquestaddon.command.CommandsManger
 import com.github.mrjimin.betonquestaddon.config.ConfigsManager
-import com.github.mrjimin.betonquestaddon.lib.bstats.Metrics
+import com.github.mrjimin.betonquestaddon.shadow.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
@@ -15,18 +15,15 @@ class BetonQuestAddonPlugin : JavaPlugin() {
     companion object {
         lateinit var instance: BetonQuestAddonPlugin
             private set
-//        lateinit var advancement: UltimateAdvancementAPI
-//            private set
     }
 
 
     override fun onLoad() {
+        instance = this
         CommandAPI.onLoad(CommandAPIBukkitConfig(this).verboseOutput(true))
     }
 
     override fun onEnable() {
-        instance = this
-        // advancement = UltimateAdvancementAPI.getInstance(this)
         CommandAPI.onEnable()
 
         Metrics(this, 26421)

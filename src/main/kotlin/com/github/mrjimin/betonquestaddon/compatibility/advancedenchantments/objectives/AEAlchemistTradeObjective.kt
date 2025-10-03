@@ -10,9 +10,8 @@ import org.bukkit.event.EventHandler
 
 class AEAlchemistTradeObjective(
     instruction: Instruction,
-    targetAmount: Variable<Number>,
-    log: BetonQuestLogger
-) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_ALCHEMIST_TRADE, log) {
+    targetAmount: Variable<Number>
+) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.AE_ALCHEMIST_TRADE) {
 
     @EventHandler
     fun AlchemistTradeEvent.onAlchemistTrade() {

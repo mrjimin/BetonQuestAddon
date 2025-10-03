@@ -20,8 +20,7 @@ object BetonQuestAddon {
 
     private val bqInstance: BetonQuest by lazy { BetonQuest.getInstance() }
 
-    val loggerFactory: BetonQuestLoggerFactory by lazy { bqInstance.loggerFactory }
-    val logger: BetonQuestLogger by lazy { loggerFactory.create(this::class.java) }
+    val logger: BetonQuestLogger by lazy { bqInstance.loggerFactory.create(this::class.java) }
     val server by lazy { bqInstance.server }
     val pluginMessage by lazy { bqInstance.pluginMessage }
     val variableProcessor by lazy { bqInstance.variableProcessor }
@@ -36,10 +35,10 @@ object BetonQuestAddon {
     fun initialize() {
         integratorHandler = BQAddonIntegratorHandler(
             logger,
-            data,
-            pluginMessage,
-            variableProcessor,
-            questRegistries
+//            data,
+//            pluginMessage,
+//            variableProcessor,
+//            questRegistries
         )
 
         registerConditions()

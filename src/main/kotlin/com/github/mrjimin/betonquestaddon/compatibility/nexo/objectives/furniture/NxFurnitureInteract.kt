@@ -13,10 +13,9 @@ import org.bukkit.event.Listener
 class NxFurnitureInteract(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>,
     val isCancel: Boolean
-) : NxObjective(instruction, targetAmount, LangMessageKey.FURNITURE_INTERACT, log, itemID), Listener {
+) : NxObjective(instruction, targetAmount, LangMessageKey.FURNITURE_INTERACT, itemID), Listener {
 
     @EventHandler
     fun NexoFurnitureInteractEvent.onNxFurnitureInteract() {

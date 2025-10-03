@@ -13,9 +13,8 @@ import org.bukkit.event.Listener
 class CeBlockBreak(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>
-) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_BREAK, log, itemID), Listener {
+) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_BREAK, itemID), Listener {
 
     @EventHandler
     fun CustomBlockBreakEvent.onCeBlockPlace() {

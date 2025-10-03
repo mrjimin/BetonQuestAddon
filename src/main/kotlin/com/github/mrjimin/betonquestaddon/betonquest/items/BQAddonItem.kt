@@ -2,7 +2,6 @@ package com.github.mrjimin.betonquestaddon.betonquest.items
 
 import com.github.mrjimin.betonquestaddon.api.BQAddonItems
 import com.github.mrjimin.betonquestaddon.item.ItemBuilder
-import com.github.mrjimin.betonquestaddon.util.toLegacy
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.QuestException

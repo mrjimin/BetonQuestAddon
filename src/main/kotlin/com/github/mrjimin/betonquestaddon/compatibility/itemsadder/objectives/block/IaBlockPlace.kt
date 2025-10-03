@@ -12,9 +12,8 @@ import org.bukkit.event.EventHandler
 class IaBlockPlace(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<CustomStack>
-) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_PLACE, log, itemID) {
+) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_PLACE, itemID) {
 
     @EventHandler
     fun CustomBlockPlaceEvent.onBlockPlace() {

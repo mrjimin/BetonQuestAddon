@@ -13,10 +13,9 @@ import org.bukkit.event.Listener
 class CeBlockInteract(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>,
     val isCancel: Boolean
-) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, log, itemID), Listener {
+) : CeObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, itemID), Listener {
 
     @EventHandler
     fun CustomBlockInteractEvent.onCeBlockInteract() {

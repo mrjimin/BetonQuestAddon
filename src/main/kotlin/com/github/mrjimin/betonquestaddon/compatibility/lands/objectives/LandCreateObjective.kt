@@ -9,10 +9,8 @@ import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.event.EventHandler
 
 class LandCreateObjective(
-    instruction: Instruction,
-    targetAmount: Variable<Number>,
-    log: BetonQuestLogger
-) : AbstractBaseObjective(instruction, targetAmount, LangMessageKey.LANDS_CREATE, log) {
+    instruction: Instruction
+) : AbstractBaseObjective(instruction, Variable(1), LangMessageKey.LANDS_CREATE) {
 
     @EventHandler
     fun LandCreateEvent.onLandCreate() {

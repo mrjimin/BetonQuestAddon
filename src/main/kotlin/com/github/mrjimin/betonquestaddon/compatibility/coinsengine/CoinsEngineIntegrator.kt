@@ -7,6 +7,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.events.Coins
 object CoinsEngineIntegrator : BQAddonIntegrator() {
     override fun hook() {
         condition.register("coins", CoinsConditionFactory(data))
-        event.register("coins", CoinsEventFactory(loggerFactory, data, pluginMessage, variableProcessor))
+        event.register("coins", CoinsEventFactory(logger, data, pluginMessage, variableProcessor))
     }
 }

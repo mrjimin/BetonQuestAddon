@@ -1,7 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.coinsengine.events
 
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
-import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.betonquest.betonquest.api.quest.event.PlayerEventFactory
@@ -13,11 +12,12 @@ import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.events.Coins
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.argument.Argument
 import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.quest.PrimaryServerThreadData
 import org.betonquest.betonquest.api.quest.event.thread.PrimaryServerThreadEvent
 
 class CoinsEventFactory(
-    private val loggerFactory: BetonQuestLoggerFactory,
+    private val logger: BetonQuestLogger,
     private val data: PrimaryServerThreadData,
     private val pluginMessage: PluginMessage,
     private val variableProcessor: VariableProcessor
@@ -42,13 +42,12 @@ class CoinsEventFactory(
 
         val notify = instruction.hasArgument("notify")
         val (givenSender, takenSender, resetSender) = if (notify) {
-            val log = loggerFactory.create(CoinsEvent::class.java)
             val pack = instruction.getPackage()
             val fullID = instruction.id.full
             Triple(
-                IngameNotificationSender(log, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_GIVEN.key),
-                IngameNotificationSender(log, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_TAKEN.key),
-                IngameNotificationSender(log, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_RESET.key)
+                IngameNotificationSender(logger, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_GIVEN.key),
+                IngameNotificationSender(logger, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_TAKEN.key),
+                IngameNotificationSender(logger, pluginMessage, pack, fullID, NotificationLevel.INFO, LangMessageKey.COINS_RESET.key)
             )
         } else Triple(null, null, null)
 

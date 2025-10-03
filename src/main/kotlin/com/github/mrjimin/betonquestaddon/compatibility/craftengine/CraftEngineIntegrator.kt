@@ -24,12 +24,12 @@ object CraftEngineIntegrator : BQAddonIntegrator() {
             register("ceFurnitureAt", CeSetFurnitureAtEventFactor(data))
         }
         objective.apply {
-            register("ceBlockPlace", CeBlockPlaceObjectiveFactory(loggerFactory))
-            register("ceBlockBreak", CeBlockBreakObjectiveFactory(loggerFactory))
-            register("ceBlockInteract", CeBlockInteractObjectiveFactory(loggerFactory))
-            register("ceFurniturePlace", CeFurniturePlaceObjectiveFactory(loggerFactory))
-            register("ceFurnitureBreak", CeFurnitureBreakObjectiveFactory(loggerFactory))
-            register("ceFurnitureInteract", CeFurnitureInteractObjectiveFactory(loggerFactory))
+            register("ceBlockPlace", CeBlockPlaceObjectiveFactory)
+            register("ceBlockBreak", CeBlockBreakObjectiveFactory)
+            register("ceBlockInteract", CeBlockInteractObjectiveFactory)
+            register("ceFurniturePlace", CeFurniturePlaceObjectiveFactory)
+            register("ceFurnitureBreak", CeFurnitureBreakObjectiveFactory)
+            register("ceFurnitureInteract", CeFurnitureInteractObjectiveFactory)
         }
         BetonQuestAddon.registerItem("ce", CeItemFactory, CeItemSerializer)
     }

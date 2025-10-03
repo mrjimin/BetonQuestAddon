@@ -7,8 +7,8 @@ import com.github.mrjimin.betonquestaddon.compatibility.lands.objectives.LandDel
 object LandsIntegrator : BQAddonIntegrator() {
     override fun hook() {
         objective.apply {
-            register("landCreate", LandCreateObjectiveFactory(loggerFactory))
-            register("landDelete", LandDeleteObjectiveFactory(loggerFactory))
+            register("landCreate", LandCreateObjectiveFactory)
+            register("landDelete", LandDeleteObjectiveFactory)
         }
     }
 }

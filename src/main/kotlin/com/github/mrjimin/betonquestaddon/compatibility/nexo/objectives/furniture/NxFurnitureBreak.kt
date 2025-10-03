@@ -13,9 +13,8 @@ import org.bukkit.event.Listener
 class NxFurnitureBreak(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<String>
-) : NxObjective(instruction, targetAmount, LangMessageKey.FURNITURE_BREAK, log, itemID), Listener {
+) : NxObjective(instruction, targetAmount, LangMessageKey.FURNITURE_BREAK, itemID), Listener {
 
     @EventHandler
     fun NexoFurnitureBreakEvent.onNxFurnitureBreak() {

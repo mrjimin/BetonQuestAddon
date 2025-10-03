@@ -8,14 +8,11 @@ import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.instruction.Instruction
 
-class IaBlockBreakObjectiveFactory(
-    private val loggerFactory: BetonQuestLoggerFactory
-) : ObjectiveFactory {
+object IaBlockBreakObjectiveFactory : ObjectiveFactory {
 
     override fun parseInstruction(instruction: Instruction): Objective? {
         val itemID = instruction.get(IaParser)
         val targetAmount = instruction.getNumberNotLessThanZero("amount", 1)
-        val log = loggerFactory.create(IaObjective::class.java)
-        return IaBlockBreak(instruction, targetAmount, log, itemID)
+        return IaBlockBreak(instruction, targetAmount, itemID)
     }
 }

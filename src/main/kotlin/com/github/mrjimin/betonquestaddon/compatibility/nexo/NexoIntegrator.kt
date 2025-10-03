@@ -25,6 +25,7 @@ object NexoIntegrator : BQAddonIntegrator() {
             register("nxBlockPlace", NxBlockPlaceObjectiveFactory)
             register("nxBlockBreak", NxBlockBreakObjectiveFactory)
             register("nxBlockInteract", NxBlockInteractFactory)
+
             register("nxFurniturePlace", NxFurniturePlaceObjectiveFactory)
             register("nxFurnitureBreak", NxFurnitureBreakObjectiveFactory)
             register("nxFurnitureInteract", NxFurnitureInteractObjectiveFactory)

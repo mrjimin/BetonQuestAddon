@@ -13,10 +13,9 @@ import org.bukkit.event.Listener
 class IaBlockInteract(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<CustomStack>,
     val isCancel: Boolean
-) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, log, itemID), Listener {
+) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_INTERACT, itemID), Listener {
 
     @EventHandler
     fun CustomBlockInteractEvent.onCustomBlockInteract() {

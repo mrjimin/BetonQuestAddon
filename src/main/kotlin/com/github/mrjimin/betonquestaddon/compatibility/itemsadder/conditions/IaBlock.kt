@@ -13,7 +13,7 @@ class IaBlock(
 ) : NullableCondition {
 
     override fun check(profile: Profile?): Boolean {
-        val block = CustomBlock.byAlreadyPlaced(location.getValue(profile)!!.block)
-        return block != null && block.customStack.matchNamespacedID(itemID.getValue(profile))
+        val block = CustomBlock.byAlreadyPlaced(location.getValue(profile)?.block)
+        return block != null && block.matchNamespacedID(itemID.getValue(profile))
     }
 }

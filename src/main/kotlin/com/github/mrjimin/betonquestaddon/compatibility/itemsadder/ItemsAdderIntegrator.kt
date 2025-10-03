@@ -16,12 +16,12 @@ object ItemsAdderIntegrator : BQAddonIntegrator() {
         condition.registerCombined("iaBlock", IaBlockConditionFactory(data))
         event.apply {
             register("iaBlockAt", IaSetBlockAtEventFactory(data))
-            register("iaPlayAnimation", IaPlayAnimationEventFactory(loggerFactory, data))
+            register("iaPlayAnimation", IaPlayAnimationEventFactory(logger, data))
         }
         objective.apply {
-            register("iaBlockPlace", IaBlockPlaceObjectiveFactory(loggerFactory))
-            register("iaBlockBreak", IaBlockBreakObjectiveFactory(loggerFactory))
-            register("iaBlockInteract", IaBlockInteractFactory(loggerFactory))
+            register("iaBlockPlace", IaBlockPlaceObjectiveFactory)
+            register("iaBlockBreak", IaBlockBreakObjectiveFactory)
+            register("iaBlockInteract", IaBlockInteractFactory)
         }
         BetonQuestAddon.registerItem("ia", IaItemFactory, IaItemSerializer)
     }

@@ -1,7 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.items
 
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook
-import com.github.mrjimin.betonquestaddon.util.toLegacy
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.item.QuestItem
@@ -23,7 +22,7 @@ class CeItem(
 
     override fun generate(int: Int, profile: Profile?): ItemStack? {
         val item = CraftEngineHook.itemFromId(itemId) ?: return null
-        return item.buildItemStack()
+        return item.buildItemStack(int)
     }
 
     override fun matches(item: ItemStack?): Boolean {

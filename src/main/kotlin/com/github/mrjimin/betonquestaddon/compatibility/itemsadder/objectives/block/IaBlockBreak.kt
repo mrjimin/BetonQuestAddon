@@ -12,9 +12,8 @@ import org.bukkit.event.EventHandler
 class IaBlockBreak(
     instruction: Instruction,
     targetAmount: Variable<Number>,
-    log: BetonQuestLogger,
     itemID: Variable<CustomStack>
-) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_BREAK, log, itemID) {
+) : IaObjective(instruction, targetAmount, LangMessageKey.BLOCK_BREAK, itemID) {
 
     @EventHandler
     fun CustomBlockBreakEvent.onBlockBreak() {

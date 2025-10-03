@@ -9,11 +9,11 @@ import org.bukkit.Location
 
 class NxSetBlockAt(
     private val itemID: Variable<String>,
-    private val loc: Variable<Location>
+    private val location: Variable<Location>
 ) : PlayerEvent {
 
     override fun execute(profile: Profile) {
-        val loc = loc.getValue(profile)
+        val loc = location.getValue(profile)
         val id = itemID.getValue(profile)
 
         if (!NexoBlocks.isCustomBlock(id))

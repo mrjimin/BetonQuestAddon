@@ -6,13 +6,10 @@ import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 
-class AETinkererTradeObjectiveFactory(
-    private val loggerFactory: BetonQuestLoggerFactory
-) : ObjectiveFactory {
+object AETinkererTradeObjectiveFactory : ObjectiveFactory {
 
     override fun parseInstruction(instruction: Instruction): Objective {
         val targetAmount = instruction.getNumberNotLessThanZero("amount", 1)
-        val log = loggerFactory.create(AETinkererTradeObjective::class.java)
-        return AETinkererTradeObjective(instruction, targetAmount, log)
+        return AETinkererTradeObjective(instruction, targetAmount)
     }
 }

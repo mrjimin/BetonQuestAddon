@@ -2,7 +2,6 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 
 import com.github.mrjimin.betonquestaddon.compatibility.AbstractItemObjective
 import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
-import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
 
