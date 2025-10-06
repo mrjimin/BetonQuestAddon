@@ -16,7 +16,7 @@ object ItemsAdderIntegrator : BQAddonIntegrator() {
         condition.registerCombined("iaBlock", IaBlockConditionFactory(data))
         event.apply {
             register("iaBlockAt", IaSetBlockAtEventFactory(data))
-            register("iaPlayAnimation", IaPlayAnimationEventFactory(logger, data))
+            register("iaPlayAnimation", IaPlayAnimationEventFactory(data))
         }
         objective.apply {
             register("iaBlockPlace", IaBlockPlaceObjectiveFactory)

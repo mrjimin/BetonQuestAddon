@@ -1,8 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.events.animation
 
+import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.argument.Argument
-import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.quest.PrimaryServerThreadData
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.betonquest.betonquest.api.quest.event.PlayerEventFactory
@@ -10,7 +10,6 @@ import org.betonquest.betonquest.api.quest.event.online.OnlineEventAdapter
 import org.betonquest.betonquest.api.quest.event.thread.PrimaryServerThreadEvent
 
 class IaPlayAnimationEventFactory(
-    private val logger: BetonQuestLogger,
     private val data: PrimaryServerThreadData
 ) : PlayerEventFactory {
 
@@ -19,7 +18,7 @@ class IaPlayAnimationEventFactory(
         return PrimaryServerThreadEvent(
             OnlineEventAdapter(
                 IaPlayAnimation(animation),
-                logger,
+                BetonQuestAddon.logger,
                 instruction.getPackage()
             ), data
         )

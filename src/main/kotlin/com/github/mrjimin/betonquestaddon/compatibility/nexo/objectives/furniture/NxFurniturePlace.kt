@@ -18,6 +18,6 @@ class NxFurniturePlace(
     @EventHandler
     fun NexoFurniturePlaceEvent.onCeFurniturePlace() {
         val id = NexoFurniture.furnitureMechanic(baseEntity)?.itemID
-        handle(id, player)
+        handle(player, id)
     }
 }

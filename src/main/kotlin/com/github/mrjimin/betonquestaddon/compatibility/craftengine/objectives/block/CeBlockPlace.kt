@@ -4,7 +4,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.LangMessageKey
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives.CeObjective
 import com.github.mrjimin.betonquestaddon.hook.CraftEngineHook.toIdOrNull
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockPlaceEvent
-import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.event.EventHandler
@@ -18,6 +17,6 @@ class CeBlockPlace(
 
     @EventHandler
     fun CustomBlockPlaceEvent.onCeBlockPlace() {
-        handle(customBlock().id().toIdOrNull(), player)
+        handle(player, customBlock().id().toIdOrNull())
     }
 }

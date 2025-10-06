@@ -3,6 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility
 import com.github.mrjimin.betonquestaddon.compatibility.advancedenchantments.AEIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.CoinsEngineIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.CustomCropsIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.headdatabase.HDBIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.ItemsAdderIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.lands.LandsIntegrator
@@ -63,6 +64,7 @@ class BQAddonIntegratorHandler(
         register("Nexo", NexoIntegrator)
         register("ItemsAdder", ItemsAdderIntegrator)
         register("CraftEngine", CraftEngineIntegrator)
+        register("CustomCrops", CustomCropsIntegrator)
         register("HeadDatabase", HDBIntegrator)
         register("AdvancedEnchantments", AEIntegrator)
         register("PlaceholderAPI", PAPIIntegrator)

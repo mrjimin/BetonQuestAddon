@@ -1,7 +1,5 @@
 package com.github.mrjimin.betonquestaddon.test.listener
 
-import com.github.mrjimin.betonquestaddon.api.BQAddonItems
-import com.github.mrjimin.betonquestaddon.api.BQAddonItems.ITEM_ID
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -33,10 +31,6 @@ class TestListener : Listener {
 //
 //        println("================")
 //        println(head == blockDrop)
-        println(ITEM_ID)
-
-        val item = BQAddonItems.itemFromId("languages")?.build() ?: return
-        player.inventory.addItem(item)
 
     }
 }

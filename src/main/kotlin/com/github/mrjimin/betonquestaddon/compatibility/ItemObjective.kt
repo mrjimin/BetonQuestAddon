@@ -1,22 +1,21 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
 import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
-import org.betonquest.betonquest.api.profile.OnlineProfile
-import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
-import org.bukkit.entity.Player
+import org.betonquest.betonquest.api.profile.Profile
+import org.betonquest.betonquest.api.quest.QuestException
 
-abstract class AbstractItemObjective<T>(
+abstract class ItemObjective<T>(
     instruction: Instruction,
     targetAmount: Variable<Number>,
     langMessageKey: LangMessageKey,
     private val itemID: Variable<T>
-) : AbstractBaseObjective(instruction, targetAmount, langMessageKey) {
+) : BaseObjective(instruction, targetAmount, langMessageKey) {
 
     protected abstract fun matches(expected: T, inputId: String?): Boolean
 
-    override fun checkMatch(profile: OnlineProfile, input: Any?): Boolean {
+    override fun checkMatch(profile: Profile, input: Any?): Boolean {
         val inputId = input as? String ?: return false
         return try {
             val expected = itemID.getValue(profile)
@@ -26,8 +25,4 @@ abstract class AbstractItemObjective<T>(
             false
         }
     }
-
-
-    fun handle(namespacedID: String?, player: Player?) =
-        handle(player, namespacedID)
 }

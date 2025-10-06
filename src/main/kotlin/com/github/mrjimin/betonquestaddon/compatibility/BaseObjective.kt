@@ -4,27 +4,30 @@ import org.betonquest.betonquest.BetonQuest
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
-import org.betonquest.betonquest.api.profile.OnlineProfile
+import org.betonquest.betonquest.api.profile.Profile
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 
-abstract class AbstractBaseObjective(
-    protected val instruction: Instruction,
+abstract class BaseObjective(
+    instruction: Instruction,
     targetAmount: Variable<Number>,
     langMessageKey: LangMessageKey
 ) : CountingObjective(instruction, targetAmount, langMessageKey.key), Listener {
 
-    protected fun getProfile(player: Player?): OnlineProfile =
-        BetonQuest.getInstance().profileProvider.getProfile(player)
+    protected fun getProfile(player: Player?): Profile? =
+        player?.let { BetonQuest.getInstance().profileProvider.getProfile(it) }
 
-    protected fun handle(player: Player?, input: Any? = null) {
-        val profile = player?.let { getProfile(it) } ?: return
+    protected inline fun withProfile(player: Player?, block: (Profile) -> Unit) {
+        val profile = getProfile(player) ?: return
         if (!containsPlayer(profile) || !checkConditions(profile)) return
-        if (!checkMatch(profile, input)) return
+        block(profile)
+    }
 
+    protected open fun checkMatch(profile: Profile, input: Any?): Boolean = true
+
+    protected fun handle(player: Player?, input: Any? = null) = withProfile(player) { profile ->
+        if (!checkMatch(profile, input)) return@withProfile
         getCountingData(profile).progress()
         completeIfDoneOrNotify(profile)
     }
-
-    protected open fun checkMatch(profile: OnlineProfile, input: Any?): Boolean = true
 }

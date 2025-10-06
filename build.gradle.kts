@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.mrjimin"
-version = "1.5.1"
+version = "1.5.2"
 
 repositories {
     mavenCentral()
@@ -40,12 +40,11 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.14")
     compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
+    compileOnly("net.momirealms:custom-crops:3.6.40")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.0") // stdlib 포함
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0") // PlasmoVoice 호환
     implementation("dev.jorel:commandapi-paper-shade:11.0.0")
-    implementation("xyz.xenondevs.invui:invui:2.0.0-alpha.17")
-    implementation("xyz.xenondevs.invui:invui-kotlin:2.0.0-alpha.17")
 
     compileOnly(fileTree("lib") {
         include("*.jar")

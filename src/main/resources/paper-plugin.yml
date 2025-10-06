@@ -27,6 +27,9 @@ dependencies:
     CraftEngine:
       load: BEFORE
       required: false
+    CustomCrops:
+      load: BEFORE
+      required: false
     HeadDatabase:
       load: BEFORE
       required: false

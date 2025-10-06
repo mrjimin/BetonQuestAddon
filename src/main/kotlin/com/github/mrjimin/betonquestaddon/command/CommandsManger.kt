@@ -12,11 +12,8 @@ class CommandsManger(private val plugin: BetonQuestAddonPlugin) {
 
     fun loadsCommands() {
         val subcommands = mutableListOf(
-            ReloadCommand(plugin).build(),
-            GiveCommand().build()
-        ).apply {
-            addIf(MinecraftVersion.V1_21_8.isExact()) { GUICommand().build() }
-        }
+            ReloadCommand(plugin).build()
+        )
 
         CommandAPICommand("betonquestaddon")
             .withAliases("bqa", "bqaddon")

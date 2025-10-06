@@ -2,15 +2,12 @@ package com.github.mrjimin.betonquestaddon
 
 import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
 import com.github.mrjimin.betonquestaddon.command.CommandsManger
-import com.github.mrjimin.betonquestaddon.config.ConfigsManager
 import com.github.mrjimin.betonquestaddon.shadow.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
 import dev.jorel.commandapi.CommandAPI
-import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPIPaperConfig
 import org.bukkit.plugin.java.JavaPlugin
 
-@Suppress("UnstableApiUsage")
 class BetonQuestAddonPlugin : JavaPlugin() {
 
     companion object {
@@ -30,7 +27,6 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         BetonQuestAddon.initialize()
         UpdateChecker.checkForUpdates(this, 120813)
 
-        ConfigsManager(this).reload()
         CommandsManger(this).loadsCommands()
 
         logger.info("BetonQuestAddon v${pluginMeta.version} successfully enabled.")

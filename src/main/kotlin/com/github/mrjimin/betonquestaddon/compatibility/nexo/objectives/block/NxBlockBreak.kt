@@ -16,6 +16,6 @@ class NxBlockBreak(
 
     @EventHandler
     fun NexoBlockBreakEvent.onNexoBlockBreak() {
-        handle(mechanic.itemID, player)
+        handle(player, mechanic.itemID)
     }
 }

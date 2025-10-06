@@ -1,12 +1,9 @@
 package com.github.mrjimin.betonquestaddon.betonquest
 
-import com.github.mrjimin.betonquestaddon.betonquest.items.BQAddonItemFactory
-import com.github.mrjimin.betonquestaddon.betonquest.items.BQAddonItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.BQAddonIntegratorHandler
 import org.betonquest.betonquest.BetonQuest
 import org.betonquest.betonquest.api.kernel.TypeFactory
 import org.betonquest.betonquest.api.logger.BetonQuestLogger
-import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.PrimaryServerThreadData
 import org.betonquest.betonquest.item.QuestItemSerializer
@@ -44,8 +41,6 @@ object BetonQuestAddon {
         registerConditions()
         registerEvents()
         registerObjectives()
-
-        registerItem("bqa", BQAddonItemFactory, BQAddonItemSerializer)
     }
 
     private fun registerConditions() {
