@@ -17,7 +17,7 @@ enum class Settings(
     PV_ICON("compatibility.plasmovoice.icon");
 
     private val config
-        get() = BetonQuestAddonPlugin.instance.config
+        get() = BetonQuestAddonPlugin.INSTANCE.config
 
     fun get(): Any? = config.get(path) ?: default
 

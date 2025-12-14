@@ -1,35 +1,19 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo
 
-import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
-import com.github.mrjimin.betonquestaddon.compatibility.BQAddonIntegrator
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.conditions.NxBlockConditionFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.events.block.NxSetBlockAtEventFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.events.furniture.NxSetFurnitureAtEventFactor
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.items.NxItemFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.items.NxItemSerializer
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.block.NxBlockBreakObjectiveFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.block.NxBlockInteractFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.block.NxBlockPlaceObjectiveFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.furniture.NxFurnitureBreakObjectiveFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.furniture.NxFurnitureInteractObjectiveFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.furniture.NxFurniturePlaceObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoItemFactory
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoQuestItemSerializer
+import org.betonquest.betonquest.api.BetonQuestApi
 
-object NexoIntegrator : BQAddonIntegrator() {
-    override fun hook() {
-        condition.registerCombined("nxBlock", NxBlockConditionFactory(data))
-        event.apply {
-            register("nxBlockAt", NxSetBlockAtEventFactory(data))
-            register("nxFurnitureAt", NxSetFurnitureAtEventFactor(data))
-        }
-        objective.apply {
-            register("nxBlockPlace", NxBlockPlaceObjectiveFactory)
-            register("nxBlockBreak", NxBlockBreakObjectiveFactory)
-            register("nxBlockInteract", NxBlockInteractFactory)
+class NexoIntegrator : ICompatibility {
 
-            register("nxFurniturePlace", NxFurniturePlaceObjectiveFactory)
-            register("nxFurnitureBreak", NxFurnitureBreakObjectiveFactory)
-            register("nxFurnitureInteract", NxFurnitureInteractObjectiveFactory)
-        }
-        BetonQuestAddon.registerItem("nexo", NxItemFactory, NxItemSerializer)
+    override fun hook(api: BetonQuestApi) {
+//        val loggerFactory = api.loggerFactory
+//        val data = api.primaryServerThreadData
+//        val questRegistries = api.questRegistries
+
+        val itemRegistry = api.featureRegistries.item()
+        itemRegistry.register("nexo", NexoItemFactory())
+        itemRegistry.registerSerializer("nexo", NexoQuestItemSerializer())
     }
 }

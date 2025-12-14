@@ -1,40 +1,29 @@
 package com.github.mrjimin.betonquestaddon
 
-import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestAddon
-import com.github.mrjimin.betonquestaddon.command.CommandsManger
+import com.github.mrjimin.betonquestaddon.compatibility.CompatibilityManager
 import com.github.mrjimin.betonquestaddon.shadow.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
-import dev.jorel.commandapi.CommandAPI
-import dev.jorel.commandapi.CommandAPIPaperConfig
-import org.bukkit.plugin.java.JavaPlugin
+import org.betonquest.betonquest.BetonQuest
 
-class BetonQuestAddonPlugin : JavaPlugin() {
+class BetonQuestAddonPlugin : BetonQuest() {
 
     companion object {
-        lateinit var instance: BetonQuestAddonPlugin
+        lateinit var INSTANCE: BetonQuestAddonPlugin
             private set
     }
 
     override fun onLoad() {
-        instance = this
-        CommandAPI.onLoad(CommandAPIPaperConfig(this).verboseOutput(true).silentLogs(true))
+        INSTANCE = this
     }
 
     override fun onEnable() {
-        CommandAPI.onEnable()
-
         Metrics(this, 26421)
-        BetonQuestAddon.initialize()
-        UpdateChecker.checkForUpdates(this, 120813)
-
-        CommandsManger(this).loadsCommands()
+        CompatibilityManager(getInstance()).registerCompatiblePlugins()
 
         logger.info("BetonQuestAddon v${pluginMeta.version} successfully enabled.")
 
         // TestPluginInit(this)
+        UpdateChecker.checkForUpdates(this, 120813)
     }
 
-    override fun onDisable() {
-        CommandAPI.onDisable()
-    }
 }

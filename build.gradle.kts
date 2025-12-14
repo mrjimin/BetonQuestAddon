@@ -1,9 +1,9 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    kotlin("jvm") version "2.2.10"
-    java
-    id("com.gradleup.shadow") version "9.0.0-beta11"
+    kotlin("jvm") version "2.2.21"
+    id("com.gradleup.shadow") version "9.2.2"
+    id("java")
 }
 
 group = "com.github.mrjimin"
@@ -16,20 +16,20 @@ repositories {
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 
-    maven("https://repo.nexomc.com/releases")
+    maven("https://repo.nexomc.com/snapshots")
     maven("https://maven.devs.beer/")
     maven("https://jitpack.io")
-    maven("https://repo.codemc.org/repository/maven-public/")
     maven("https://repo.nightexpressdev.com/releases")
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
     maven("https://maven.enginehub.org/repo/")
+    maven("https://nexus.betonquest.org/repository/betonquest/")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
-    compileOnly("com.nexomc:nexo:1.11.0-dev")
+    compileOnly("com.nexomc:nexo:1.16.0-dev.8") { exclude("*") }
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
     compileOnly("net.momirealms:craft-engine-core:0.0.63")
@@ -41,10 +41,8 @@ dependencies {
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.14")
     compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
     compileOnly("net.momirealms:custom-crops:3.6.40")
+    compileOnly("org.betonquest.betonquest:core:1.0.0-SNAPSHOT") { exclude("*") }
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.0") // stdlib 포함
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0") // PlasmoVoice 호환
-    implementation("dev.jorel:commandapi-paper-shade:11.0.0")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
@@ -72,8 +70,6 @@ tasks.register<ShadowJar>("shadowJarPlugin") {
     exclude("org/slf4j/**")
 
     from("LICENSE")
-
-    relocate("dev.jorel.commandapi", "com.github.mrjimin.betonquestaddon.shadow.commandapi")
 
     manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"
