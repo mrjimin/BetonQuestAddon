@@ -6,15 +6,12 @@ plugins {
     id("java")
 }
 
-group = "com.github.mrjimin"
+group = "com.github.seojimin0402"
 version = "1.5.2"
 
 repositories {
     mavenCentral()
-    maven {
-        name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+    maven("https://repo.papermc.io/repository/maven-public/")
 
     maven("https://repo.nexomc.com/snapshots")
     maven("https://maven.devs.beer/")
@@ -28,21 +25,23 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
-    compileOnly("com.nexomc:nexo:1.16.0-dev.8") { exclude("*") }
-    compileOnly("dev.lone:api-itemsadder:4.0.10")
-    compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
-    compileOnly("net.momirealms:craft-engine-core:0.0.63")
-    compileOnly("net.momirealms:craft-engine-bukkit:0.0.63")
+    compileOnly("io.papermc.paper:paper-api:${rootProject.properties["paper_version"]}-R0.1-SNAPSHOT")
+    compileOnly("com.nexomc:nexo:${rootProject.properties["nexo_version"]}") { exclude("*") }
+    compileOnly("dev.lone:api-itemsadder:${rootProject.properties["itemsadder_version"]}")
+
+    compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
+    compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
+
     compileOnly("com.github.angeschossen:LandsAPI:7.15.20")
-    compileOnly("net.momirealms:custom-crops:3.6.40")
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.14")
     compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
     compileOnly("net.momirealms:custom-crops:3.6.40")
+
     compileOnly("org.betonquest.betonquest:core:1.0.0-SNAPSHOT") { exclude("*") }
 
+    compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
