@@ -10,9 +10,11 @@ import org.betonquest.betonquest.api.quest.condition.PlayerlessConditionFactory
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableConditionAdapter
 import org.betonquest.betonquest.api.quest.condition.thread.PrimaryServerThreadPlayerCondition
 import org.betonquest.betonquest.api.quest.condition.thread.PrimaryServerThreadPlayerlessCondition
+import org.bukkit.Location
 
-class NexoBlockConditionFactory(
-    private val data: PrimaryServerThreadData
+class NexoConditionFactory(
+    private val data: PrimaryServerThreadData,
+    private val mechanicIdProvider: (Location) -> String?
 ) : PlayerConditionFactory, PlayerlessConditionFactory {
 
     override fun parsePlayer(instruction: Instruction): PlayerCondition =
@@ -27,9 +29,9 @@ class NexoBlockConditionFactory(
             data
         )
 
-    private fun parseInstruction(instruction: Instruction): NexoBlockCondition {
-        val itemID= instruction[Argument.STRING]
+    private fun parseInstruction(instruction: Instruction): NexoCondition {
+        val itemId = instruction[Argument.STRING]
         val location = instruction[Argument.LOCATION]
-        return NexoBlockCondition(itemID, location)
+        return NexoCondition(itemId, location, mechanicIdProvider)
     }
 }
