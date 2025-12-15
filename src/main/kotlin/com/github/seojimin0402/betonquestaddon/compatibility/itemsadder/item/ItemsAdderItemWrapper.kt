@@ -8,7 +8,7 @@ import org.betonquest.betonquest.item.QuestItem
 import org.betonquest.betonquest.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
 
-data class ItemsAdderItemWrapper(
+class ItemsAdderItemWrapper(
     private val stack: Variable<CustomStack>
 ) : QuestItemWrapper {
 

@@ -1,2 +1,2 @@
 # 🧩 BetonQuestAddon
-> 👤 Author: MrJimin
+> 👤 Author: seojimin0402

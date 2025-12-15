@@ -4,10 +4,22 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("com.gradleup.shadow") version "9.2.2"
     id("java")
+    `java-library`
 }
 
+val git : String = versionBanner()
+val builder : String = builder()
+ext["git_version"] = git
+ext["builder"] = builder
+
+val isDev: Boolean = true
+
 group = "com.github.seojimin0402"
-version = "1.5.2"
+version = if (isDev) {
+    "${rootProject.properties["project_version"]}-$git-dev"
+} else {
+    "${rootProject.properties["project_version"]}-$git"
+}
 
 repositories {
     mavenCentral()
@@ -57,26 +69,20 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-tasks.register<ShadowJar>("shadowJarPlugin") {
-    archiveFileName.set("BetonQuestAddon-${project.version}.jar")
-
-    from(sourceSets.main.get().output)
-    configurations = listOf(project.configurations.runtimeClasspath.get())
-
-    exclude("kotlin/**", "kotlinx/**")
-    exclude("org/intellij/**")
-    exclude("org/jetbrains/**")
-    exclude("org/slf4j/**")
-
-    from("LICENSE")
-
-    manifest {
-        attributes["paperweight-mappings-namespace"] = "mojang"
-    }
-
-}
-
 tasks {
+    register<ShadowJar>("shadowJarPlugin") {
+        archiveFileName.set("BetonQuestAddon-${project.version}.jar")
+
+        from(sourceSets.main.get().output)
+        configurations = listOf(project.configurations.runtimeClasspath.get())
+
+        exclude("kotlin/**", "kotlinx/**")
+        exclude("org/intellij/**")
+        exclude("org/jetbrains/**")
+        exclude("org/slf4j/**")
+    }
+        // from("LICENSE")
+
     build {
         dependsOn("shadowJarPlugin")
     }
@@ -95,3 +101,11 @@ tasks {
         }
     }
 }
+
+fun versionBanner(): String = project.providers.exec {
+    commandLine("git", "rev-parse", "--short=8", "HEAD")
+}.standardOutput.asText.map { it.trim() }.getOrElse("Unknown")
+
+fun builder(): String = project.providers.exec {
+    commandLine("git", "config", "user.name")
+}.standardOutput.asText.map { it.trim() }.getOrElse("Unknown")

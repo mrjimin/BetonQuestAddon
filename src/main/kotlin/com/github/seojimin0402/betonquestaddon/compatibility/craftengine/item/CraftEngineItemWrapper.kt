@@ -9,7 +9,7 @@ import org.betonquest.betonquest.item.QuestItem
 import org.betonquest.betonquest.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
 
-data class CraftEngineItemWrapper (
+class CraftEngineItemWrapper (
     private val itemName: Variable<String>
 ) : QuestItemWrapper {
 

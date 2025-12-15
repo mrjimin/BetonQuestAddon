@@ -1,13 +1,13 @@
 name: BetonQuestAddon
 version: '${version}'
-author: MrJimin
+author: seojimin0402
 website: https://www.spigotmc.org/resources/betonquestaddon.120813/
 description: Extends BetonQuest with additional powerful features.
 
 api-version: "1.21"
 
-main: com.github.mrjimin.betonquestaddon.BetonQuestAddonPlugin
-loader: com.github.mrjimin.betonquestaddon.BetonQuestAddonLoader
+main: com.github.seojimin0402.betonquestaddon.BetonQuestAddonPlugin
+loader: com.github.seojimin0402.betonquestaddon.BetonQuestAddonLoader
 
 dependencies:
   server:
