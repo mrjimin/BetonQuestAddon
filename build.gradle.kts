@@ -14,7 +14,7 @@ ext["builder"] = builder
 
 val isDev: Boolean = true
 
-group = "com.github.seojimin0402"
+group = "com.github.mrjimin"
 version = if (isDev) {
     "${rootProject.properties["project_version"]}-$git-dev"
 } else {
