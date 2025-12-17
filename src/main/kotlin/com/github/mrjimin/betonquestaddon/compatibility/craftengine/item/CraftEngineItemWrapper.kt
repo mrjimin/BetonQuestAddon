@@ -6,6 +6,7 @@ import net.momirealms.craftengine.bukkit.api.CraftEngineItems
 import net.momirealms.craftengine.core.util.Key
 import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
+import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.item.QuestItem
 import org.betonquest.betonquest.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
@@ -22,13 +23,13 @@ class CraftEngineItemWrapper (
     ) : QuestItem {
 
         private val customItemMeta = CraftEngineItems.byId(itemId.asCraftKey())
-            ?.buildItemStack()?.itemMeta
+            ?.buildItemStack()?.itemMeta ?: throw QuestException("Invalid CraftEngine Item: $itemId")
 
         override fun getName(): Component? =
-            customItemMeta?.itemName()
+            customItemMeta.itemName()
 
         override fun getLore(): List<Component?>? =
-            customItemMeta?.lore()
+            customItemMeta.lore()
 
         override fun generate(stackSize: Int, profile: Profile?): ItemStack? =
             CraftEngineItems.byId(itemId.asCraftKey())?.buildItemStack(stackSize)?.clone()
