@@ -8,7 +8,7 @@ import org.betonquest.betonquest.api.instruction.argument.Argument
 import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 
-interface IItemObjectiveFactory : ObjectiveFactory {
+interface ICheckObjectiveFactory : ObjectiveFactory {
 
     val targetType: TargetType
     val actionType: ActionType

@@ -13,7 +13,7 @@ class NexoItemWrapper(
     private val itemName: Variable<String>
 ) : QuestItemWrapper {
 
-    override fun getItem(profile: Profile?): QuestItem? =
+    override fun getItem(profile: Profile?): QuestItem =
         NexoItem(itemName.getValue(profile))
 
     class NexoItem(

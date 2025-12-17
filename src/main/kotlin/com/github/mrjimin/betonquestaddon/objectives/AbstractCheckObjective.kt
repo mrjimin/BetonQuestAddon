@@ -7,7 +7,7 @@ import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 
-abstract class AbstractItemObjective(
+abstract class AbstractCheckObjective(
     instruction: Instruction,
     message: String,
     amount: Variable<Number>?,

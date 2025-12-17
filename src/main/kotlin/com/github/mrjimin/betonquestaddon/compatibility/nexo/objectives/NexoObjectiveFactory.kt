@@ -1,35 +1,16 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives
 
-import com.github.mrjimin.betonquestaddon.objectives.IItemObjectiveFactory
+import com.github.mrjimin.betonquestaddon.objectives.ICheckObjectiveFactory
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import org.betonquest.betonquest.api.Objective
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.variable.Variable
 
-//class NexoObjectiveFactory(
-//    private val targetType: TargetType,
-//    private val actionType: ActionType
-//) : ObjectiveFactory {
-//
-//    override fun parseInstruction(instruction: Instruction): Objective {
-//        val itemId = instruction[Argument.STRING]
-//        val amount = instruction.getValue("amount", Argument.NUMBER_NOT_LESS_THAN_ONE, 1)
-//        val isCancelled = instruction.getValue("isCancelled", Argument.BOOLEAN)
-//
-//        val message = "${targetType.name.lowercase()}_to_${actionType.name.lowercase()}"
-//
-//        return when (targetType) {
-//            TargetType.FURNITURE -> NexoFurnitureObjective(instruction, amount, message, itemId, actionType, isCancelled)
-//            TargetType.BLOCK -> NexoBlockObjective(instruction, amount, message, itemId, actionType, isCancelled)
-//        }
-//    }
-//}
-
 class NexoObjectiveFactory(
     override val targetType: TargetType,
     override val actionType: ActionType
-) : IItemObjectiveFactory {
+) : ICheckObjectiveFactory {
 
     override fun createFurniture(
         instruction: Instruction,

@@ -12,20 +12,20 @@ class ItemsAdderItemWrapper(
     private val stack: Variable<CustomStack>
 ) : QuestItemWrapper {
 
-    override fun getItem(profile: Profile?): QuestItem? =
+    override fun getItem(profile: Profile?): QuestItem =
         ItemsAdderItem(stack.getValue(profile))
 
     class ItemsAdderItem(
         private val stack: CustomStack
     ) : QuestItem {
 
-        override fun getName(): Component? =
+        override fun getName(): Component =
             stack.itemStack.itemMeta.itemName()
 
-        override fun getLore(): List<Component?>? =
+        override fun getLore(): List<Component>? =
             stack.itemStack.itemMeta.lore()
 
-        override fun generate(stackSize: Int, profile: Profile?): ItemStack? =
+        override fun generate(stackSize: Int, profile: Profile?): ItemStack =
             stack.itemStack.clone().apply {
                 amount = stackSize
             }

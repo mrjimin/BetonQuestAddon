@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives
 
-import com.github.mrjimin.betonquestaddon.objectives.AbstractItemObjective
+import com.github.mrjimin.betonquestaddon.objectives.AbstractCheckObjective
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
@@ -17,7 +17,7 @@ abstract class NexoObjective(
     item: Variable<String>,
     actionType: ActionType,
     isCancelled: Variable<Boolean>?
-) : AbstractItemObjective(instruction, message, amount, item, actionType, isCancelled) {
+) : AbstractCheckObjective(instruction, message, amount, item, actionType, isCancelled) {
 
     protected fun handle(
         expected: ActionType,

@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 
-import com.github.mrjimin.betonquestaddon.objectives.AbstractItemObjective
+import com.github.mrjimin.betonquestaddon.objectives.AbstractCheckObjective
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
@@ -18,7 +18,7 @@ abstract class CraftEngineObjective(
     item: Variable<String>,
     actionType: ActionType,
     isCancelled: Variable<Boolean>?
-) : AbstractItemObjective(instruction, message, amount, item, actionType, isCancelled) {
+) : AbstractCheckObjective(instruction, message, amount, item, actionType, isCancelled) {
 
     protected fun handle(
         expected: ActionType,
