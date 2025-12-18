@@ -46,3 +46,6 @@ bin/
 
 /lib/
 /lib/**
+
+/aabbcc/
+/aabbcc/**
