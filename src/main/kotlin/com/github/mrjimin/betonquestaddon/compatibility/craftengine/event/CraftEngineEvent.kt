@@ -16,7 +16,7 @@ class CraftEngineEvent(
     private val targetType: TargetType
 ) : PlayerEvent {
 
-    override fun execute(profile: Profile?) {
+    override fun execute(profile: Profile) {
         val id = itemId.getValue(profile)
         val loc = location.getValue(profile)
 

@@ -4,24 +4,20 @@ import dev.lone.itemsadder.api.CustomStack
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.instruction.variable.Variable
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.api.quest.QuestException
 import org.betonquest.betonquest.item.QuestItem
 import org.betonquest.betonquest.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
 
 class ItemsAdderItemWrapper(
-    private val itemId: Variable<String>
+    private val customStack: Variable<CustomStack>
 ) : QuestItemWrapper {
 
     override fun getItem(profile: Profile?): QuestItem =
-        ItemsAdderItem(itemId.getValue(profile))
+        ItemsAdderItem(customStack.getValue(profile))
 
     class ItemsAdderItem(
-        private val itemId: String
+        private val customStack: CustomStack
     ) : QuestItem {
-
-        private val customStack: CustomStack =
-            CustomStack.getInstance(itemId) ?: throw QuestException("Invalid ItemsAdder Item: $itemId")
 
         override fun getName(): Component =
             customStack.itemStack.itemMeta.itemName()

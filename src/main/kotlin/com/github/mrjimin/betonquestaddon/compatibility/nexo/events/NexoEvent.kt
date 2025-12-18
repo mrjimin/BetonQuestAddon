@@ -35,12 +35,7 @@ class NexoEvent(
 
     private fun placeFurniture(id: String, loc: Location, profile: Profile) {
         requireNotNull(NexoFurniture.isFurniture(id)) { "Nexo item is not a furniture: $id" }
-        NexoFurniture.place(
-            id,
-            loc,
-            rotation(profile),
-            blockFace(profile)
-        )
+        NexoFurniture.place(id, loc, rotation(profile), blockFace(profile))
     }
 
     private fun rotation(profile: Profile): Rotation =
