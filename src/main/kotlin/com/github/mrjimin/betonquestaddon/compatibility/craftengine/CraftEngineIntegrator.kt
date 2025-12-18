@@ -10,6 +10,7 @@ import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
+import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
 
 class CraftEngineIntegrator : ICompatibility {
@@ -29,13 +30,18 @@ class CraftEngineIntegrator : ICompatibility {
                 BukkitAdaptors.adapt(location.block).id().toString()
             }
         )
-//        condition.registerCombined(
-//            "craftFurniture",
-//            CustomConditionFactory(data) { location ->
-//                CraftEngineFurniture.
-//                BukkitAdaptors.adapt(location.block).id().toString()
-//            }
-//        )
+        condition.registerCombined(
+            "craftFurniture",
+            BaseConditionFactory(data) { location ->
+                location.world
+                    .getNearbyEntities(location, 1.0, 1.0, 1.0).firstNotNullOfOrNull { entity ->
+                        CraftEngineFurniture
+                            .getLoadedFurnitureByMetaEntity(entity)
+                            ?.id()
+                            ?.toString()
+                    }
+            }
+        )
 
         val event = questRegistries.event()
         event.register(
