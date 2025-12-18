@@ -4,8 +4,9 @@ import com.github.mrjimin.betonquestaddon.compatibility.CompatibilityManager
 import com.github.mrjimin.betonquestaddon.shadow.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
 import org.betonquest.betonquest.BetonQuest
+import org.bukkit.plugin.java.JavaPlugin
 
-class BetonQuestAddonPlugin : BetonQuest() {
+class BetonQuestAddonPlugin : JavaPlugin() {
 
     companion object {
         lateinit var INSTANCE: BetonQuestAddonPlugin
@@ -18,7 +19,7 @@ class BetonQuestAddonPlugin : BetonQuest() {
 
     override fun onEnable() {
         Metrics(this, 26421)
-        CompatibilityManager(getInstance()).registerCompatiblePlugins()
+        CompatibilityManager(BetonQuest.getInstance()).registerCompatiblePlugins()
 
         logger.info("BetonQuestAddon v${pluginMeta.version} successfully enabled.")
 

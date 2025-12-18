@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed an issue where some item events were not triggered correctly
 - Fixed errors in Objective count handling
+- Fixed an issue where an error was displayed in the BetonQuestAddon when disabled
 
 ### Security
 - Strengthened permission validation for external plugin integrations

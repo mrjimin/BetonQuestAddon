@@ -26,7 +26,7 @@ interface ICheckObjectiveFactory : ObjectiveFactory {
         )
 
         val message =
-            "${targetType.name.lowercase()}_to_${actionType.name.lowercase()}"
+            "betonQuestAddon.${targetType.name.lowercase()}.${actionType.name.lowercase()}"
 
         return when (targetType) {
             TargetType.FURNITURE ->

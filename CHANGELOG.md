@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - 일부 아이템 이벤트가 정상적으로 트리거되지 않던 문제 수정
 - Objective 카운트 처리 오류 수정
+- disable시 BetonQuestAddon에 오류가 출력되는 문제 수정
 
 ### Security
 - 외부 플러그인 연동 시 권한 검증 강화
