@@ -22,17 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0-dev] - 2025-12-18
 
 ### Added
-- **Nexo** 연동 지원
+- `Nexo` 연동 지원
     - Item
     - Event
     - Objective
     - Condition
-- **CraftEngine** 연동 지원
+- `CraftEngine` 연동 지원
     - Item
     - Event
     - Objective
     - Condition
-- **ItemsAdder** 연동 지원
+- `ItemsAdder` 연동 지원
     - Item
     - Event
     - Objective
