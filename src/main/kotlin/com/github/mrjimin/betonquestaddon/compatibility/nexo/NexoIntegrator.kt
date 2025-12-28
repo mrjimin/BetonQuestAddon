@@ -15,7 +15,6 @@ import org.betonquest.betonquest.api.BetonQuestApi
 class NexoIntegrator : ICompatibility {
 
     override fun hook(api: BetonQuestApi) {
-        val data = api.primaryServerThreadData
         val questRegistries = api.questRegistries
 
         val itemRegistry = api.featureRegistries.item()
@@ -25,13 +24,13 @@ class NexoIntegrator : ICompatibility {
         val condition = questRegistries.condition()
         condition.registerCombined(
             "nexoBlock",
-            BaseConditionFactory(data) { location ->
+            BaseConditionFactory { location ->
                 NexoBlocks.customBlockMechanic(location)?.itemID
             }
         )
         condition.registerCombined(
             "nexoFurniture",
-            BaseConditionFactory(data) { location ->
+            BaseConditionFactory { location ->
                 NexoFurniture.furnitureMechanic(location)?.itemID
             }
         )
@@ -39,11 +38,11 @@ class NexoIntegrator : ICompatibility {
         val event = questRegistries.event()
         event.register(
             "nexoBlockAt",
-            NexoEventFactory(data, TargetType.BLOCK)
+            NexoEventFactory(TargetType.BLOCK)
         )
         event.register(
             "nexoFurnitureAt",
-            NexoEventFactory(data, TargetType.FURNITURE)
+            NexoEventFactory(TargetType.FURNITURE)
         )
 
         val objective = questRegistries.objective()

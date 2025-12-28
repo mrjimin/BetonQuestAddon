@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.nexo.events
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.bukkit.Location
@@ -11,10 +11,10 @@ import org.bukkit.Rotation
 import org.bukkit.block.BlockFace
 
 class NexoEvent(
-    private val itemId: Variable<String>,
-    private val location: Variable<Location>,
-    private val rotation: Variable<String>?,
-    private val blockFace: Variable<String>?,
+    private val itemId: Argument<String>,
+    private val location: Argument<Location>,
+    private val rotation: Argument<String>?,
+    private val blockFace: Argument<String>?,
     private val targetType: TargetType
 ) : PlayerEvent {
 
@@ -51,4 +51,8 @@ class NexoEvent(
             ?.uppercase()
             ?.let { BlockFace.valueOf(it) }
             ?: BlockFace.SELF
+
+    override fun isPrimaryThreadEnforced(): Boolean {
+        return true
+    }
 }

@@ -4,15 +4,15 @@ import com.github.mrjimin.betonquestaddon.compatibility.craftengine.asCraftKey
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.bukkit.Location
 
 class CraftEngineEvent(
-    private val itemId: Variable<String>,
-    private val location: Variable<Location>,
-    private val playSound: Variable<Boolean>?,
+    private val itemId: Argument<String>,
+    private val location: Argument<Location>,
+    private val playSound: Argument<Boolean>,
     private val targetType: TargetType
 ) : PlayerEvent {
 
@@ -20,7 +20,7 @@ class CraftEngineEvent(
         val id = itemId.getValue(profile)
         val loc = location.getValue(profile)
 
-        val playSound = playSound?.getValue(profile) ?: false
+        val playSound = playSound.getValue(profile)
 
         when (targetType) {
             TargetType.BLOCK -> placeBlock(id, loc, playSound)
@@ -37,6 +37,10 @@ class CraftEngineEvent(
         val furniture = CraftEngineFurniture.byId(id.asCraftKey())
         requireNotNull(furniture) { "CraftEngine item is not a furniture: $id" }
         CraftEngineFurniture.place(loc, id.asCraftKey(), furniture.anyVariantName(), playSound)
+    }
+
+    override fun isPrimaryThreadEnforced(): Boolean {
+        return true
     }
 
 }

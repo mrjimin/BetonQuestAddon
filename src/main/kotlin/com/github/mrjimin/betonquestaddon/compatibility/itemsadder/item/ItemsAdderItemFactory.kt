@@ -8,7 +8,7 @@ import org.betonquest.betonquest.item.QuestItemWrapper
 
 class ItemsAdderItemFactory : TypeFactory<QuestItemWrapper> {
     override fun parseInstruction(instruction: Instruction): QuestItemWrapper? {
-        val wrapper = ItemsAdderItemWrapper(instruction[CustomStackParser])
+        val wrapper = ItemsAdderItemWrapper(instruction.parse(CustomStackParser).get())
         return if (instruction.hasArgument("quest-item")) {
             QuestItemTagAdapterWrapper(wrapper)
         } else {

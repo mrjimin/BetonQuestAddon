@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.item
 
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems
-import org.betonquest.betonquest.api.quest.QuestException
+import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.item.QuestItemSerializer
 import org.bukkit.inventory.ItemStack
 

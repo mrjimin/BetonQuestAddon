@@ -3,16 +3,16 @@ package com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.nexomc.nexo.api.events.custom_block.*
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 import org.bukkit.event.EventHandler
 
 class NexoBlockObjective(
     instruction: Instruction,
-    amount: Variable<Number>?,
+    amount: Argument<Number>?,
     message: String,
-    item: Variable<String>,
+    item: Argument<String>,
     actionType: ActionType,
-    isCancelled: Variable<Boolean>?
+    isCancelled: Argument<Boolean>?
 ) : NexoObjective(instruction, message, amount, item, actionType, isCancelled) {
 
     @EventHandler(ignoreCancelled = true)
@@ -29,5 +29,4 @@ class NexoBlockObjective(
     fun NexoBlockInteractEvent.onInteract() {
         handle(ActionType.INTERACT, player, block)
     }
-
 }

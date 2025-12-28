@@ -4,8 +4,7 @@ import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import org.betonquest.betonquest.api.Objective
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.instruction.argument.Argument
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 
 interface ICheckObjectiveFactory : ObjectiveFactory {
@@ -14,17 +13,10 @@ interface ICheckObjectiveFactory : ObjectiveFactory {
     val actionType: ActionType
 
     override fun parseInstruction(instruction: Instruction): Objective {
-        val itemId = instruction[Argument.STRING]
-        val amount = instruction.getValue(
-            "amount",
-            Argument.NUMBER_NOT_LESS_THAN_ONE,
-            1
-        )
-        val isCancelled = instruction.getValue(
-            "isCancelled",
-            Argument.BOOLEAN,
-            false
-        )
+        val itemId = instruction.string().get()
+        val amount = instruction.number().get("amount", 1)
+
+        val isCancelled = instruction.bool().get("isCancelled", false)
 
         val message =
             "betonQuestAddon.${targetType.name.lowercase()}.${actionType.name.lowercase()}"
@@ -54,19 +46,19 @@ interface ICheckObjectiveFactory : ObjectiveFactory {
 
     fun createFurniture(
         instruction: Instruction,
-        amount: Variable<Number>?,
+        amount: Argument<Number>,
         message: String,
-        itemId: Variable<String>,
+        itemId: Argument<String>,
         actionType: ActionType,
-        isCancelled: Variable<Boolean>?
+        isCancelled: Argument<Boolean>?
     ): Objective
 
     fun createBlock(
         instruction: Instruction,
-        amount: Variable<Number>?,
+        amount: Argument<Number>,
         message: String,
-        itemId: Variable<String>,
+        itemId: Argument<String>,
         actionType: ActionType,
-        isCancelled: Variable<Boolean>?
+        isCancelled: Argument<Boolean>?
     ): Objective
 }

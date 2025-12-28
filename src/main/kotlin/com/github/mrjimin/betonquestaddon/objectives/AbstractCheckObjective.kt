@@ -1,35 +1,62 @@
+//package com.github.mrjimin.betonquestaddon.objectives
+//
+//import com.github.mrjimin.betonquestaddon.util.event.ActionType
+//import org.betonquest.betonquest.api.instruction.Instruction
+//import org.betonquest.betonquest.api.instruction.Argument
+//import org.betonquest.betonquest.api.profile.Profile
+//import org.bukkit.entity.Player
+//import org.bukkit.event.Listener
+//
+//abstract class AbstractCheckObjective(
+//    instruction: Instruction,
+//    message: String,
+//    amount: Argument<Number>,
+//    protected val item: Argument<String>,
+//    protected val actionType: ActionType,
+//    private val isCancelled: Argument<Boolean>?
+//) : BaseObjective(instruction, amount, message), Listener {
+//
+//    override fun checkMatch(profile: Profile, input: Any?): Boolean {
+//        val itemId = input as? String ?: return false
+//        if (isCancelled?.getValue(profile) == true) return false
+//        return item.getValue(profile) == itemId
+//    }
+//
+//    protected fun handleItem(
+//        expected: ActionType,
+//        player: Player,
+//        itemId: String?
+//    ) {
+//        if (actionType != expected || itemId == null) return
+//        handle(player, itemId)
+//    }
+//}
+
+
 package com.github.mrjimin.betonquestaddon.objectives
 
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
-import org.betonquest.betonquest.api.CountingObjective
+import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.profile.Profile
 import org.bukkit.entity.Player
-import org.bukkit.event.Listener
 
 abstract class AbstractCheckObjective(
     instruction: Instruction,
     message: String,
-    amount: Variable<Number>?,
-    protected val item: Variable<String>,
-    protected val actionType: ActionType,
-    private val isCancelled: Variable<Boolean>?
-) : CountingObjective(instruction, amount, message), Listener {
+    amount: Argument<Number>?,
+    protected val item: Argument<String>,
+    private val actionType: ActionType,
+    private val isCancelled: Argument<Boolean>?
+) : BaseObjective(instruction, amount, message) {
 
-    private fun dispatchIfMatches(player: Player, itemId: String) {
-        val profile = profileProvider.getProfile(player)
-        if (isCancelled?.getValue(profile) == true) return
+    override fun checkMatch(profile: Profile, input: Any?): Boolean {
+        val itemId = input as? String ?: return false
 
-        qeHandler.handle {
-            if (
-                containsPlayer(profile) &&
-                item.getValue(profile) == itemId &&
-                checkConditions(profile)
-            ) {
-                getCountingData(profile).progress()
-                completeIfDoneOrNotify(profile)
-            }
-        }
+        if (isCancelled?.getValue(profile) == true) return false
+        if (item.getValue(profile) != itemId) return false
+
+        return true
     }
 
     protected fun handleItem(
@@ -37,8 +64,7 @@ abstract class AbstractCheckObjective(
         player: Player,
         itemId: String?
     ) {
-        if (actionType != expected || itemId == null) return
-        dispatchIfMatches(player, itemId)
+        if (actionType != expected) return
+        handle(player, itemId)
     }
 }
-

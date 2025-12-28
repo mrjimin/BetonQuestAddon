@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item
 
 import dev.lone.itemsadder.api.CustomStack
-import org.betonquest.betonquest.api.quest.QuestException
+import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.item.QuestItemSerializer
 import org.bukkit.inventory.ItemStack
 

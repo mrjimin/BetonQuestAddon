@@ -5,7 +5,7 @@ import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import org.betonquest.betonquest.api.Objective
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 
 class CraftEngineObjectiveFactory(
     override val targetType: TargetType,
@@ -14,11 +14,11 @@ class CraftEngineObjectiveFactory(
 
     override fun createFurniture(
         instruction: Instruction,
-        amount: Variable<Number>?,
+        amount: Argument<Number>,
         message: String,
-        itemId: Variable<String>,
+        itemId: Argument<String>,
         actionType: ActionType,
-        isCancelled: Variable<Boolean>?
+        isCancelled: Argument<Boolean>?
     ): Objective = CraftEngineFurnitureObjective(
         instruction,
         amount,
@@ -29,11 +29,11 @@ class CraftEngineObjectiveFactory(
     )
     override fun createBlock(
         instruction: Instruction,
-        amount: Variable<Number>?,
+        amount: Argument<Number>,
         message: String,
-        itemId: Variable<String>,
+        itemId: Argument<String>,
         actionType: ActionType,
-        isCancelled: Variable<Boolean>?
+        isCancelled: Argument<Boolean>?
     ): Objective = CraftEngineBlockObjective(
         instruction,
         amount,

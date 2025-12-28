@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.util
 
-import org.betonquest.betonquest.api.quest.QuestException
+import org.betonquest.betonquest.api.QuestException
 
 fun String.compareWith(op: String, other: String, ignoreCase: Boolean): Boolean {
     val opTrimmed = op.trim()

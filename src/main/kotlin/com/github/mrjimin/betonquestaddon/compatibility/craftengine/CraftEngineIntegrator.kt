@@ -5,7 +5,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.craftengine.event.CraftE
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives.CraftEngineObjectiveFactory
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.NexoObjectiveFactory
 import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
@@ -16,7 +15,6 @@ import org.betonquest.betonquest.api.BetonQuestApi
 class CraftEngineIntegrator : ICompatibility {
 
     override fun hook(api: BetonQuestApi) {
-        val data = api.primaryServerThreadData
         val questRegistries = api.questRegistries
 
         val itemRegistry = api.featureRegistries.item()
@@ -26,13 +24,13 @@ class CraftEngineIntegrator : ICompatibility {
         val condition = questRegistries.condition()
         condition.registerCombined(
             "craftEngineBlock",
-            BaseConditionFactory(data) {  location ->
+            BaseConditionFactory {  location ->
                 BukkitAdaptors.adapt(location.block).id().toString()
             }
         )
         condition.registerCombined(
             "craftFurniture",
-            BaseConditionFactory(data) { location ->
+            BaseConditionFactory { location ->
                 location.world
                     .getNearbyEntities(location, 1.0, 1.0, 1.0).firstNotNullOfOrNull { entity ->
                         CraftEngineFurniture
@@ -46,11 +44,11 @@ class CraftEngineIntegrator : ICompatibility {
         val event = questRegistries.event()
         event.register(
             "craftEngineBlockAt",
-            CraftEngineEventFactory(data, TargetType.BLOCK)
+            CraftEngineEventFactory(TargetType.BLOCK)
         )
         event.register(
             "craftEngineFurnitureAt",
-            CraftEngineEventFactory(data, TargetType.FURNITURE)
+            CraftEngineEventFactory(TargetType.FURNITURE)
         )
 
 

@@ -33,7 +33,7 @@ repositories {
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
     maven("https://maven.enginehub.org/repo/")
-    maven("https://nexus.betonquest.org/repository/betonquest/")
+    maven("https://repo.betonquest.org/betonquest")
 }
 
 dependencies {
@@ -51,7 +51,9 @@ dependencies {
     compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
     compileOnly("net.momirealms:custom-crops:3.6.40")
 
-    compileOnly("org.betonquest.betonquest:core:1.0.0-SNAPSHOT") { exclude("*") }
+    compileOnly("org.betonquest:betonquest:3.0.0-SNAPSHOT") {
+        exclude(group = "de.themoep", module = "minedown-adventure")
+    } // { exclude("*") }
 
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
 

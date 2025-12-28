@@ -4,14 +4,14 @@ import com.github.mrjimin.betonquestaddon.util.event.TargetType
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
 import dev.lone.itemsadder.api.CustomStack
-import org.betonquest.betonquest.api.instruction.variable.Variable
+import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.event.PlayerEvent
 import org.bukkit.Location
 
 class ItemsAdderEvent(
-    private val customStack: Variable<CustomStack>,
-    private val location: Variable<Location>,
+    private val customStack: Argument<CustomStack>,
+    private val location: Argument<Location>,
     private val targetType: TargetType
 ) : PlayerEvent {
 
@@ -33,5 +33,9 @@ class ItemsAdderEvent(
     private fun placeFurniture(id: String, loc: Location) {
         requireNotNull(CustomFurniture.getInstance(id)) { "ItemsAdder item is not a furniture: $id" }
         CustomFurniture.spawn(id, loc.block)
+    }
+
+    override fun isPrimaryThreadEnforced(): Boolean {
+        return true
     }
 }

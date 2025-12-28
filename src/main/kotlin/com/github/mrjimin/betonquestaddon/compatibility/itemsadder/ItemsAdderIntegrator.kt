@@ -9,15 +9,12 @@ import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives.It
 import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
-import com.nexomc.nexo.api.NexoBlocks
-import com.nexomc.nexo.api.NexoFurniture
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
 
 class ItemsAdderIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val data = api.primaryServerThreadData
         val questRegistries = api.questRegistries
         val loggerFactory = api.loggerFactory
 
@@ -28,13 +25,13 @@ class ItemsAdderIntegrator : ICompatibility {
         val condition = questRegistries.condition()
         condition.registerCombined(
             "itemsAdderBlock",
-            BaseConditionFactory(data) { location ->
+            BaseConditionFactory { location ->
                 CustomBlock.byAlreadyPlaced(location.block)?.namespacedID
             }
         )
         condition.registerCombined(
             "itemsAdderFurniture",
-            BaseConditionFactory(data) { location ->
+            BaseConditionFactory { location ->
                 CustomFurniture.byAlreadySpawned(location.block)?.namespacedID
             }
         )
@@ -42,15 +39,15 @@ class ItemsAdderIntegrator : ICompatibility {
         val event = questRegistries.event()
         event.register(
             "itemsAdderBlockAt",
-            ItemsAdderEventFactory(data, TargetType.BLOCK)
+            ItemsAdderEventFactory(TargetType.BLOCK)
         )
         event.register(
             "itemsAdderFurnitureAt",
-            ItemsAdderEventFactory(data, TargetType.FURNITURE)
+            ItemsAdderEventFactory(TargetType.FURNITURE)
         )
         event.register(
             "itemsAdderPlayAnimation",
-            PlayAnimationFactory(data, loggerFactory)
+            PlayAnimationFactory(loggerFactory)
         )
 
         val objective = questRegistries.objective()
