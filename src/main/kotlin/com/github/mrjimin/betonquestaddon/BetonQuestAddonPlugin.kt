@@ -23,7 +23,6 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 
         logger.info("BetonQuestAddon v${pluginMeta.version} successfully enabled.")
 
-        // TestPluginInit(this)
         UpdateChecker.checkForUpdates(this, 120813)
     }
 

@@ -34,6 +34,7 @@ repositories {
     maven("https://repo.xenondevs.xyz/releases")
     maven("https://maven.enginehub.org/repo/")
     maven("https://repo.betonquest.org/betonquest")
+    maven("https://repo.hibiscusmc.com/releases")
 }
 
 dependencies {
@@ -44,18 +45,19 @@ dependencies {
     compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
 
-    compileOnly("com.github.angeschossen:LandsAPI:7.15.20")
-    compileOnly("me.clip:placeholderapi:2.11.6")
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.14")
-    compileOnly("com.sk89q.worldedit:worldedit-core:7.3.14")
-    compileOnly("net.momirealms:custom-crops:3.6.40")
+    compileOnly("com.github.angeschossen:LandsAPI:${rootProject.properties["lands_version"]}")
+    compileOnly("me.clip:placeholderapi:${rootProject.properties["placeholderapi_version"]}")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["worldguard_version"]}")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${rootProject.properties["worldedit_version"]}")
+    compileOnly("com.sk89q.worldedit:worldedit-core:${rootProject.properties["worldedit_version"]}")
+    compileOnly("net.momirealms:custom-crops:${rootProject.properties["customcrops_version"]}")
 
-    compileOnly("org.betonquest:betonquest:3.0.0-SNAPSHOT") {
+    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
         exclude(group = "de.themoep", module = "minedown-adventure")
     } // { exclude("*") }
 
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
+    compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmccosmetics_version"]}")
 
     compileOnly(fileTree("lib") {
         include("*.jar")

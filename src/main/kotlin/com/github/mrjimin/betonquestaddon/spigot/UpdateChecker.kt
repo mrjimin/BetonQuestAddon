@@ -30,8 +30,6 @@ class UpdateChecker(
     }
 
     companion object {
-
-        @Suppress("UnstableApiUsage")
         fun checkForUpdates(plugin: JavaPlugin, resourceId: Int) {
             UpdateChecker(plugin, resourceId).getVersion { version ->
                 if (plugin.pluginMeta.version < version) {

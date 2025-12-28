@@ -11,15 +11,18 @@ class CompatibilityManager(private val api: BetonQuestApi) {
     private val integrators = mutableMapOf<String, ICompatibility>()
 
     fun registerCompatiblePlugins() {
-        register("Nexo", NexoIntegrator())
-        register("CraftEngine", CraftEngineIntegrator())
-        register("ItemsAdder", ItemsAdderIntegrator())
+        register("Nexo") { NexoIntegrator() }
+        register("CraftEngine") { CraftEngineIntegrator() }
+        register("ItemsAdder") { ItemsAdderIntegrator() }
     }
 
-    private fun register(name: String, compatibility: ICompatibility) {
-        integrators[name] = compatibility
-        if (Bukkit.getPluginManager().getPlugin(name)?.isEnabled == true) {
+    private fun register(name: String, factory: () -> ICompatibility) {
+        if (name in integrators) return
+
+        Bukkit.getPluginManager().getPlugin(name)?.takeIf { it.isEnabled }?.let {
+            val compatibility = factory()
             compatibility.hook(api)
+            integrators[name] = compatibility
         }
     }
 
