@@ -3,7 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 import com.github.mrjimin.betonquestaddon.objectives.ICheckObjectiveFactory
 import com.github.mrjimin.betonquestaddon.util.event.ActionType
 import com.github.mrjimin.betonquestaddon.util.event.TargetType
-import org.betonquest.betonquest.api.Objective
+import org.betonquest.betonquest.api.DefaultObjective
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.Argument
 
@@ -19,7 +19,7 @@ class CraftEngineObjectiveFactory(
         itemId: Argument<String>,
         actionType: ActionType,
         isCancelled: Argument<Boolean>?
-    ): Objective = CraftEngineFurnitureObjective(
+    ): DefaultObjective = CraftEngineFurnitureObjective(
         instruction,
         amount,
         message,
@@ -34,7 +34,7 @@ class CraftEngineObjectiveFactory(
         itemId: Argument<String>,
         actionType: ActionType,
         isCancelled: Argument<Boolean>?
-    ): Objective = CraftEngineBlockObjective(
+    ): DefaultObjective = CraftEngineBlockObjective(
         instruction,
         amount,
         message,
