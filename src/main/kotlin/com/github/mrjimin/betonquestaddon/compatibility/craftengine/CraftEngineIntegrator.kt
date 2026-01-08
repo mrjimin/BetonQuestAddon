@@ -1,13 +1,13 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
-import com.github.mrjimin.betonquestaddon.compatibility.craftengine.event.CraftEngineEventFactory
+import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives.CraftEngineObjectiveFactory
 import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -41,14 +41,14 @@ class CraftEngineIntegrator : ICompatibility {
             }
         )
 
-        val event = questRegistries.event()
-        event.register(
+        val action = questRegistries.action()
+        action.register(
             "craftEngineBlockAt",
-            CraftEngineEventFactory(TargetType.BLOCK)
+            CraftEngineActionFactory(TargetType.BLOCK)
         )
-        event.register(
+        action.register(
             "craftEngineFurnitureAt",
-            CraftEngineEventFactory(TargetType.FURNITURE)
+            CraftEngineActionFactory(TargetType.FURNITURE)
         )
 
 

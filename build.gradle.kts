@@ -7,18 +7,13 @@ plugins {
     `java-library`
 }
 
-val git : String = versionBanner()
-val builder : String = builder()
-ext["git_version"] = git
-ext["builder"] = builder
-
 val isDev: Boolean = true
 
 group = "com.github.mrjimin"
 version = if (isDev) {
-    "${rootProject.properties["project_version"]}-$git-dev"
+    "${rootProject.properties["project_version"]}-dev"
 } else {
-    "${rootProject.properties["project_version"]}-$git"
+    "${rootProject.properties["project_version"]}"
 }
 
 repositories {
@@ -45,16 +40,15 @@ dependencies {
     compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
 
-    compileOnly("com.github.angeschossen:LandsAPI:${rootProject.properties["lands_version"]}")
-    compileOnly("me.clip:placeholderapi:${rootProject.properties["placeholderapi_version"]}")
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["worldguard_version"]}")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${rootProject.properties["worldedit_version"]}")
-    compileOnly("com.sk89q.worldedit:worldedit-core:${rootProject.properties["worldedit_version"]}")
-    compileOnly("net.momirealms:custom-crops:${rootProject.properties["customcrops_version"]}")
+//    compileOnly("com.github.angeschossen:LandsAPI:${rootProject.properties["lands_version"]}")
+//
+//    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["worldguard_version"]}")
+//    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${rootProject.properties["worldedit_version"]}")
+//    compileOnly("com.sk89q.worldedit:worldedit-core:${rootProject.properties["worldedit_version"]}")
 
     compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
         exclude(group = "de.themoep", module = "minedown-adventure")
-    } // { exclude("*") }
+    }
 
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmccosmetics_version"]}")
@@ -72,8 +66,11 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
+
 val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
     archiveFileName.set("BetonQuestAddon-${project.version}.jar")
+
+    destinationDirectory.set(file("${project.rootDir}/target"))
 
     from(sourceSets.main.get().output)
     configurations = listOf(project.configurations.runtimeClasspath.get())
@@ -85,7 +82,6 @@ val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
 }
 
 tasks.named("build") {
-    // dependsOn(tasks.clean)
     dependsOn(shadowJarPlugin)
 }
 
@@ -102,11 +98,3 @@ tasks.processResources {
         expand(props)
     }
 }
-
-fun versionBanner(): String = project.providers.exec {
-    commandLine("git", "rev-parse", "--short=8", "HEAD")
-}.standardOutput.asText.map { it.trim() }.getOrElse("Unknown")
-
-fun builder(): String = project.providers.exec {
-    commandLine("git", "config", "user.name")
-}.standardOutput.asText.map { it.trim() }.getOrElse("Unknown")

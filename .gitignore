@@ -49,3 +49,6 @@ bin/
 
 /aabbcc/
 /aabbcc/**
+
+# Build output directory
+/target/

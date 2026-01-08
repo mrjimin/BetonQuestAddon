@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import net.momirealms.craftengine.bukkit.api.event.*
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.Argument

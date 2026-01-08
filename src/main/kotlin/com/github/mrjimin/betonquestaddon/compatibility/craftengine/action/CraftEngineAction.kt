@@ -1,20 +1,20 @@
-package com.github.mrjimin.betonquestaddon.compatibility.craftengine.event
+package com.github.mrjimin.betonquestaddon.compatibility.craftengine.action
 
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.asCraftKey
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.api.quest.event.PlayerEvent
+import org.betonquest.betonquest.api.quest.action.PlayerAction
 import org.bukkit.Location
 
-class CraftEngineEvent(
+class CraftEngineAction(
     private val itemId: Argument<String>,
     private val location: Argument<Location>,
     private val playSound: Argument<Boolean>,
     private val targetType: TargetType
-) : PlayerEvent {
+) : PlayerAction {
 
     override fun execute(profile: Profile) {
         val id = itemId.getValue(profile)

@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives
 
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import com.nexomc.nexo.api.events.custom_block.*
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.Argument

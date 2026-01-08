@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives
 
 import com.github.mrjimin.betonquestaddon.objectives.AbstractCheckObjective
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
 import org.betonquest.betonquest.api.instruction.Instruction

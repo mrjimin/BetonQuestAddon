@@ -1,14 +1,14 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
-import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.event.ItemsAdderEventFactory
-import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.event.PlayAnimationFactory
+import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.ItemsAdderEventFactory
+import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.PlayAnimationFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdderItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdderQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives.ItemsAdderObjectiveFactory
 import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -36,16 +36,16 @@ class ItemsAdderIntegrator : ICompatibility {
             }
         )
 
-        val event = questRegistries.event()
-        event.register(
+        val action = questRegistries.action()
+        action.register(
             "itemsAdderBlockAt",
             ItemsAdderEventFactory(TargetType.BLOCK)
         )
-        event.register(
+        action.register(
             "itemsAdderFurnitureAt",
             ItemsAdderEventFactory(TargetType.FURNITURE)
         )
-        event.register(
+        action.register(
             "itemsAdderPlayAnimation",
             PlayAnimationFactory(loggerFactory)
         )

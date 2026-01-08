@@ -1,19 +1,19 @@
-package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.event
+package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action
 
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
 import dev.lone.itemsadder.api.CustomStack
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.api.quest.event.PlayerEvent
+import org.betonquest.betonquest.api.quest.action.PlayerAction
 import org.bukkit.Location
 
 class ItemsAdderEvent(
     private val customStack: Argument<CustomStack>,
     private val location: Argument<Location>,
     private val targetType: TargetType
-) : PlayerEvent {
+) : PlayerAction {
 
     override fun execute(profile: Profile) {
         val stack = customStack.getValue(profile)

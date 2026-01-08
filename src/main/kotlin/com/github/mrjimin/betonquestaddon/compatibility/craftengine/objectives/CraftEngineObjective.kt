@@ -1,14 +1,13 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives
 
 import com.github.mrjimin.betonquestaddon.objectives.AbstractCheckObjective
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.Argument
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
-import org.bukkit.entity.ItemDisplay
 import org.bukkit.entity.Player
 
 abstract class CraftEngineObjective(

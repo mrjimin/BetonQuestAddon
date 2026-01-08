@@ -35,7 +35,7 @@
 
 package com.github.mrjimin.betonquestaddon.objectives
 
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.profile.Profile

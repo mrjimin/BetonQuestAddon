@@ -1,4 +1,4 @@
-package com.github.mrjimin.betonquestaddon.util.event
+package com.github.mrjimin.betonquestaddon.util.action
 
 enum class ActionType {
     BREAK,

@@ -1,8 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives
 
 import com.github.mrjimin.betonquestaddon.objectives.ICheckObjectiveFactory
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import org.betonquest.betonquest.api.DefaultObjective
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.instruction.Argument

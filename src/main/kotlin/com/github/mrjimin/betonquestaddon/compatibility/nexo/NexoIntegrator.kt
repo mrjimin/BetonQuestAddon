@@ -1,13 +1,13 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.events.NexoEventFactory
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.NexoObjectiveFactory
 import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
-import com.github.mrjimin.betonquestaddon.util.event.ActionType
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.ActionType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -35,14 +35,14 @@ class NexoIntegrator : ICompatibility {
             }
         )
 
-        val event = questRegistries.event()
-        event.register(
+        val action = questRegistries.action()
+        action.register(
             "nexoBlockAt",
-            NexoEventFactory(TargetType.BLOCK)
+            NexoActionFactory(TargetType.BLOCK)
         )
-        event.register(
+        action.register(
             "nexoFurnitureAt",
-            NexoEventFactory(TargetType.FURNITURE)
+            NexoActionFactory(TargetType.FURNITURE)
         )
 
         val objective = questRegistries.objective()

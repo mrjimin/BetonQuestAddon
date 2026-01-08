@@ -1,22 +1,22 @@
-package com.github.mrjimin.betonquestaddon.compatibility.nexo.events
+package com.github.mrjimin.betonquestaddon.compatibility.nexo.action
 
-import com.github.mrjimin.betonquestaddon.util.event.TargetType
+import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.api.quest.event.PlayerEvent
+import org.betonquest.betonquest.api.quest.action.PlayerAction
 import org.bukkit.Location
 import org.bukkit.Rotation
 import org.bukkit.block.BlockFace
 
-class NexoEvent(
+class NexoAction(
     private val itemId: Argument<String>,
     private val location: Argument<Location>,
     private val rotation: Argument<String>?,
     private val blockFace: Argument<String>?,
     private val targetType: TargetType
-) : PlayerEvent {
+) : PlayerAction {
 
     override fun execute(profile: Profile) {
         val id = itemId.getValue(profile)

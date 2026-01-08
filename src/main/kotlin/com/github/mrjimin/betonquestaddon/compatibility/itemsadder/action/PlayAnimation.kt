@@ -1,13 +1,13 @@
-package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.event
+package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action
 
 import dev.lone.itemsadder.api.ItemsAdder
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
-import org.betonquest.betonquest.api.quest.event.online.OnlineEvent
+import org.betonquest.betonquest.api.quest.action.online.OnlineAction
 
 class PlayAnimation(
     private val name: Argument<String>
-) : OnlineEvent {
+) : OnlineAction {
 
     override fun execute(profile: OnlineProfile) {
         ItemsAdder.playTotemAnimation(profile.player, name.getValue(profile))
