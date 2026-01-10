@@ -20,10 +20,10 @@ class ItemsAdderItemWrapper(
     ) : QuestItem {
 
         override fun getName(): Component =
-            customStack.itemStack.itemMeta.itemName()
+            customStack.itemName()
 
-        override fun getLore(): List<Component>? =
-            customStack.itemStack.itemMeta.lore()
+        override fun getLore(): List<Component> =
+            customStack.itemStack.itemMeta.lore() ?: listOf()
 
         override fun generate(stackSize: Int, profile: Profile?): ItemStack =
             customStack.itemStack.clone().apply {

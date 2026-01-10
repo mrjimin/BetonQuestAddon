@@ -6,15 +6,15 @@ import org.betonquest.betonquest.api.quest.action.PlayerAction
 import org.betonquest.betonquest.api.quest.action.PlayerActionFactory
 import org.betonquest.betonquest.api.quest.action.online.OnlineActionAdapter
 
-class PlayAnimationFactory(
+class ItemsAdderPlayAnimationFactory(
     private val loggerFactory: BetonQuestLoggerFactory
 ) : PlayerActionFactory {
 
     override fun parsePlayer(instruction: Instruction): PlayerAction? {
         val animation = instruction.string().get()
         return OnlineActionAdapter(
-            PlayAnimation(animation),
-            loggerFactory.create(PlayAnimation::class.java),
+            ItemsAdderPlayAnimation(animation),
+            loggerFactory.create(ItemsAdderPlayAnimation::class.java),
             instruction.`package`
         )
     }

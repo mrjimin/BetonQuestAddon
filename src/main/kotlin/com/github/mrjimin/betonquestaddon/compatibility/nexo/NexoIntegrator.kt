@@ -5,7 +5,7 @@ import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoActionFa
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.NexoObjectiveFactory
-import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
+import com.github.mrjimin.betonquestaddon.conditions.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import com.nexomc.nexo.api.NexoBlocks
@@ -17,41 +17,35 @@ class NexoIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
         val questRegistries = api.questRegistries
 
-        val itemRegistry = api.featureRegistries.item()
-        itemRegistry.register("nexo", NexoItemFactory())
-        itemRegistry.registerSerializer("nexo", NexoQuestItemSerializer())
+        api.featureRegistries.item().apply {
+            register("nexo", NexoItemFactory())
+            registerSerializer("nexo", NexoQuestItemSerializer())
+        }
 
-        val condition = questRegistries.condition()
-        condition.registerCombined(
-            "nexoBlock",
-            BaseConditionFactory { location ->
-                NexoBlocks.customBlockMechanic(location)?.itemID
-            }
-        )
-        condition.registerCombined(
-            "nexoFurniture",
-            BaseConditionFactory { location ->
-                NexoFurniture.furnitureMechanic(location)?.itemID
-            }
-        )
+        questRegistries.condition().apply {
+            registerCombined("nexoBlock", LocationConditionFactory { location ->
+                    NexoBlocks.customBlockMechanic(location)?.itemID
+                }
+            )
+            registerCombined("nexoFurniture", LocationConditionFactory { location ->
+                    NexoFurniture.furnitureMechanic(location)?.itemID
+                }
+            )
+        }
 
-        val action = questRegistries.action()
-        action.register(
-            "nexoBlockAt",
-            NexoActionFactory(TargetType.BLOCK)
-        )
-        action.register(
-            "nexoFurnitureAt",
-            NexoActionFactory(TargetType.FURNITURE)
-        )
+        questRegistries.action().apply {
+            register("nexoBlockAt", NexoActionFactory(TargetType.BLOCK))
+            register("nexoFurnitureAt", NexoActionFactory(TargetType.FURNITURE))
+        }
 
-        val objective = questRegistries.objective()
-        objective.register("nexoBlockBreak", NexoObjectiveFactory(TargetType.BLOCK, ActionType.BREAK))
-        objective.register("nexoBlockPlace", NexoObjectiveFactory(TargetType.BLOCK, ActionType.PLACE))
-        objective.register("nexoBlockInteract", NexoObjectiveFactory(TargetType.BLOCK, ActionType.INTERACT))
+        questRegistries.objective().apply {
+            register("nexoBlockPlace", NexoObjectiveFactory(ActionType.PLACE_BLOCK))
+            register("nexoBlockBreak", NexoObjectiveFactory(ActionType.BREAK_BLOCK))
+            register("nexoBlockInteract", NexoObjectiveFactory(ActionType.INTERACT_BLOCK))
 
-        objective.register("nexoFurnitureBreak", NexoObjectiveFactory(TargetType.FURNITURE, ActionType.BREAK))
-        objective.register("nexoFurniturePlace", NexoObjectiveFactory(TargetType.FURNITURE, ActionType.PLACE))
-        objective.register("nexoFurnitureInteract", NexoObjectiveFactory(TargetType.FURNITURE, ActionType.INTERACT))
+            register("nexoFurniturePlace", NexoObjectiveFactory(ActionType.PLACE_FURNITURE))
+            register("nexoFurnitureBreak", NexoObjectiveFactory(ActionType.BREAK_FURNITURE))
+            register("nexoFurnitureInteract", NexoObjectiveFactory(ActionType.INTERACT_FURNITURE))
+        }
     }
 }

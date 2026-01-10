@@ -1,8 +1,8 @@
-package com.github.mrjimin.betonquestaddon.compatibility.cosmetics
+package com.github.mrjimin.betonquestaddon.provider.cosmetics
 
 import org.bukkit.entity.Player
 
-interface CosmeticsService {
+interface CosmeticsProvider {
     fun exists(key: String): Boolean
     fun getAll(): List<CosmeticsWrapper>
     fun get(key: String): CosmeticsWrapper?

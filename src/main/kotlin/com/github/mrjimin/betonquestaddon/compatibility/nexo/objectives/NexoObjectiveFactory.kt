@@ -1,47 +1,30 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives
 
-import com.github.mrjimin.betonquestaddon.objectives.ICheckObjectiveFactory
 import com.github.mrjimin.betonquestaddon.util.action.ActionType
-import com.github.mrjimin.betonquestaddon.util.action.TargetType
+import com.nexomc.nexo.api.events.custom_block.*
+import com.nexomc.nexo.api.events.furniture.*
 import org.betonquest.betonquest.api.DefaultObjective
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
+import org.betonquest.betonquest.api.quest.objective.event.ObjectiveFactoryService
 
 class NexoObjectiveFactory(
-    override val targetType: TargetType,
-    override val actionType: ActionType
-) : ICheckObjectiveFactory {
+    private val actionType: ActionType
+) : ObjectiveFactory {
 
-    override fun createFurniture(
-        instruction: Instruction,
-        amount: Argument<Number>,
-        message: String,
-        itemId: Argument<String>,
-        actionType: ActionType,
-        isCancelled: Argument<Boolean>?
-    ): DefaultObjective = NexoFurnitureObjective(
-        instruction,
-        amount,
-        message,
-        itemId,
-        actionType,
-        isCancelled
-    )
+    override fun parseInstruction(instruction: Instruction, service: ObjectiveFactoryService): DefaultObjective {
+        val identifier = instruction.string().get()
+        val targetAmount = instruction.number().get("amount", 1)
 
-    override fun createBlock(
-        instruction: Instruction,
-        amount: Argument<Number>,
-        message: String,
-        itemId: Argument<String>,
-        actionType: ActionType,
-        isCancelled: Argument<Boolean>?
-    ): DefaultObjective = NexoBlockObjective(
-        instruction,
-        amount,
-        message,
-        itemId,
-        actionType,
-        isCancelled
-    )
+        val objective = NexoObjective(service, targetAmount, actionType, identifier)
 
+        return when (actionType) {
+            ActionType.PLACE_BLOCK -> service.request(NexoBlockPlaceEvent::class.java).handler(objective::onBlockPlace)
+            ActionType.BREAK_BLOCK -> service.request(NexoBlockBreakEvent::class.java).handler(objective::onBlockBreak)
+            ActionType.INTERACT_BLOCK -> service.request(NexoBlockInteractEvent::class.java).handler(objective::onBlockInteract)
+            ActionType.PLACE_FURNITURE -> service.request(NexoFurniturePlaceEvent::class.java).handler(objective::onFurniturePlace)
+            ActionType.BREAK_FURNITURE -> service.request(NexoFurnitureBreakEvent::class.java).handler(objective::onFurnitureBreak)
+            ActionType.INTERACT_FURNITURE -> service.request(NexoFurnitureInteractEvent::class.java).handler(objective::onFurnitureInteract)
+        }.subscribe(true).let { objective }
+    }
 }

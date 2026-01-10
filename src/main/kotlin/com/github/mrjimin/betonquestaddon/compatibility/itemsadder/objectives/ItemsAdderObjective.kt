@@ -1,45 +1,70 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives
 
-import com.github.mrjimin.betonquestaddon.objectives.AbstractCheckObjective
 import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomFurniture
-import org.betonquest.betonquest.api.instruction.Instruction
+import dev.lone.itemsadder.api.Events.*
+import org.betonquest.betonquest.api.CountingObjective
+import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.quest.objective.event.ObjectiveFactoryService
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 
-abstract class ItemsAdderObjective(
-    instruction: Instruction,
-    message: String,
-    amount: Argument<Number>?,
-    item: Argument<String>,
+class ItemsAdderObjective(
+    service: ObjectiveFactoryService,
+    targetAmount: Argument<Number>,
     actionType: ActionType,
-    isCancelled: Argument<Boolean>?
-) : AbstractCheckObjective(instruction, message, amount, item, actionType, isCancelled) {
+    private val identifier: Argument<String>
+) : CountingObjective(service, targetAmount, "betonquestaddon.${actionType.toKey()}") {
 
-    protected fun handle(
-        expected: ActionType,
-        player: Player,
-        entity: Entity
-    ) {
-        handleItem(
-            expected,
-            player,
-            CustomFurniture.byAlreadySpawned(entity)?.namespacedID
-        )
+    fun onBlockPlace(event: CustomBlockPlaceEvent) {
+        handleBlock(event.player, event.block)
     }
 
-    protected fun handle(
-        expected: ActionType,
-        player: Player,
-        block: Block
-    ) {
-        handleItem(
-            expected,
-            player,
-            CustomBlock.byAlreadyPlaced(block)?.namespacedID
-        )
+    fun onBlockBreak(event: CustomBlockBreakEvent) {
+        handleBlock(event.player, event.block)
     }
+
+    fun onBlockInteract(event: CustomBlockInteractEvent) {
+        handleBlock(event.player, event.blockClicked)
+    }
+
+    fun onFurniturePlace(event: FurniturePlacedEvent) {
+        handleFurniture(event.player, event.furniture?.entity!!)
+    }
+
+    fun onFurnitureBreak(event: FurnitureBreakEvent) {
+        handleFurniture(event.player, event.furniture?.entity!!)
+    }
+
+    fun onFurnitureInteract(event: FurnitureInteractEvent) {
+        handleFurniture(event.player, event.furniture?.entity!!)
+    }
+
+    @Throws(QuestException::class)
+    private fun handleBlock(player: Player, block: Block) {
+        val profile = service.profileProvider.getProfile(player) ?: return
+        if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
+
+        val blockId = CustomBlock.byAlreadyPlaced(block)?.namespacedID
+        if (identifier.getValue(profile) == blockId) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
+    }
+
+    @Throws(QuestException::class)
+    private fun handleFurniture(player: Player, entity: Entity) {
+        val profile = service.profileProvider.getProfile(player) ?: return
+        if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
+
+        val furnitureId = CustomFurniture.byAlreadySpawned(entity)?.namespacedID
+        if (identifier.getValue(profile) == furnitureId) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
+    }
+
 }

@@ -11,11 +11,11 @@ import org.betonquest.betonquest.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
 
 class CraftEngineItemWrapper (
-    private val itemName: Argument<String>
+    private val itemId: Argument<String>
 ) : QuestItemWrapper {
 
     override fun getItem(profile: Profile?): QuestItem =
-        CraftEngineItem(itemName.getValue(profile))
+        CraftEngineItem(itemId.getValue(profile))
 
     class CraftEngineItem(
         private val itemId: String

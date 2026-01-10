@@ -1,4 +1,4 @@
-package com.github.mrjimin.betonquestaddon.compatibility.cosmetics
+package com.github.mrjimin.betonquestaddon.provider.cosmetics
 
 import org.bukkit.inventory.ItemStack
 

@@ -8,7 +8,7 @@ import org.betonquest.betonquest.api.quest.condition.PlayerlessConditionFactory
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableConditionAdapter
 import org.bukkit.Location
 
-class BaseConditionFactory(
+class LocationConditionFactory(
     private val mechanicIdProvider: (Location) -> String?
 ) : PlayerConditionFactory, PlayerlessConditionFactory {
 
@@ -18,10 +18,10 @@ class BaseConditionFactory(
     override fun parsePlayerless(instruction: Instruction): PlayerlessCondition =
         NullableConditionAdapter(parseInstruction(instruction))
 
-    private fun parseInstruction(instruction: Instruction): BaseCondition {
+    private fun parseInstruction(instruction: Instruction): LocationCondition {
         val itemId = instruction.string().get()
         val location = instruction.location().get()
-        return BaseCondition(itemId, location, mechanicIdProvider)
+        return LocationCondition(itemId, location, mechanicIdProvider)
     }
 
 }

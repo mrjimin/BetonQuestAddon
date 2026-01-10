@@ -5,7 +5,7 @@ import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition
 import org.bukkit.Location
 
-class BaseCondition(
+class LocationCondition(
     private val itemId: Argument<String>,
     private val location: Argument<Location>,
     private val mechanicIdProvider: (Location) -> String?

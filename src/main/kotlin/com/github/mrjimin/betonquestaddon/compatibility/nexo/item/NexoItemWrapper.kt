@@ -21,9 +21,8 @@ class NexoItemWrapper(
         private val itemId: String
     ) : QuestItem {
 
-        private val itemBuilder: ItemBuilder =
-            NexoItems.itemFromId(itemId)
-                ?: throw QuestException("Invalid Nexo Item: $itemId")
+        private val itemBuilder: ItemBuilder = NexoItems.itemFromId(itemId)
+            ?: throw QuestException("Invalid Nexo Item: $itemId")
 
         override fun getName(): Component? =
             itemBuilder.itemName

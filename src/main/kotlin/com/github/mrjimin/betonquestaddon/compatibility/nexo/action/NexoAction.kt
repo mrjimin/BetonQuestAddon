@@ -13,8 +13,8 @@ import org.bukkit.block.BlockFace
 class NexoAction(
     private val itemId: Argument<String>,
     private val location: Argument<Location>,
-    private val rotation: Argument<String>?,
-    private val blockFace: Argument<String>?,
+    private val rotation: Argument<Rotation>,
+    private val blockFace: Argument<BlockFace>,
     private val targetType: TargetType
 ) : PlayerAction {
 
@@ -35,22 +35,8 @@ class NexoAction(
 
     private fun placeFurniture(id: String, loc: Location, profile: Profile) {
         requireNotNull(NexoFurniture.isFurniture(id)) { "Nexo item is not a furniture: $id" }
-        NexoFurniture.place(id, loc, rotation(profile), blockFace(profile))
+        NexoFurniture.place(id, loc, rotation.getValue(profile), blockFace.getValue(profile))
     }
-
-    private fun rotation(profile: Profile): Rotation =
-        rotation
-            ?.getValue(profile)
-            ?.uppercase()
-            ?.let { Rotation.valueOf(it) }
-            ?: Rotation.NONE
-
-    private fun blockFace(profile: Profile): BlockFace =
-        blockFace
-            ?.getValue(profile)
-            ?.uppercase()
-            ?.let { BlockFace.valueOf(it) }
-            ?: BlockFace.SELF
 
     override fun isPrimaryThreadEnforced(): Boolean {
         return true

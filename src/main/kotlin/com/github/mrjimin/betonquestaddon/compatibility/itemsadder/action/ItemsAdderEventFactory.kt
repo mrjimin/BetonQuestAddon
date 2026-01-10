@@ -13,7 +13,6 @@ class ItemsAdderEventFactory(
     override fun parsePlayer(instruction: Instruction): PlayerAction {
         val customStack = instruction.parse(CustomStackParser).get()
         val location = instruction.location().get()
-
         return ItemsAdderEvent(customStack, location, targetType)
     }
 

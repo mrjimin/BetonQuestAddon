@@ -1,12 +1,12 @@
-package com.github.mrjimin.betonquestaddon.compatibility.cosmetics.hmccosmetics
+package com.github.mrjimin.betonquestaddon.compatibility.hmccosmetics
 
-import com.github.mrjimin.betonquestaddon.compatibility.cosmetics.CosmeticsWrapper
-import com.github.mrjimin.betonquestaddon.compatibility.cosmetics.CosmeticsService
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
 import com.hibiscusmc.hmccosmetics.api.HMCCosmeticsAPI
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap
 
-class HMCCosmeticsService : CosmeticsService {
+class HMCCosmeticsProvider : CosmeticsProvider {
 
     private val cache = ConcurrentHashMap<String, CosmeticsWrapper>()
 

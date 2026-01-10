@@ -1,0 +1,8 @@
+# Please restart the server after changing these settings for them to take effect.
+# 설정을 변경한 후에는 반드시 서버를 재시작해야 적용됩니다.
+
+update-checker: true
+hook:
+  Nexo: true
+  CraftEngine: true
+  ItemsAdder: true

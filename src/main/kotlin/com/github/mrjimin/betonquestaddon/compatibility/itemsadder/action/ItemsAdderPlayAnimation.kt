@@ -5,7 +5,7 @@ import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.action.online.OnlineAction
 
-class PlayAnimation(
+class ItemsAdderPlayAnimation(
     private val name: Argument<String>
 ) : OnlineAction {
 

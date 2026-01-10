@@ -1,14 +1,14 @@
-package com.github.mrjimin.betonquestaddon.compatibility.cosmetics.cosmeticscore
+package com.github.mrjimin.betonquestaddon.compatibility.cosmeticscore
 
-import com.github.mrjimin.betonquestaddon.compatibility.cosmetics.CosmeticsWrapper
-import com.github.mrjimin.betonquestaddon.compatibility.cosmetics.CosmeticsService
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
 import dev.lone.cosmeticscore.api.temporary.CosmeticAccessor
 import dev.lone.cosmeticscore.api.temporary.CosmeticsCoreApi
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap
 
-class CosmeticsCoreService : CosmeticsService {
+class CosmeticsCoreProvider : CosmeticsProvider {
 
     private val cache = ConcurrentHashMap<String, CosmeticsWrapper>()
 

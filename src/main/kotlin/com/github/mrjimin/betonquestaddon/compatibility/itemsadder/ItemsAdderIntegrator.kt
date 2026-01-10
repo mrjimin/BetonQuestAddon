@@ -2,11 +2,11 @@ package com.github.mrjimin.betonquestaddon.compatibility.itemsadder
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.ItemsAdderEventFactory
-import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.PlayAnimationFactory
+import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.ItemsAdderPlayAnimationFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdderItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdderQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objectives.ItemsAdderObjectiveFactory
-import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
+import com.github.mrjimin.betonquestaddon.conditions.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import dev.lone.itemsadder.api.CustomBlock
@@ -18,45 +18,36 @@ class ItemsAdderIntegrator : ICompatibility {
         val questRegistries = api.questRegistries
         val loggerFactory = api.loggerFactory
 
-        val itemRegistry = api.featureRegistries.item()
-        itemRegistry.register("itemsAdder", ItemsAdderItemFactory())
-        itemRegistry.registerSerializer("itemsAdder", ItemsAdderQuestItemSerializer())
+        api.featureRegistries.item().apply {
+            register("itemsAdder", ItemsAdderItemFactory())
+            registerSerializer("itemsAdder", ItemsAdderQuestItemSerializer())
+        }
 
-        val condition = questRegistries.condition()
-        condition.registerCombined(
-            "itemsAdderBlock",
-            BaseConditionFactory { location ->
-                CustomBlock.byAlreadyPlaced(location.block)?.namespacedID
-            }
-        )
-        condition.registerCombined(
-            "itemsAdderFurniture",
-            BaseConditionFactory { location ->
-                CustomFurniture.byAlreadySpawned(location.block)?.namespacedID
-            }
-        )
+        questRegistries.condition().apply {
+            registerCombined("itemsAdderBlock", LocationConditionFactory { location ->
+                    CustomBlock.byAlreadyPlaced(location.block)?.namespacedID
+                }
+            )
+            registerCombined("itemsAdderFurniture", LocationConditionFactory { location ->
+                    CustomFurniture.byAlreadySpawned(location.block)?.namespacedID
+                }
+            )
+        }
 
-        val action = questRegistries.action()
-        action.register(
-            "itemsAdderBlockAt",
-            ItemsAdderEventFactory(TargetType.BLOCK)
-        )
-        action.register(
-            "itemsAdderFurnitureAt",
-            ItemsAdderEventFactory(TargetType.FURNITURE)
-        )
-        action.register(
-            "itemsAdderPlayAnimation",
-            PlayAnimationFactory(loggerFactory)
-        )
+        questRegistries.action().apply {
+            register("itemsAdderBlockAt", ItemsAdderEventFactory(TargetType.BLOCK))
+            register("itemsAdderFurnitureAt", ItemsAdderEventFactory(TargetType.FURNITURE))
+            register("itemsAdderPlayAnimation", ItemsAdderPlayAnimationFactory(loggerFactory))
+        }
 
-        val objective = questRegistries.objective()
-        objective.register("itemsAdderBlockBreak", ItemsAdderObjectiveFactory(TargetType.BLOCK, ActionType.BREAK))
-        objective.register("itemsAdderBlockPlace", ItemsAdderObjectiveFactory(TargetType.BLOCK, ActionType.PLACE))
-        objective.register("itemsAdderBlockInteract", ItemsAdderObjectiveFactory(TargetType.BLOCK, ActionType.INTERACT))
+        questRegistries.objective().apply {
+            register("itemsAdderBlockPlace", ItemsAdderObjectiveFactory(ActionType.PLACE_BLOCK))
+            register("itemsAdderBlockBreak", ItemsAdderObjectiveFactory(ActionType.BREAK_BLOCK))
+            register("itemsAdderBlockInteract", ItemsAdderObjectiveFactory(ActionType.INTERACT_BLOCK))
 
-        objective.register("itemsAdderFurnitureBreak", ItemsAdderObjectiveFactory(TargetType.FURNITURE, ActionType.BREAK))
-        objective.register("itemsAdderFurniturePlace", ItemsAdderObjectiveFactory(TargetType.FURNITURE, ActionType.PLACE))
-        objective.register("itemsAdderFurnitureInteract", ItemsAdderObjectiveFactory(TargetType.FURNITURE, ActionType.INTERACT))
+            register("itemsAdderFurniturePlace", ItemsAdderObjectiveFactory(ActionType.PLACE_FURNITURE))
+            register("itemsAdderFurnitureBreak", ItemsAdderObjectiveFactory(ActionType.BREAK_FURNITURE))
+            register("itemsAdderFurnitureInteract", ItemsAdderObjectiveFactory(ActionType.INTERACT_FURNITURE))
+        }
     }
 }

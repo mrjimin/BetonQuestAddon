@@ -12,9 +12,7 @@ class CraftEngineActionFactory(
     override fun parsePlayer(instruction: Instruction): PlayerAction {
         val itemId = instruction.string().get()
         val location = instruction.location().get()
-
         val playSound = instruction.bool().get("playSound", false)
-
         return CraftEngineAction(itemId, location, playSound, targetType)
     }
 

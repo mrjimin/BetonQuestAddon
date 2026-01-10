@@ -1,7 +1,7 @@
 name: BetonQuestAddon
 version: '${version}'
 author: mrjimin
-website: https://www.spigotmc.org/resources/betonquestaddon.120813/
+website: https://www.spigotmc.org/resources/120813/
 description: Extends BetonQuest with additional powerful features.
 
 api-version: "1.21"
@@ -21,37 +21,6 @@ dependencies:
     Nexo:
       load: BEFORE
       required: false
-    CoinsEngine:
-      load: BEFORE
-      required: false
     CraftEngine:
       load: BEFORE
       required: false
-    CustomCrops:
-      load: BEFORE
-      required: false
-    HeadDatabase:
-      load: BEFORE
-      required: false
-    AdvancedEnchantments:
-      load: BEFORE
-      required: false
-    Lands:
-      load: BEFORE
-      required: false
-    PlaceholderAPI:
-      load: BEFORE
-      required: false
-    WorldGuard:
-      load: BEFORE
-      required: false
-
-permissions:
-  betonquestaddon.command:
-    default: op
-  betonquestaddon.command.reload:
-    default: op
-  betonquestaddon.command.give:
-    default: op
-  betonquestaddon.command.inventory:
-    default: op

@@ -28,7 +28,7 @@ repositories {
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
     maven("https://maven.enginehub.org/repo/")
-    maven("https://repo.betonquest.org/betonquest")
+//    maven("https://repo.betonquest.org/betonquest")
     maven("https://repo.hibiscusmc.com/releases")
 }
 
@@ -40,15 +40,9 @@ dependencies {
     compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
 
-//    compileOnly("com.github.angeschossen:LandsAPI:${rootProject.properties["lands_version"]}")
-//
-//    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["worldguard_version"]}")
-//    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${rootProject.properties["worldedit_version"]}")
-//    compileOnly("com.sk89q.worldedit:worldedit-core:${rootProject.properties["worldedit_version"]}")
-
-    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
-        exclude(group = "de.themoep", module = "minedown-adventure")
-    }
+//    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
+//        exclude(group = "de.themoep", module = "minedown-adventure")
+//    }
 
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmccosmetics_version"]}")
@@ -76,9 +70,9 @@ val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
     configurations = listOf(project.configurations.runtimeClasspath.get())
 
     exclude("kotlin/**", "kotlinx/**")
-    exclude("org/intellij/**")
-    exclude("org/jetbrains/**")
-    exclude("org/slf4j/**")
+//    exclude("org/intellij/**")
+//    exclude("org/jetbrains/**")
+//    exclude("org/slf4j/**")
 }
 
 tasks.named("build") {

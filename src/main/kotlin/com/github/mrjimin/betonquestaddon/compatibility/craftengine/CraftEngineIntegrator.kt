@@ -5,7 +5,7 @@ import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.Craft
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives.CraftEngineObjectiveFactory
-import com.github.mrjimin.betonquestaddon.conditions.BaseConditionFactory
+import com.github.mrjimin.betonquestaddon.conditions.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.util.action.ActionType
 import com.github.mrjimin.betonquestaddon.util.action.TargetType
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
@@ -17,49 +17,39 @@ class CraftEngineIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
         val questRegistries = api.questRegistries
 
-        val itemRegistry = api.featureRegistries.item()
-        itemRegistry.register("craftEngine", CraftEngineItemFactory())
-        itemRegistry.registerSerializer("craftEngine", CraftEngineQuestItemSerializer())
+        api.featureRegistries.item().apply {
+            register("craftEngine", CraftEngineItemFactory())
+            registerSerializer("craftEngine", CraftEngineQuestItemSerializer())
+        }
 
-        val condition = questRegistries.condition()
-        condition.registerCombined(
-            "craftEngineBlock",
-            BaseConditionFactory {  location ->
-                BukkitAdaptors.adapt(location.block).id().toString()
-            }
-        )
-        condition.registerCombined(
-            "craftFurniture",
-            BaseConditionFactory { location ->
-                location.world
-                    .getNearbyEntities(location, 1.0, 1.0, 1.0).firstNotNullOfOrNull { entity ->
-                        CraftEngineFurniture
-                            .getLoadedFurnitureByMetaEntity(entity)
-                            ?.id()
-                            ?.toString()
-                    }
-            }
-        )
+        questRegistries.condition().apply {
+            registerCombined("craftEngineBlock", LocationConditionFactory { location ->
+                    BukkitAdaptors.adapt(location.block).id().toString()
+                }
+            )
+            registerCombined("craftFurniture", LocationConditionFactory { location ->
+                    location.world.getNearbyEntities(location, 1.0, 1.0, 1.0).firstNotNullOfOrNull { entity ->
+                            CraftEngineFurniture.getLoadedFurnitureByMetaEntity(entity)
+                                ?.id().toString()
+                        }
+                }
+            )
+        }
 
-        val action = questRegistries.action()
-        action.register(
-            "craftEngineBlockAt",
-            CraftEngineActionFactory(TargetType.BLOCK)
-        )
-        action.register(
-            "craftEngineFurnitureAt",
-            CraftEngineActionFactory(TargetType.FURNITURE)
-        )
+        questRegistries.action().apply {
+            register("craftEngineBlockAt", CraftEngineActionFactory(TargetType.BLOCK))
+            register("craftEngineFurnitureAt", CraftEngineActionFactory(TargetType.FURNITURE))
+        }
 
+        questRegistries.objective().apply {
+            register("craftEngineBlockPlace", CraftEngineObjectiveFactory(ActionType.PLACE_BLOCK))
+            register("craftEngineBlockBreak", CraftEngineObjectiveFactory(ActionType.BREAK_BLOCK))
+            register("craftEngineBlockInteract", CraftEngineObjectiveFactory(ActionType.INTERACT_BLOCK))
 
-        val objective = questRegistries.objective()
-        objective.register("craftEngineBlockBreak", CraftEngineObjectiveFactory(TargetType.BLOCK, ActionType.BREAK))
-        objective.register("craftEngineBlockPlace", CraftEngineObjectiveFactory(TargetType.BLOCK, ActionType.PLACE))
-        objective.register("craftEngineBlockInteract", CraftEngineObjectiveFactory(TargetType.BLOCK, ActionType.INTERACT))
-
-        objective.register("craftEngineFurnitureBreak", CraftEngineObjectiveFactory(TargetType.FURNITURE, ActionType.BREAK))
-        objective.register("craftEngineFurniturePlace", CraftEngineObjectiveFactory(TargetType.FURNITURE, ActionType.PLACE))
-        objective.register("craftEngineFurnitureInteract", CraftEngineObjectiveFactory(TargetType.FURNITURE, ActionType.INTERACT))
+            register("craftEngineFurniturePlace", CraftEngineObjectiveFactory(ActionType.PLACE_FURNITURE))
+            register("craftEngineFurnitureBreak", CraftEngineObjectiveFactory(ActionType.BREAK_FURNITURE))
+            register("craftEngineFurnitureInteract", CraftEngineObjectiveFactory(ActionType.INTERACT_FURNITURE))
+        }
     }
 
 }
