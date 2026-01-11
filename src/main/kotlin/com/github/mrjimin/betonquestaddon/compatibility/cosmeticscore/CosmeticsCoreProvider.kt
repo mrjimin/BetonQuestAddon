@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.cosmeticscore
 
-import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
 import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
 import dev.lone.cosmeticscore.api.temporary.CosmeticAccessor
 import dev.lone.cosmeticscore.api.temporary.CosmeticsCoreApi
 import org.bukkit.Bukkit

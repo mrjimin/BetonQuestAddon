@@ -1,10 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.sprinkler
 
-import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.common.ScarecrowObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
-import net.momirealms.customcrops.api.event.ScarecrowBreakEvent
-import net.momirealms.customcrops.api.event.ScarecrowPlaceEvent
 import net.momirealms.customcrops.api.event.SprinklerBreakEvent
 import net.momirealms.customcrops.api.event.SprinklerPlaceEvent
 import org.betonquest.betonquest.api.DefaultObjective

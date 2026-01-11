@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.crop
 
-import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.CustomCropsObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
+import com.github.mrjimin.betonquestaddon.objective.SimpleAddonObjective
 import net.momirealms.customcrops.api.event.CropBreakEvent
 import net.momirealms.customcrops.api.event.CropPlantEvent
 import org.betonquest.betonquest.api.instruction.Argument
@@ -13,7 +13,7 @@ class CropObjective(
     targetAmount: Argument<Number>,
     identifiers: Argument<List<String>>,
     notifyMessage: NotifyMessage
-) : CustomCropsObjective(service, targetAmount, identifiers, notifyMessage) {
+) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: CropPlantEvent) {
         handle(event.player, event.cropConfig().id())

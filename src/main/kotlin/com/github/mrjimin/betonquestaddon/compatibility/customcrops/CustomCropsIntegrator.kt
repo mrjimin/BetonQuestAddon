@@ -6,6 +6,9 @@ import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.cr
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.fertilizer.FertilizerUseObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.pot.PotObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.sprinkler.SprinklerObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.wateringcan.CanFillObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.wateringcan.CanPotObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.wateringcan.CanSprinklerObjectiveFactory
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -25,6 +28,10 @@ class CustomCropsIntegrator : ICompatibility {
             register("customCropsScarecrowBreak", ScarecrowObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SCARECROW_BREAK))
 
             register("customCropsFertilizerUse", FertilizerUseObjectiveFactory())
+
+            register("customCropsCanFill", CanFillObjectiveFactory())
+            register("customCropsCanPot", CanPotObjectiveFactory())
+            register("customCropsCanSprinkler", CanSprinklerObjectiveFactory())
 
             register("customCropsSprinklerPlace", SprinklerObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_SPRINKLER_PLACE))
             register("customCropsSprinklerBreak", SprinklerObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SPRINKLER_BREAK))

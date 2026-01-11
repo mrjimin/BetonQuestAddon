@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.hmccosmetics
 
-import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
 import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
+import com.github.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
 import com.hibiscusmc.hmccosmetics.api.HMCCosmeticsAPI
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap

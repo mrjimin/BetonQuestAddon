@@ -15,11 +15,11 @@ class ItemsAdderFurnitureObjectiveFactory(
     private val notifyMessage: NotifyMessage
 ) : ObjectiveFactory {
     override fun parseInstruction(instruction: Instruction, service: ObjectiveService): DefaultObjective {
-        // val id = instruction.string().get()
         val id = instruction.string().list().get()
         val targetAmount = instruction.number().get("amount", 1)
+        val isCancelled = instruction.bool().get("isCancelled", false)
 
-        val objective = ItemsAdderFurnitureObjective(service, targetAmount, id, notifyMessage)
+        val objective = ItemsAdderFurnitureObjective(service, targetAmount, id, isCancelled, notifyMessage)
 
         return when (action) {
             Action.PLACE -> service.request(FurniturePlacedEvent::class.java).handler(objective::onPlace)
