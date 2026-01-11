@@ -1,6 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.CustomCropsIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.ItemsAdderIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
 import com.github.mrjimin.betonquestaddon.util.toMMComponent
@@ -19,6 +20,7 @@ class CompatibilityManager(
         register("Nexo") { NexoIntegrator() }
         register("CraftEngine") { CraftEngineIntegrator() }
         register("ItemsAdder") { ItemsAdderIntegrator() }
+        register("CustomCrops") { CustomCropsIntegrator() }
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {

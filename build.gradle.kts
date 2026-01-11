@@ -39,6 +39,7 @@ dependencies {
 
     compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
+    compileOnly("net.momirealms:custom-crops:${rootProject.properties["customcrops_version"]}")
 
 //    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
 //        exclude(group = "de.themoep", module = "minedown-adventure")

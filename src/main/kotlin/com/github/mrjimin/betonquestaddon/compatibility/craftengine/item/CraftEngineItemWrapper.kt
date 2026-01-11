@@ -21,20 +21,22 @@ class CraftEngineItemWrapper (
         private val itemId: String
     ) : QuestItem {
 
-        private val customItemMeta = CraftEngineItems.byId(itemId.asCraftKey())
-            ?.buildItemStack()?.itemMeta ?: throw QuestException("Invalid CraftEngine Item: $itemId")
+        private val customItem = CraftEngineItems.byId(itemId.asCraftKey())
+            ?: throw QuestException("Invalid CraftEngine Item: $itemId")
+
+        private val buildItemMeta = customItem.buildItemStack().itemMeta
 
         override fun getName(): Component =
-            customItemMeta.itemName()
+            buildItemMeta.itemName()
 
-        override fun getLore(): List<Component>? =
-            customItemMeta.lore()
+        override fun getLore(): List<Component> =
+            buildItemMeta.lore() ?: listOf()
 
-        override fun generate(stackSize: Int, profile: Profile?): ItemStack? =
-            CraftEngineItems.byId(itemId.asCraftKey())?.buildItemStack(stackSize)?.clone()
+        override fun generate(stackSize: Int, profile: Profile?): ItemStack =
+            customItem.buildItemStack(stackSize)
 
         override fun matches(item: ItemStack?): Boolean =
-            itemId.asCraftKey() == item?.let(CraftEngineItems::getCustomItemId)
+            item != null && itemId.asCraftKey() == CraftEngineItems.getCustomItemId(item)
 
     }
 }

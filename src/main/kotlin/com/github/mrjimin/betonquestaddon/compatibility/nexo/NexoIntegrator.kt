@@ -1,13 +1,15 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoActionFactory
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoSetBlockActionFactory
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoSetFurnitureActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoQuestItemSerializer
-import com.github.mrjimin.betonquestaddon.compatibility.nexo.objectives.NexoObjectiveFactory
-import com.github.mrjimin.betonquestaddon.conditions.LocationConditionFactory
-import com.github.mrjimin.betonquestaddon.util.action.ActionType
-import com.github.mrjimin.betonquestaddon.util.action.TargetType
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.objective.NexoBlockObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.nexo.objective.NexoFurnitureObjectiveFactory
+import com.github.mrjimin.betonquestaddon.condition.LocationConditionFactory
+import com.github.mrjimin.betonquestaddon.config.NotifyMessage
+import com.github.mrjimin.betonquestaddon.util.action.Action
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -34,18 +36,18 @@ class NexoIntegrator : ICompatibility {
         }
 
         questRegistries.action().apply {
-            register("nexoBlockAt", NexoActionFactory(TargetType.BLOCK))
-            register("nexoFurnitureAt", NexoActionFactory(TargetType.FURNITURE))
+            register("nexoBlockAt", NexoSetBlockActionFactory())
+            register("nexoFurnitureAt", NexoSetFurnitureActionFactory())
         }
 
         questRegistries.objective().apply {
-            register("nexoBlockPlace", NexoObjectiveFactory(ActionType.PLACE_BLOCK))
-            register("nexoBlockBreak", NexoObjectiveFactory(ActionType.BREAK_BLOCK))
-            register("nexoBlockInteract", NexoObjectiveFactory(ActionType.INTERACT_BLOCK))
+            register("nexoBlockPlace", NexoBlockObjectiveFactory(Action.PLACE, NotifyMessage.BLOCK_PLACE))
+            register("nexoBlockBreak", NexoBlockObjectiveFactory(Action.BREAK, NotifyMessage.BLOCK_BREAK))
+            register("nexoBlockInteract", NexoBlockObjectiveFactory(Action.INTERACT, NotifyMessage.BLOCK_INTERACT))
 
-            register("nexoFurniturePlace", NexoObjectiveFactory(ActionType.PLACE_FURNITURE))
-            register("nexoFurnitureBreak", NexoObjectiveFactory(ActionType.BREAK_FURNITURE))
-            register("nexoFurnitureInteract", NexoObjectiveFactory(ActionType.INTERACT_FURNITURE))
+            register("nexoFurniturePlace", NexoFurnitureObjectiveFactory(Action.PLACE, NotifyMessage.FURNITURE_PLACE))
+            register("nexoFurnitureBreak", NexoFurnitureObjectiveFactory(Action.BREAK, NotifyMessage.FURNITURE_BREAK))
+            register("nexoFurnitureInteract", NexoFurnitureObjectiveFactory(Action.INTERACT, NotifyMessage.FURNITURE_INTERACT))
         }
     }
 }

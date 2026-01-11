@@ -1,13 +1,15 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
-import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineActionFactory
+import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineSetBlockActionFactory
+import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineSetFurnitureActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineItemFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineQuestItemSerializer
-import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objectives.CraftEngineObjectiveFactory
-import com.github.mrjimin.betonquestaddon.conditions.LocationConditionFactory
-import com.github.mrjimin.betonquestaddon.util.action.ActionType
-import com.github.mrjimin.betonquestaddon.util.action.TargetType
+import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngineBlockObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngineFurnitureObjectiveFactory
+import com.github.mrjimin.betonquestaddon.condition.LocationConditionFactory
+import com.github.mrjimin.betonquestaddon.config.NotifyMessage
+import com.github.mrjimin.betonquestaddon.util.action.Action
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
@@ -37,18 +39,18 @@ class CraftEngineIntegrator : ICompatibility {
         }
 
         questRegistries.action().apply {
-            register("craftEngineBlockAt", CraftEngineActionFactory(TargetType.BLOCK))
-            register("craftEngineFurnitureAt", CraftEngineActionFactory(TargetType.FURNITURE))
+            register("craftEngineBlockAt", CraftEngineSetBlockActionFactory())
+            register("craftEngineFurnitureAt", CraftEngineSetFurnitureActionFactory())
         }
 
         questRegistries.objective().apply {
-            register("craftEngineBlockPlace", CraftEngineObjectiveFactory(ActionType.PLACE_BLOCK))
-            register("craftEngineBlockBreak", CraftEngineObjectiveFactory(ActionType.BREAK_BLOCK))
-            register("craftEngineBlockInteract", CraftEngineObjectiveFactory(ActionType.INTERACT_BLOCK))
+            register("craftEngineBlockPlace", CraftEngineBlockObjectiveFactory(Action.PLACE, NotifyMessage.BLOCK_PLACE))
+            register("craftEngineBlockBreak", CraftEngineBlockObjectiveFactory(Action.BREAK, NotifyMessage.BLOCK_BREAK))
+            register("craftEngineBlockInteract", CraftEngineBlockObjectiveFactory(Action.INTERACT, NotifyMessage.BLOCK_INTERACT))
 
-            register("craftEngineFurniturePlace", CraftEngineObjectiveFactory(ActionType.PLACE_FURNITURE))
-            register("craftEngineFurnitureBreak", CraftEngineObjectiveFactory(ActionType.BREAK_FURNITURE))
-            register("craftEngineFurnitureInteract", CraftEngineObjectiveFactory(ActionType.INTERACT_FURNITURE))
+            register("craftEngineFurniturePlace", CraftEngineFurnitureObjectiveFactory(Action.PLACE, NotifyMessage.FURNITURE_PLACE))
+            register("craftEngineFurnitureBreak", CraftEngineFurnitureObjectiveFactory(Action.BREAK, NotifyMessage.FURNITURE_BREAK))
+            register("craftEngineFurnitureInteract", CraftEngineFurnitureObjectiveFactory(Action.INTERACT, NotifyMessage.FURNITURE_INTERACT))
         }
     }
 
