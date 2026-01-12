@@ -8,7 +8,7 @@ import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.entity.Player
 
-abstract class SimpleAddonObjective(
+abstract class SimpleTargetsObjective(
     service: ObjectiveService,
     targetAmount: Argument<Number>,
     private val identifiers: Argument<List<String>>,
@@ -26,10 +26,10 @@ abstract class SimpleAddonObjective(
         }
     }
 
-    protected open val matcherCache = mutableMapOf<List<String>, WildcardPatternMatcher>()
+    private val matcherCache = mutableMapOf<List<String>, WildcardPatternMatcher>()
 
     @Throws(QuestException::class)
-    protected fun wildCardHandle(player: Player, id: String) {
+    protected fun wildcardHandle(player: Player, id: String) {
         val profile = service.profileProvider.getProfile(player) ?: return
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 

@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.pot
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.github.mrjimin.betonquestaddon.objective.SimpleAddonObjective
+import com.github.mrjimin.betonquestaddon.objective.SimpleTargetsObjective
 import net.momirealms.customcrops.api.event.PotBreakEvent
 import net.momirealms.customcrops.api.event.PotPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
@@ -13,15 +13,15 @@ class PotObjective(
     targetAmount: Argument<Number>,
     identifiers: Argument<List<String>>,
     notifyMessage: NotifyMessage
-) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
+) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: PotPlaceEvent) {
-        wildCardHandle(event.player, event.potConfig().id())
+        wildcardHandle(event.player, event.potConfig().id())
     }
 
     fun onBreak(event: PotBreakEvent) {
         val player = event.entityBreaker() as? Player ?: return
-        wildCardHandle(player, event.potConfig().id())
+        wildcardHandle(player, event.potConfig().id())
     }
 
 }

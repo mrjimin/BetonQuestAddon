@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.sprinkler
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.github.mrjimin.betonquestaddon.objective.SimpleAddonObjective
+import com.github.mrjimin.betonquestaddon.objective.SimpleTargetsObjective
 import net.momirealms.customcrops.api.event.SprinklerBreakEvent
 import net.momirealms.customcrops.api.event.SprinklerPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
@@ -13,14 +13,14 @@ class SprinklerObjective(
     targetAmount: Argument<Number>,
     identifiers: Argument<List<String>>,
     notifyMessage: NotifyMessage
-) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
+) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: SprinklerPlaceEvent) {
-        wildCardHandle(event.player, event.sprinklerConfig().id())
+        wildcardHandle(event.player, event.sprinklerConfig().id())
     }
 
     fun onBreak(event: SprinklerBreakEvent) {
         val player = event.entityBreaker() as? Player ?: return
-        wildCardHandle(player, event.sprinklerConfig().id())
+        wildcardHandle(player, event.sprinklerConfig().id())
     }
 }
