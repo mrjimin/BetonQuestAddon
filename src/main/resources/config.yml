@@ -1,7 +1,12 @@
-# Please restart the server after changing these settings for them to take effect.
+# don't change
+config-version: 1
+
 update-checker: true
+
+# Requires server restart to apply changes.
 hook:
   Nexo: true
   CraftEngine: true
   ItemsAdder: true
   CustomCrops: true
+  CustomFishing: true

@@ -1,0 +1,27 @@
+package com.github.mrjimin.betonquestaddon.compatibility.customfishing.objective
+
+import com.github.mrjimin.betonquestaddon.config.NotifyMessage
+import net.momirealms.customfishing.api.event.FishingResultEvent
+import org.betonquest.betonquest.api.DefaultObjective
+import org.betonquest.betonquest.api.QuestException
+import org.betonquest.betonquest.api.instruction.Instruction
+import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
+import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
+
+class CaughtFishObjectiveFactory(
+    private val action: String,
+    private val notifyMessage: NotifyMessage
+) : ObjectiveFactory {
+    override fun parseInstruction(instruction: Instruction, service: ObjectiveService): DefaultObjective {
+        val id = instruction.string().list().get()
+        val targetAmount = instruction.number().get("amount", 1)
+
+        val objective = CaughtFishObjective(service, targetAmount, id, notifyMessage)
+
+        return when (action.uppercase()) {
+            "FISH" -> service.request(FishingResultEvent::class.java).handler(objective::onFish)
+            "GROUP" -> service.request(FishingResultEvent::class.java).handler(objective::onFishGroup)
+            else -> throw QuestException("Caught Fish objective only supports FISH or GROUP.")
+        }.subscribe(true).let { objective }
+    }
+}

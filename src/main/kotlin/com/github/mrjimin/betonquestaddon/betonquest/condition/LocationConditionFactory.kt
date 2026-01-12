@@ -1,4 +1,4 @@
-package com.github.mrjimin.betonquestaddon.condition
+package com.github.mrjimin.betonquestaddon.betonquest.condition
 
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition

@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.pot
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.SimpleTargetsObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.github.mrjimin.betonquestaddon.objective.SimpleTargetsObjective
 import net.momirealms.customcrops.api.event.PotBreakEvent
 import net.momirealms.customcrops.api.event.PotPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument

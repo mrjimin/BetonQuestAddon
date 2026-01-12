@@ -7,9 +7,9 @@ plugins {
     `java-library`
 }
 
-val isDev: Boolean = true
+val isDev: Boolean = false
 
-group = "com.github.mrjimin"
+group = "com.github.mrjimin.betonquestaddon"
 version = if (isDev) {
     "${rootProject.properties["project_version"]}-dev"
 } else {
@@ -35,24 +35,27 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${rootProject.properties["paper_version"]}-R0.1-SNAPSHOT")
     compileOnly("com.nexomc:nexo:${rootProject.properties["nexo_version"]}") { exclude("*") }
-    compileOnly("dev.lone:api-itemsadder:${rootProject.properties["itemsadder_version"]}")
+    compileOnly("dev.lone:api-itemsadder:${rootProject.properties["items_adder_version"]}")
 
-    compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craftengine_version"]}")
-    compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craftengine_version"]}")
-    compileOnly("net.momirealms:custom-crops:${rootProject.properties["customcrops_version"]}")
+    compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craft_engine_version"]}")
+    compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craft_engine_version"]}")
+    compileOnly("net.momirealms:custom-crops:${rootProject.properties["custom_crops_version"]}")
+    compileOnly("net.momirealms:custom-fishing:${rootProject.properties["custom_fishing_version"]}")
 
 //    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
 //        exclude(group = "de.themoep", module = "minedown-adventure")
 //    }
 
     compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
-    compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmccosmetics_version"]}")
+    compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
     })
 
-    implementation("org.bstats:bstats-bukkit:3.1.0")
+    // compileOnly("dev.dejvokep:boosted-yaml:${rootProject.properties["boosted_yaml_version"]}")
+    implementation("dev.dejvokep:boosted-yaml:${rootProject.properties["boosted_yaml_version"]}")
+    implementation("org.bstats:bstats-bukkit:${rootProject.properties["bstats_version"]}")
 }
 
 kotlin {
@@ -65,20 +68,16 @@ java {
 }
 
 val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
-    archiveFileName.set("BetonQuestAddon-${project.version}.jar")
-
+    archiveFileName = "BetonQuestAddon-${project.version}.jar"
     destinationDirectory.set(file("${project.rootDir}/target"))
 
     from(sourceSets.main.get().output)
     configurations = listOf(project.configurations.runtimeClasspath.get())
 
     exclude("kotlin/**", "kotlinx/**")
-//    exclude("org/intellij/**")
-//    exclude("org/jetbrains/**")
-//    exclude("org/slf4j/**")
 
-    dependencies { exclude { it.moduleGroup != "org.bstats" } }
-    relocate("org.bstats", "com.github.mrjimin.lib.bstats")
+    relocate("org.bstats", "com.github.mrjimin.betonquestaddon.libraries.bstats")
+    relocate("dev.dejvokep.boostedyaml", "com.github.mrjimin.betonquestaddon.libraries.boostedyaml")
 }
 
 tasks.named("build") {

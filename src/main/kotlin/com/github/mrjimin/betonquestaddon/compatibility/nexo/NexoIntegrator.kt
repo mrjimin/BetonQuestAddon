@@ -1,5 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo
 
+import com.github.mrjimin.betonquestaddon.betonquest.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoSetBlockActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.action.NexoSetFurnitureActionFactory
@@ -7,7 +8,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoItemFactor
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.item.NexoQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.objective.NexoBlockObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.objective.NexoFurnitureObjectiveFactory
-import com.github.mrjimin.betonquestaddon.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
 import com.nexomc.nexo.api.NexoBlocks

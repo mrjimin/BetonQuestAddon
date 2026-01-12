@@ -1,10 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.fertilizer
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.TargetsObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.github.mrjimin.betonquestaddon.objective.TargetsObjective
-import com.github.mrjimin.betonquestaddon.util.matcher.WildcardPatternMatcher
 import net.momirealms.customcrops.api.event.FertilizerUseEvent
-import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService

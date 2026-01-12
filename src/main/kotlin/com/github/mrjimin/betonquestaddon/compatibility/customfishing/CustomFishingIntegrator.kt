@@ -1,6 +1,9 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customfishing
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
+import com.github.mrjimin.betonquestaddon.compatibility.customfishing.objective.ActivateTotemObjectiveFactory
+import com.github.mrjimin.betonquestaddon.compatibility.customfishing.objective.CaughtFishObjectiveFactory
+import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.BetonQuestApi
 
 class CustomFishingIntegrator : ICompatibility {
@@ -8,6 +11,9 @@ class CustomFishingIntegrator : ICompatibility {
         val questRegistries = api.questRegistries
 
         questRegistries.objective().apply {
+            register("customFishingCaughtFish", CaughtFishObjectiveFactory("FISH", NotifyMessage.CUSTOM_FISHING_CAUGHT_FISH))
+            register("customFishingCaughtGroup", CaughtFishObjectiveFactory("GROUP", NotifyMessage.CUSTOM_FISHING_CAUGHT_GROUP))
+            register("customFishingActivateTotem", ActivateTotemObjectiveFactory())
         }
     }
 }

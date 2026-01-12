@@ -1,5 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder
 
+import com.github.mrjimin.betonquestaddon.betonquest.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.ItemsAdderPlayAnimationFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.action.ItemsAdderSetBlockActionFactory
@@ -8,7 +9,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdd
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.item.ItemsAdderQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objective.ItemsAdderBlockObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objective.ItemsAdderFurnitureObjectiveFactory
-import com.github.mrjimin.betonquestaddon.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
 import dev.lone.itemsadder.api.CustomBlock

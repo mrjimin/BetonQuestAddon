@@ -1,4 +1,4 @@
-package com.github.mrjimin.betonquestaddon.objective
+package com.github.mrjimin.betonquestaddon.betonquest.objective
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.matcher.WildcardPatternMatcher

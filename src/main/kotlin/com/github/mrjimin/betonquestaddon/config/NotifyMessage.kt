@@ -23,6 +23,11 @@ enum class NotifyMessage(private val key: String) {
     CUSTOM_CROPS_SCARECROW_PLACE("customcrops.scarecrow_place"),
     CUSTOM_CROPS_SCARECROW_BREAK("customcrops.scarecrow_break"),
 
+    // CustomFishing
+    CUSTOM_FISHING_CAUGHT_FISH("customfishing.caught_fish"),
+    CUSTOM_FISHING_CAUGHT_GROUP("customfishing.caught_group"),
+    CUSTOM_FISHING_ACTIVATE_TOTEM("customfishing.activate_totem"),
+
     ;
 
     fun toKey(): String = "betonquestaddon.$key"

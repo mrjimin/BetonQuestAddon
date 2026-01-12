@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.crop
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.SimpleTargetsObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.github.mrjimin.betonquestaddon.objective.SimpleTargetsObjective
 import net.momirealms.customcrops.api.event.CropBreakEvent
 import net.momirealms.customcrops.api.event.CropPlantEvent
 import org.betonquest.betonquest.api.QuestException

@@ -1,5 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.craftengine
 
+import com.github.mrjimin.betonquestaddon.betonquest.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineSetBlockActionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.action.CraftEngineSetFurnitureActionFactory
@@ -7,7 +8,6 @@ import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEn
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.item.CraftEngineQuestItemSerializer
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngineBlockObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngineFurnitureObjectiveFactory
-import com.github.mrjimin.betonquestaddon.condition.LocationConditionFactory
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptors

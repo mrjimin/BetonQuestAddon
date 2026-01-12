@@ -1,4 +1,4 @@
-package com.github.mrjimin.betonquestaddon.condition
+package com.github.mrjimin.betonquestaddon.betonquest.condition
 
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
