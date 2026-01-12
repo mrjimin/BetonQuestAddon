@@ -2,8 +2,11 @@ package com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.c
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.objective.SimpleAddonObjective
+import com.github.mrjimin.betonquestaddon.util.matcher.WildcardPatternMatcher
 import net.momirealms.customcrops.api.event.CropBreakEvent
 import net.momirealms.customcrops.api.event.CropPlantEvent
+import org.betonquest.betonquest.api.CountingObjective
+import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.entity.Player
@@ -15,11 +18,15 @@ class CropObjective(
     notifyMessage: NotifyMessage
 ) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
 
+    @Throws(QuestException::class)
     fun onPlace(event: CropPlantEvent) {
         handle(event.player, event.cropConfig().id())
     }
 
+    @Throws(QuestException::class)
     fun onBreak(event: CropBreakEvent) {
-        handle(event.entityBreaker() as? Player ?: return, event.cropConfig().id())
+        val player = event.entityBreaker() as? Player ?: return
+        wildCardHandle(player, event.cropStageItemID())
     }
+
 }

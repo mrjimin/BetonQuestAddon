@@ -24,13 +24,17 @@ class CompatibilityManager(
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {
-        if (name in integrators || !config.getBoolean("hook.$name", false)) return
-        Bukkit.getPluginManager().getPlugin(name)?.takeIf { it.isEnabled }?.let { plugin ->
-            integrators[name] = factory().apply { hook(api) }
-            val version = plugin.pluginMeta.version
+        println("Registering $name: $config")
+        println(name in integrators)
 
-            Bukkit.getConsoleSender().sendMessage("[BetonQuestAddon] <green>Successfully hooked into <gray>$name ($version)".toMMComponent())
-        }
+        if (name in integrators) return
+        if (!config.getBoolean("hook.$name", false)) return
+
+        val plugin = Bukkit.getPluginManager().getPlugin(name)?.takeIf { it.isEnabled } ?: return
+        integrators[name] = factory().apply { hook(api) }
+
+        val version = plugin.pluginMeta.version
+        Bukkit.getConsoleSender().sendMessage("[BetonQuestAddon] <green>Successfully hooked into <gray>$name ($version)".toMMComponent())
     }
 
 }

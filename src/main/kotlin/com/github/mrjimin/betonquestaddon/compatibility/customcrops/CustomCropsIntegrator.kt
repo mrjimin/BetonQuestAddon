@@ -1,6 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customcrops
 
 import com.github.mrjimin.betonquestaddon.compatibility.ICompatibility
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.action.CustomCropsSetSeasonActionFactory
+import com.github.mrjimin.betonquestaddon.compatibility.customcrops.condition.CustomCropsSeasonConditionFactory
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.common.ScarecrowObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.crop.CropObjectiveFactory
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.objective.fertilizer.FertilizerUseObjectiveFactory
@@ -17,12 +19,20 @@ class CustomCropsIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
         val questRegistries = api.questRegistries
 
+        questRegistries.condition().apply {
+            registerCombined("customCropsSeason", CustomCropsSeasonConditionFactory())
+        }
+
+        questRegistries.action().apply {
+            register("customCropsSetSeason", CustomCropsSetSeasonActionFactory())
+        }
+
         questRegistries.objective().apply {
             register("customCropsCropPlant", CropObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_CROP_PLANT))
             register("customCropsCropHarvest", CropObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_CROP_HARVEST))
 
             register("customCropsPotPlace", PotObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_POT_PLACE))
-            register("customCropsPotBream", PotObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_POT_BREAK))
+            register("customCropsPotBreak", PotObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_POT_BREAK))
 
             register("customCropsScarecrowPlace", ScarecrowObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_SCARECROW_PLACE))
             register("customCropsScarecrowBreak", ScarecrowObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SCARECROW_BREAK))

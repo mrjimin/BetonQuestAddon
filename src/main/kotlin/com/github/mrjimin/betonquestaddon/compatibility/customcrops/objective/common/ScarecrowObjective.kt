@@ -17,9 +17,15 @@ class ScarecrowObjective(
 
     fun onPlace(event: ScarecrowPlaceEvent) {
         handle(event.player, event.scarecrowItemID())
+        println(event.scarecrowItemID())
+        println(event.scarecrowItemID())
+        println(event.scarecrowItemID())
+        println(event.scarecrowItemID())
     }
 
     fun onBreak(event: ScarecrowBreakEvent) {
-        handle(event.entityBreaker() as? Player ?: return, event.scarecrowItemID())
+        val player = event.entityBreaker() as? Player ?: return
+        handle(player, event.scarecrowItemID())
     }
+
 }

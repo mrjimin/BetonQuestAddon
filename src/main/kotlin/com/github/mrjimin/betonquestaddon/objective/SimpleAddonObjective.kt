@@ -1,6 +1,7 @@
 package com.github.mrjimin.betonquestaddon.objective
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
+import com.github.mrjimin.betonquestaddon.util.matcher.WildcardPatternMatcher
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
@@ -15,13 +16,31 @@ abstract class SimpleAddonObjective(
 ) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
 
     @Throws(QuestException::class)
-    protected fun handle(player: Player, configId: String) {
+    protected fun handle(player: Player, id: String) {
         val profile = service.profileProvider.getProfile(player) ?: return
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
-        if (identifiers.getValue(profile).contains(configId)) {
+        if (identifiers.getValue(profile).contains(id)) {
             getCountingData(profile)?.progress()
             completeIfDoneOrNotify(profile)
         }
+    }
+
+    protected open val matcherCache = mutableMapOf<List<String>, WildcardPatternMatcher>()
+
+    @Throws(QuestException::class)
+    protected fun wildCardHandle(player: Player, id: String) {
+        val profile = service.profileProvider.getProfile(player) ?: return
+        if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
+
+        val patterns = identifiers.getValue(profile)
+        if (getMatcher(patterns).matches(id)) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
+    }
+
+    private fun getMatcher(patterns: List<String>): WildcardPatternMatcher {
+        return matcherCache.getOrPut(patterns) { WildcardPatternMatcher(patterns) }
     }
 }

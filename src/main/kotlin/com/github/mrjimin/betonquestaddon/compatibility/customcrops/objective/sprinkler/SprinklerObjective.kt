@@ -16,10 +16,11 @@ class SprinklerObjective(
 ) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: SprinklerPlaceEvent) {
-        handle(event.player, event.sprinklerConfig().id())
+        wildCardHandle(event.player, event.sprinklerConfig().id())
     }
 
     fun onBreak(event: SprinklerBreakEvent) {
-        handle(event.entityBreaker() as? Player ?: return, event.sprinklerConfig().id())
+        val player = event.entityBreaker() as? Player ?: return
+        wildCardHandle(player, event.sprinklerConfig().id())
     }
 }

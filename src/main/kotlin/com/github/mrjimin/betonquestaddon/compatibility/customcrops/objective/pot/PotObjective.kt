@@ -16,11 +16,12 @@ class PotObjective(
 ) : SimpleAddonObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: PotPlaceEvent) {
-        handle(event.player, event.potConfig().id())
+        wildCardHandle(event.player, event.potConfig().id())
     }
 
     fun onBreak(event: PotBreakEvent) {
-        handle(event.entityBreaker() as? Player ?: return, event.potConfig().id())
+        val player = event.entityBreaker() as? Player ?: return
+        wildCardHandle(player, event.potConfig().id())
     }
 
 }
