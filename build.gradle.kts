@@ -51,6 +51,8 @@ dependencies {
     compileOnly(fileTree("lib") {
         include("*.jar")
     })
+
+    implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
 kotlin {
@@ -74,6 +76,9 @@ val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
 //    exclude("org/intellij/**")
 //    exclude("org/jetbrains/**")
 //    exclude("org/slf4j/**")
+
+    dependencies { exclude { it.moduleGroup != "org.bstats" } }
+    relocate("org.bstats", "com.github.mrjimin.lib.bstats")
 }
 
 tasks.named("build") {

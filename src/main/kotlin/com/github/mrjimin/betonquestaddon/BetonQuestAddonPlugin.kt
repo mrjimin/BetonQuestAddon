@@ -1,9 +1,9 @@
 package com.github.mrjimin.betonquestaddon
 
 import com.github.mrjimin.betonquestaddon.compatibility.CompatibilityManager
-import com.github.mrjimin.betonquestaddon.shadow.bstats.Metrics
 import com.github.mrjimin.betonquestaddon.spigot.UpdateChecker
 import org.betonquest.betonquest.BetonQuest
+import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
 class BetonQuestAddonPlugin : JavaPlugin() {
@@ -27,7 +27,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         logger.info("========================================")
 
         CompatibilityManager(BetonQuest.getInstance(), config).registerCompatiblePlugins()
-        UpdateChecker.checkForUpdates(this, 120813)
+        // UpdateChecker.checkForUpdates(this, 120813)
     }
 
 }
