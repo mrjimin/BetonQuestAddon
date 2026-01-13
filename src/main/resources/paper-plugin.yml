@@ -1,7 +1,7 @@
 name: BetonQuestAddon
 version: '${version}'
 author: mrjimin
-website: https://www.spigotmc.org/resources/120813/
+website: https://modrinth.com/plugin/betonquestaddon
 description: Extends BetonQuest with additional powerful features.
 
 api-version: "1.21"
@@ -25,5 +25,11 @@ dependencies:
       load: BEFORE
       required: false
     CustomCrops:
+      load: BEFORE
+      required: false
+    CustomFishing:
+      load: BEFORE
+      required: false
+    CustomNameplates:
       load: BEFORE
       required: false

@@ -1,5 +1,5 @@
 # don't change
-config-version: 1
+config-version: '${config_version}'
 
 update-checker: true
 
@@ -10,3 +10,4 @@ hook:
   ItemsAdder: true
   CustomCrops: true
   CustomFishing: true
+  CustomNameplates: true

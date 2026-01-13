@@ -11,8 +11,8 @@ class CustomFishingIntegrator : ICompatibility {
         val questRegistries = api.questRegistries
 
         questRegistries.objective().apply {
-            register("customFishingCaughtFish", CaughtFishObjectiveFactory("FISH", NotifyMessage.CUSTOM_FISHING_CAUGHT_FISH))
-            register("customFishingCaughtGroup", CaughtFishObjectiveFactory("GROUP", NotifyMessage.CUSTOM_FISHING_CAUGHT_GROUP))
+            register("customFishingCaughtFish", CaughtFishObjectiveFactory(FishingCaughtType.FISH, NotifyMessage.CUSTOM_FISHING_CAUGHT_FISH))
+            register("customFishingCaughtGroup", CaughtFishObjectiveFactory(FishingCaughtType.GROUP, NotifyMessage.CUSTOM_FISHING_CAUGHT_GROUP))
             register("customFishingActivateTotem", ActivateTotemObjectiveFactory())
         }
     }

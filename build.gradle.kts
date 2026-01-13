@@ -41,6 +41,7 @@ dependencies {
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craft_engine_version"]}")
     compileOnly("net.momirealms:custom-crops:${rootProject.properties["custom_crops_version"]}")
     compileOnly("net.momirealms:custom-fishing:${rootProject.properties["custom_fishing_version"]}")
+    compileOnly("net.momirealms:custom-nameplates:${rootProject.properties["custom_nameplates_version"]}")
 
 //    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
 //        exclude(group = "de.themoep", module = "minedown-adventure")
@@ -95,5 +96,10 @@ tasks.processResources {
     filteringCharset = "UTF-8"
     filesMatching("paper-plugin.yml") {
         expand(props)
+    }
+
+    val configVersion = project.properties["config_version"]!!
+    filesMatching("config.yml") {
+        expand("config_version" to configVersion)
     }
 }

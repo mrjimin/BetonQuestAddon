@@ -3,6 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.CustomCropsIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.customfishing.CustomFishingIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.customnameplates.CustomNameplatesIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.ItemsAdderIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
 import com.github.mrjimin.betonquestaddon.util.info
@@ -23,6 +24,7 @@ class CompatibilityManager(
         register("ItemsAdder") { ItemsAdderIntegrator() }
         register("CustomCrops") { CustomCropsIntegrator() }
         register("CustomFishing") { CustomFishingIntegrator() }
+        register("CustomNameplates") { CustomNameplatesIntegrator() }
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {
