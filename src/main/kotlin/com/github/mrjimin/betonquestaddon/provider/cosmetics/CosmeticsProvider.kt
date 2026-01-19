@@ -7,6 +7,12 @@ interface CosmeticsProvider {
     fun getAll(): List<CosmeticsWrapper>
     fun get(key: String): CosmeticsWrapper?
 
-    fun hasPermission(player: Player, key: String): Boolean
     fun owns(player: Player, key: String): Boolean
+
+    fun getEquipped(player: Player): List<CosmeticsWrapper>
+
+    fun equip(player: Player, key: String): Boolean
+    fun unequip(player: Player, key: String): Boolean
+
+    fun isInWardrobe(player: Player): Boolean
 }

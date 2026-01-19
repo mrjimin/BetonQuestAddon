@@ -1,17 +1,18 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customnameplates.condition
 
 import com.github.mrjimin.betonquestaddon.compatibility.customnameplates.NpCheckType
+import net.momirealms.craftengine.core.entity.player.Player
 import net.momirealms.customnameplates.api.CustomNameplatesAPI
 import org.betonquest.betonquest.api.instruction.Argument
-import org.betonquest.betonquest.api.profile.OnlineProfile
-import org.betonquest.betonquest.api.quest.condition.online.OnlineCondition
+import org.betonquest.betonquest.api.profile.Profile
+import org.betonquest.betonquest.api.quest.condition.PlayerCondition
 
 class NpHasCondition(
     private val type: NpCheckType,
     private val id: Argument<String>,
     private val ignore: Argument<Boolean>
-) : OnlineCondition {
-    override fun check(profile: OnlineProfile): Boolean {
+) : PlayerCondition {
+    override fun check(profile: Profile): Boolean {
         val target = id.getValue(profile)
         val shouldIgnore = ignore.getValue(profile)
 
@@ -24,9 +25,11 @@ class NpHasCondition(
             if (!exists) return false
         }
 
+        val player = profile.player as Player
+
         return when (type) {
-            NpCheckType.NAMEPLATE -> profile.player.hasPermission("nameplates.equip.$target")
-            NpCheckType.BUBBLE -> profile.player.hasPermission("bubbles.equip.$target")
+            NpCheckType.NAMEPLATE -> player.hasPermission("nameplates.equip.$target")
+            NpCheckType.BUBBLE -> player.hasPermission("bubbles.equip.$target")
         }
     }
 }

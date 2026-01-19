@@ -11,3 +11,5 @@ hook:
   CustomCrops: true
   CustomFishing: true
   CustomNameplates: true
+  HMCCosmetics: true
+  TypeWriter: true

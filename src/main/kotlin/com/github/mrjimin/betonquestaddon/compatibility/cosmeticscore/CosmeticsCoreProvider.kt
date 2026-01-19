@@ -8,16 +8,15 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap
 
-class CosmeticsCoreProvider : CosmeticsProvider {
+object CosmeticsCoreProvider : CosmeticsProvider {
 
     private val cache = ConcurrentHashMap<String, CosmeticsWrapper>()
 
-    override fun exists(key: String): Boolean = get(key) != null
+    override fun exists(key: String): Boolean =
+        CosmeticsCoreApi.isCosmeticRegistered(key)
 
     override fun getAll(): List<CosmeticsWrapper> {
-        val keys = getAllKeys()
-        if (keys.isEmpty()) return emptyList()
-        return keys.mapNotNull { get(it) }
+        return getAllKeys().mapNotNull { get(it) }
     }
 
     override fun get(key: String): CosmeticsWrapper? {
@@ -31,13 +30,10 @@ class CosmeticsCoreProvider : CosmeticsProvider {
         }
     }
 
-    override fun hasPermission(player: Player, key: String): Boolean =
-        get(key)?.let { player.hasPermission(it.permission) } ?: false
-
     override fun owns(player: Player, key: String): Boolean =
-        getEquipped(player).any { it.key == key }
+        player.hasPermission(permission(key))
 
-    private fun getEquipped(player: Player): List<CosmeticsWrapper> {
+    override fun getEquipped(player: Player): List<CosmeticsWrapper> {
         return CosmeticsCoreApi.getEquippedCosmeticsAccessors(player)
             .filterIsInstance<CosmeticAccessor>()
             .mapNotNull { accessor ->
@@ -46,6 +42,22 @@ class CosmeticsCoreProvider : CosmeticsProvider {
                     CosmeticsWrapper(accessor.key, permission(accessor.key), item.clone())
                 }
             }
+    }
+
+    override fun equip(player: Player, key: String): Boolean {
+        val accessor = newAccessor(key, player) ?: return false
+        accessor.equip()
+        return true
+    }
+
+    override fun unequip(player: Player, key: String): Boolean {
+        val accessor = newAccessor(key, player) ?: return false
+        accessor.unequip()
+        return true
+    }
+
+    override fun isInWardrobe(player: Player): Boolean {
+        return CosmeticsCoreApi.isInWardrobe(player)
     }
 
     private fun permission(key: String) = "cosmeticscore.user.cosmetics.wear.$key"

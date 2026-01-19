@@ -18,8 +18,10 @@ class NexoFurnitureObjectiveFactory(
         val id = instruction.string().list().get()
         val targetAmount = instruction.number().get("amount", 1)
         val isCancelled = instruction.bool().get("isCancelled", false)
+        val location = instruction.location().get("location").orElse(null)
+        val range = instruction.number().get("range").orElse(null)
 
-        val objective = NexoFurnitureObjective(service, targetAmount, id, isCancelled, notifyMessage)
+        val objective = NexoFurnitureObjective(service, targetAmount, id, isCancelled, location, range, notifyMessage)
 
         return when (action) {
             Action.PLACE -> service.request(NexoFurniturePlaceEvent::class.java).handler(objective::onPlace)

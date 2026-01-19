@@ -1,5 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objective
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.events.custom_block.NexoBlockBreakEvent
@@ -9,6 +10,7 @@ import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
+import org.bukkit.Location
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable
@@ -16,10 +18,19 @@ import org.bukkit.event.Cancellable
 class NexoBlockObjective(
     service: ObjectiveService,
     targetAmount: Argument<Number>,
-    private val identifier: Argument<List<String>>,
-    private val isCancelled: Argument<Boolean>,
+    identifier: Argument<List<String>>,
+    isCancelled: Argument<Boolean>,
+    location: Argument<Location>,
+    range: Argument<Number>,
     notifyMessage: NotifyMessage
-) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
+) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
+
+    override fun getId(target: Block): String? {
+        return NexoBlocks.customBlockMechanic(target)?.itemID
+    }
+    override fun getLocation(target: Block): Location {
+        return target.location
+    }
 
     fun onPlace(event: NexoBlockPlaceEvent) {
         handle(event.player, event.block, event)
@@ -31,18 +42,5 @@ class NexoBlockObjective(
 
     fun onInteract(event: NexoBlockInteractEvent) {
         handle(event.player, event.block, event)
-    }
-
-    @Throws(QuestException::class)
-    private fun handle(player: Player, block: Block, event: Cancellable) {
-        val profile = service.profileProvider.getProfile(player) ?: return
-        if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
-
-        if (identifier.getValue(profile).contains(NexoBlocks.customBlockMechanic(block)?.itemID)) {
-            getCountingData(profile)?.progress()
-            completeIfDoneOrNotify(profile)
-
-            if (isCancelled.getValue(profile)) event.isCancelled = true
-        }
     }
 }

@@ -1,59 +1,42 @@
-package com.github.mrjimin.betonquestaddon.compatibility.nexo.objective
+package com.github.mrjimin.betonquestaddon.betonquest.objective
 
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.nexomc.nexo.api.NexoBlocks
-import com.nexomc.nexo.api.NexoFurniture
-import com.nexomc.nexo.api.events.furniture.NexoFurnitureBreakEvent
-import com.nexomc.nexo.api.events.furniture.NexoFurnitureInteractEvent
-import com.nexomc.nexo.api.events.furniture.NexoFurniturePlaceEvent
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
-import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable
-import kotlin.collections.contains
 
-class NexoFurnitureObjective(
+abstract class AbstractAddonObjective<T>(
     service: ObjectiveService,
     targetAmount: Argument<Number>,
     private val identifier: Argument<List<String>>,
     private val isCancelled: Argument<Boolean>,
     private val location: Argument<Location>,
     private val range: Argument<Number>,
-    notifyMessage: NotifyMessage,
+    notifyMessage: NotifyMessage
 ) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
 
-    fun onPlace(event: NexoFurniturePlaceEvent) {
-        handle(event.player, event.baseEntity, event)
-    }
-
-    fun onBreak(event: NexoFurnitureBreakEvent) {
-        handle(event.player, event.baseEntity, event)
-    }
-
-    fun onInteract(event: NexoFurnitureInteractEvent) {
-        handle(event.player, event.baseEntity, event)
-    }
+    protected abstract fun getId(target: T): String?
+    protected abstract fun getLocation(target: T): Location
 
     @Throws(QuestException::class)
-    private fun handle(player: Player, entity: Entity, event: Cancellable) {
+    protected fun handle(player: Player, target: T, event: Cancellable) {
         val profile = service.profileProvider.getProfile(player) ?: return
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
-        val nexoId = NexoFurniture.furnitureMechanic(entity)?.itemID
-        if (!identifier.getValue(profile).contains(nexoId)) return
+        val id = getId(target)
+        if (!identifier.getValue(profile).contains(id)) return
 
         val targetLoc = location.getValue(profile)
         if (targetLoc != null) {
-            if (entity.world != targetLoc.world) return
+            val currentLoc = getLocation(target)
+            if (currentLoc.world != targetLoc.world) return
 
-            val distance = entity.location.distance(targetLoc)
             val maxRange = range.getValue(profile).toDouble()
-
-            if (distance > maxRange) return
+            if (currentLoc.distance(targetLoc) > maxRange) return
         }
 
         getCountingData(profile)?.progress()

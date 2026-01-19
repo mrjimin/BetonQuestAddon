@@ -2,19 +2,15 @@ package com.github.mrjimin.betonquestaddon.compatibility.customnameplates.condit
 
 import com.github.mrjimin.betonquestaddon.compatibility.customnameplates.NpCheckType
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition
 import org.betonquest.betonquest.api.quest.condition.PlayerConditionFactory
-import org.betonquest.betonquest.api.quest.condition.online.OnlineConditionAdapter
 
 class NpHasConditionFactory(
-    private val type: NpCheckType,
-    private val loggerFactory: BetonQuestLoggerFactory
+    private val type: NpCheckType
 ): PlayerConditionFactory {
     override fun parsePlayer(instruction: Instruction): PlayerCondition {
         val target = instruction.string().get()
         val ignore = instruction.bool().get("ignore", false)
-        val log = loggerFactory.create(NpHasCondition::class.java)
-        return OnlineConditionAdapter(NpHasCondition(type, target, ignore), log, instruction.`package`)
+        return NpHasCondition(type, target, ignore)
     }
 }

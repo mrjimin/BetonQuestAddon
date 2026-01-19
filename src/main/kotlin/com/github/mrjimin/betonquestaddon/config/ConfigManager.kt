@@ -1,6 +1,6 @@
 package com.github.mrjimin.betonquestaddon.config
 
-import com.github.mrjimin.betonquestaddon.util.info
+import com.github.mrjimin.betonquestaddon.util.Logger
 import dev.dejvokep.boostedyaml.YamlDocument
 import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning
 import dev.dejvokep.boostedyaml.libs.org.snakeyaml.engine.v2.common.ScalarStyle
@@ -44,7 +44,7 @@ class ConfigManager(private val plugin: JavaPlugin) {
             e.printStackTrace()
         }
         MAIN_CONFIG.save(File(plugin.dataFolder, "config.yml"))
-        plugin.info("Loading config.yml")
+        Logger.info("Loading config.yml")
     }
 
 }

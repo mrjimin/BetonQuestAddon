@@ -3,14 +3,15 @@ package com.github.mrjimin.betonquestaddon.compatibility.customnameplates.condit
 import com.github.mrjimin.betonquestaddon.compatibility.customnameplates.NpCheckType
 import net.momirealms.customnameplates.api.CustomNameplatesAPI
 import org.betonquest.betonquest.api.instruction.Argument
-import org.betonquest.betonquest.api.profile.OnlineProfile
-import org.betonquest.betonquest.api.quest.condition.online.OnlineCondition
+import org.betonquest.betonquest.api.profile.Profile
+import org.betonquest.betonquest.api.quest.condition.PlayerCondition
 
 class NpEquippedCondition(
     private val type: NpCheckType,
     private val id: Argument<String>
-) : OnlineCondition {
-    override fun check(profile: OnlineProfile): Boolean {
+) : PlayerCondition {
+
+    override fun check(profile: Profile): Boolean {
         val target = id.getValue(profile)
         val api = CustomNameplatesAPI.getInstance().getPlayer(profile.playerUUID) ?: return false
 

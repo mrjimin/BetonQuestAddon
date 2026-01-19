@@ -33,3 +33,9 @@ dependencies:
     CustomNameplates:
       load: BEFORE
       required: false
+    HMCCosmetics:
+      load: BEFORE
+      required: false
+    TypeWriter:
+      load: BEFORE
+      required: false

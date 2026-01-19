@@ -36,9 +36,9 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${rootProject.properties["paper_version"]}-R0.1-SNAPSHOT")
     compileOnly("com.nexomc:nexo:${rootProject.properties["nexo_version"]}") { exclude("*") }
     compileOnly("dev.lone:api-itemsadder:${rootProject.properties["items_adder_version"]}")
-
     compileOnly("net.momirealms:craft-engine-core:${rootProject.properties["craft_engine_version"]}")
     compileOnly("net.momirealms:craft-engine-bukkit:${rootProject.properties["craft_engine_version"]}")
+
     compileOnly("net.momirealms:custom-crops:${rootProject.properties["custom_crops_version"]}")
     compileOnly("net.momirealms:custom-fishing:${rootProject.properties["custom_fishing_version"]}")
     compileOnly("net.momirealms:custom-nameplates:${rootProject.properties["custom_nameplates_version"]}")
