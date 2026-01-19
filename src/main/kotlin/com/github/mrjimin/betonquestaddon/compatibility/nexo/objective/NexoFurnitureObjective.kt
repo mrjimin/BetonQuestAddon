@@ -1,30 +1,25 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.objective
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
-import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.NexoFurniture
 import com.nexomc.nexo.api.events.furniture.NexoFurnitureBreakEvent
 import com.nexomc.nexo.api.events.furniture.NexoFurnitureInteractEvent
 import com.nexomc.nexo.api.events.furniture.NexoFurniturePlaceEvent
-import org.betonquest.betonquest.api.CountingObjective
-import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.entity.Entity
-import org.bukkit.entity.Player
-import org.bukkit.event.Cancellable
-import kotlin.collections.contains
 
 class NexoFurnitureObjective(
     service: ObjectiveService,
     targetAmount: Argument<Number>,
-    private val identifier: Argument<List<String>>,
-    private val isCancelled: Argument<Boolean>,
-    private val location: Argument<Location>,
-    private val range: Argument<Number>,
+    identifier: Argument<List<String>>,
+    isCancelled: Argument<Boolean>,
+    location: Argument<Location>?,
+    range: Argument<Number>?,
     notifyMessage: NotifyMessage,
-) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
+) : AbstractAddonObjective<Entity>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
     fun onPlace(event: NexoFurniturePlaceEvent) {
         handle(event.player, event.baseEntity, event)
@@ -38,29 +33,12 @@ class NexoFurnitureObjective(
         handle(event.player, event.baseEntity, event)
     }
 
-    @Throws(QuestException::class)
-    private fun handle(player: Player, entity: Entity, event: Cancellable) {
-        val profile = service.profileProvider.getProfile(player) ?: return
-        if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
-
-        val nexoId = NexoFurniture.furnitureMechanic(entity)?.itemID
-        if (!identifier.getValue(profile).contains(nexoId)) return
-
-        val targetLoc = location.getValue(profile)
-        if (targetLoc != null) {
-            if (entity.world != targetLoc.world) return
-
-            val distance = entity.location.distance(targetLoc)
-            val maxRange = range.getValue(profile).toDouble()
-
-            if (distance > maxRange) return
-        }
-
-        getCountingData(profile)?.progress()
-        completeIfDoneOrNotify(profile)
-
-        if (isCancelled.getValue(profile)) {
-            event.isCancelled = true
-        }
+    override fun getId(target: Entity): String? {
+        return NexoFurniture.furnitureMechanic(target)?.itemID
     }
+
+    override fun getLocation(target: Entity): Location {
+        return target.location
+    }
+
 }

@@ -6,22 +6,18 @@ import com.nexomc.nexo.api.NexoBlocks
 import com.nexomc.nexo.api.events.custom_block.NexoBlockBreakEvent
 import com.nexomc.nexo.api.events.custom_block.NexoBlockInteractEvent
 import com.nexomc.nexo.api.events.custom_block.NexoBlockPlaceEvent
-import org.betonquest.betonquest.api.CountingObjective
-import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.block.Block
-import org.bukkit.entity.Player
-import org.bukkit.event.Cancellable
 
 class NexoBlockObjective(
     service: ObjectiveService,
     targetAmount: Argument<Number>,
     identifier: Argument<List<String>>,
     isCancelled: Argument<Boolean>,
-    location: Argument<Location>,
-    range: Argument<Number>,
+    location: Argument<Location>?,
+    range: Argument<Number>?,
     notifyMessage: NotifyMessage
 ) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 

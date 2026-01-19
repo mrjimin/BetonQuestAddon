@@ -1,25 +1,23 @@
 package com.github.mrjimin.betonquestaddon.compatibility.itemsadder.objective
 
+import com.github.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjectiveFactory
 import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import com.github.mrjimin.betonquestaddon.util.action.Action
 import dev.lone.itemsadder.api.Events.CustomBlockBreakEvent
 import dev.lone.itemsadder.api.Events.CustomBlockInteractEvent
 import dev.lone.itemsadder.api.Events.CustomBlockPlaceEvent
-import org.betonquest.betonquest.api.DefaultObjective
 import org.betonquest.betonquest.api.instruction.Instruction
-import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
+import org.betonquest.betonquest.api.quest.objective.Objective
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
 class ItemsAdderBlockObjectiveFactory(
-    private val action: Action,
-    private val notifyMessage: NotifyMessage
-) : ObjectiveFactory {
-    override fun parseInstruction(instruction: Instruction, service: ObjectiveService): DefaultObjective {
-        val id = instruction.string().list().get()
-        val targetAmount = instruction.number().get("amount", 1)
-        val isCancelled = instruction.bool().get("isCancelled", false)
+    action: Action,
+    notifyMessage: NotifyMessage
+) : AbstractAddonObjectiveFactory(action, notifyMessage) {
 
-        val objective = ItemsAdderBlockObjective(service, targetAmount, id, isCancelled, notifyMessage)
+    override fun parseInstruction(instruction: Instruction, service: ObjectiveService): Objective {
+        val args = parseBaseArgs(instruction)
+        val objective = ItemsAdderBlockObjective(service, args.amount, args.ids, args.isCancelled, args.location, args.range, notifyMessage)
 
         return when (action) {
             Action.PLACE -> service.request(CustomBlockPlaceEvent::class.java).handler(objective::onPlace)

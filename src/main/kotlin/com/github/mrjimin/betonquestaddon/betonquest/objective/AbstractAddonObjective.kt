@@ -4,6 +4,7 @@ import com.github.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.entity.Player
@@ -14,8 +15,8 @@ abstract class AbstractAddonObjective<T>(
     targetAmount: Argument<Number>,
     private val identifier: Argument<List<String>>,
     private val isCancelled: Argument<Boolean>,
-    private val location: Argument<Location>,
-    private val range: Argument<Number>,
+    private val location: Argument<Location>?,
+    private val range: Argument<Number>?,
     notifyMessage: NotifyMessage
 ) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
 
@@ -30,14 +31,7 @@ abstract class AbstractAddonObjective<T>(
         val id = getId(target)
         if (!identifier.getValue(profile).contains(id)) return
 
-        val targetLoc = location.getValue(profile)
-        if (targetLoc != null) {
-            val currentLoc = getLocation(target)
-            if (currentLoc.world != targetLoc.world) return
-
-            val maxRange = range.getValue(profile).toDouble()
-            if (currentLoc.distance(targetLoc) > maxRange) return
-        }
+        if (isInvalidLocation(profile, getLocation(target))) return
 
         getCountingData(profile)?.progress()
         completeIfDoneOrNotify(profile)
@@ -45,5 +39,15 @@ abstract class AbstractAddonObjective<T>(
         if (isCancelled.getValue(profile)) {
             event.isCancelled = true
         }
+    }
+
+    private fun isInvalidLocation(profile: Profile, targetLocation: Location): Boolean {
+        if (location == null || range == null) return false
+
+        val loc = location.getValue(profile) ?: return false
+        val maxRange = range.getValue(profile).toDouble()
+        if (targetLocation.world == null || targetLocation.world != loc.world) return true
+
+        return loc.distanceSquared(targetLocation) > maxRange * maxRange
     }
 }
