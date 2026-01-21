@@ -1,10 +1,10 @@
-package com.github.mrjimin.betonquestaddon.spigot
+package com.github.mrjimin.betonquestaddon.util
 
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.IOException
 import java.net.URI
-import java.util.*
+import java.util.Scanner
 import java.util.function.Consumer
 
 class UpdateChecker(

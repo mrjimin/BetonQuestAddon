@@ -17,7 +17,7 @@ class NexoFurnitureObjective(
     identifier: Argument<List<String>>,
     isCancelled: Argument<Boolean>,
     location: Argument<Location>?,
-    range: Argument<Number>?,
+    range: Argument<Number>,
     notifyMessage: NotifyMessage,
 ) : AbstractAddonObjective<Entity>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 

@@ -17,16 +17,16 @@ abstract class AbstractAddonObjectiveFactory(
         val amount: Argument<Number>,
         val isCancelled: Argument<Boolean>,
         val location: Argument<Location>?,
-        val range: Argument<Number>?
+        val range: Argument<Number>
     )
 
     protected fun parseBaseArgs(instruction: Instruction): AddonObjectiveArgs {
         return AddonObjectiveArgs(
-            ids = instruction.string().list().get(),
-            amount = instruction.number().get("amount", 1),
-            isCancelled = instruction.bool().get("isCancelled", false),
-            location = instruction.location().get("location").orElse(null),
-            range = instruction.number().get("range", 1)
+            instruction.string().list().get(),
+            instruction.number().get("amount", 1),
+            instruction.bool().get("isCancelled", false),
+            instruction.location().get("location").orElse(null),
+            instruction.number().get("range", 0)
         )
     }
 

@@ -1,7 +1,10 @@
 # don't change
 config-version: '${config_version}'
 
-update-checker: true
+# General plugin settings
+setting:
+  # Check for plugin updates on startup
+  update-checker: true
 
 # Requires server restart to apply changes.
 hook:

@@ -14,13 +14,19 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.io.IOException
 
-class ConfigManager(private val plugin: JavaPlugin) {
+class ConfigsManager(private val plugin: JavaPlugin) {
 
-    private lateinit var MAIN_CONFIG: YamlDocument
+    companion object {
+        lateinit var config: YamlDocument
+            private set
+
+        fun enabledUpdateChecker(): Boolean =
+            config.getBoolean("setting.update-checker", true)
+    }
 
     fun load() {
         try {
-            MAIN_CONFIG = YamlDocument.create(
+            config = YamlDocument.create(
                 File(plugin.dataFolder, "config.yml"),
                 plugin.getResource("config.yml")!!,
                 GeneralSettings.builder()
@@ -43,7 +49,7 @@ class ConfigManager(private val plugin: JavaPlugin) {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        MAIN_CONFIG.save(File(plugin.dataFolder, "config.yml"))
+        config.save(File(plugin.dataFolder, "config.yml"))
         Logger.info("Loading config.yml")
     }
 

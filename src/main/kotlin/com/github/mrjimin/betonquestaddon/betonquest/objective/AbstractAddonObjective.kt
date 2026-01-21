@@ -16,7 +16,7 @@ abstract class AbstractAddonObjective<T>(
     private val identifier: Argument<List<String>>,
     private val isCancelled: Argument<Boolean>,
     private val location: Argument<Location>?,
-    private val range: Argument<Number>?,
+    private val range: Argument<Number>,
     notifyMessage: NotifyMessage
 ) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
 
@@ -28,8 +28,7 @@ abstract class AbstractAddonObjective<T>(
         val profile = service.profileProvider.getProfile(player) ?: return
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
-        val id = getId(target)
-        if (!identifier.getValue(profile).contains(id)) return
+        if (!identifier.getValue(profile).contains(getId(target))) return
 
         if (isInvalidLocation(profile, getLocation(target))) return
 
@@ -42,12 +41,8 @@ abstract class AbstractAddonObjective<T>(
     }
 
     private fun isInvalidLocation(profile: Profile, targetLocation: Location): Boolean {
-        if (location == null || range == null) return false
-
-        val loc = location.getValue(profile) ?: return false
-        val maxRange = range.getValue(profile).toDouble()
-        if (targetLocation.world == null || targetLocation.world != loc.world) return true
-
-        return loc.distanceSquared(targetLocation) > maxRange * maxRange
+        val loc = location?.getValue(profile) ?: return false
+        val rangeValue = range.getValue(profile).toDouble()
+        return loc.world != targetLocation.world || loc.distanceSquared(targetLocation) > rangeValue * rangeValue
     }
 }

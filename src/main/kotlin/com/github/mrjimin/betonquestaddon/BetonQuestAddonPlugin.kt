@@ -1,7 +1,7 @@
 package com.github.mrjimin.betonquestaddon
 
 import com.github.mrjimin.betonquestaddon.compatibility.CompatibilityManager
-import com.github.mrjimin.betonquestaddon.config.ConfigManager
+import com.github.mrjimin.betonquestaddon.config.ConfigsManager
 import com.github.mrjimin.betonquestaddon.util.Logger
 import org.betonquest.betonquest.BetonQuest
 import org.bstats.bukkit.Metrics
@@ -21,8 +21,8 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 
     override fun onEnable() {
         Metrics(this, 26421)
+        ConfigsManager(this).load()
         enabledMessage()
-        ConfigManager(this).load()
         CompatibilityManager(BetonQuest.getInstance(), this).registerCompatiblePlugins()
         // UpdateChecker.checkForUpdates(this, 120813)
     }
