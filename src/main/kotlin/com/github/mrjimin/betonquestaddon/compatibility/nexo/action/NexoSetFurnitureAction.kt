@@ -26,8 +26,6 @@ class NexoSetFurnitureAction(
         NexoFurniture.place(id, location.getValue(profile), rotation.getValue(profile), blockFace.getValue(profile))
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 
 }

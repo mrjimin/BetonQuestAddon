@@ -17,7 +17,5 @@ class LocationCondition(
         return mechanicId == itemId.getValue(profile)
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 }

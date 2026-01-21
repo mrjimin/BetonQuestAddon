@@ -16,7 +16,5 @@ class CustomCropsSeasonCondition(
         return season.getValue(profile) == worldSeason
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 }

@@ -1,11 +1,11 @@
 package com.github.mrjimin.betonquestaddon.compatibility.customnameplates.condition
 
 import com.github.mrjimin.betonquestaddon.compatibility.customnameplates.NpCheckType
-import net.momirealms.craftengine.core.entity.player.Player
 import net.momirealms.customnameplates.api.CustomNameplatesAPI
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition
+import org.bukkit.entity.Player
 
 class NpHasCondition(
     private val type: NpCheckType,

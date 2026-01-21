@@ -21,7 +21,5 @@ class ItemsAdderSetFurnitureAction(
         CustomFurniture.spawn(id, location.getValue(profile).block)
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 }

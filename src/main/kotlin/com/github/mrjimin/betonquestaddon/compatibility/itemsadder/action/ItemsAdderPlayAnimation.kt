@@ -13,7 +13,5 @@ class ItemsAdderPlayAnimation(
         ItemsAdder.playTotemAnimation(profile.player, name.getValue(profile))
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 }

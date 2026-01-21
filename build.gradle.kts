@@ -30,6 +30,7 @@ repositories {
     maven("https://maven.enginehub.org/repo/")
 //    maven("https://repo.betonquest.org/betonquest")
     maven("https://repo.hibiscusmc.com/releases")
+    maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
@@ -47,8 +48,10 @@ dependencies {
 //        exclude(group = "de.themoep", module = "minedown-adventure")
 //    }
 
-    compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
+    // compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
+
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["world_guard_version"]}")
 
     compileOnly(fileTree("lib") {
         include("*.jar")

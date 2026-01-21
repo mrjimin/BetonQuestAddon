@@ -39,3 +39,6 @@ dependencies:
     TypeWriter:
       load: BEFORE
       required: false
+    WorldGuard:
+      load: BEFORE
+      required: false

@@ -9,6 +9,7 @@ import com.github.mrjimin.betonquestaddon.compatibility.hmccosmetics.HMCCosmetic
 import com.github.mrjimin.betonquestaddon.compatibility.itemsadder.ItemsAdderIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.typewriter.TypeWriterIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardIntegrator
 import com.github.mrjimin.betonquestaddon.util.Logger
 import org.betonquest.betonquest.api.BetonQuestApi
 import org.bukkit.Bukkit
@@ -31,6 +32,7 @@ class CompatibilityManager(
         register("CustomNameplates") { CustomNameplatesIntegrator() }
         register("HMCCosmetics") { HMCCosmeticsIntegrator(plugin) }
         register("TypeWriter") { TypeWriterIntegrator() }
+        register("WorldGuard") { WorldGuardIntegrator() }
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {

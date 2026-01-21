@@ -21,7 +21,5 @@ class NexoSetBlockAction(
         NexoBlocks.place(id, location.getValue(profile))
     }
 
-    override fun isPrimaryThreadEnforced(): Boolean {
-        return true
-    }
+    override fun isPrimaryThreadEnforced(): Boolean = true
 }
