@@ -3,6 +3,7 @@ package com.github.mrjimin.betonquestaddon.compatibility.craftengine.item
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.asCraftKey
 import net.kyori.adventure.text.Component
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems
+import net.momirealms.craftengine.core.util.Key
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.item.QuestItem
@@ -15,13 +16,13 @@ class CraftEngineItemWrapper (
 ) : QuestItemWrapper {
 
     override fun getItem(profile: Profile?): QuestItem =
-        CraftEngineItem(itemId.getValue(profile))
+        CraftEngineItem(itemId.getValue(profile).asCraftKey())
 
     class CraftEngineItem(
-        private val itemId: String
+        private val itemId: Key
     ) : QuestItem {
 
-        private val customItem = CraftEngineItems.byId(itemId.asCraftKey())
+        private val customItem = CraftEngineItems.byId(itemId)
             ?: throw QuestException("Invalid CraftEngine Item: $itemId")
 
         private val buildItemMeta = customItem.buildItemStack().itemMeta
@@ -36,7 +37,7 @@ class CraftEngineItemWrapper (
             customItem.buildItemStack(stackSize)
 
         override fun matches(item: ItemStack?): Boolean =
-            item != null && itemId.asCraftKey() == CraftEngineItems.getCustomItemId(item)
+            item != null && itemId == CraftEngineItems.getCustomItemId(item)
 
     }
 }

@@ -1,7 +1,6 @@
 package com.github.mrjimin.betonquestaddon.compatibility.nexo.item
 
 import com.nexomc.nexo.api.NexoItems
-import com.nexomc.nexo.items.ItemBuilder
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
@@ -21,7 +20,7 @@ class NexoItemWrapper(
         private val itemId: String
     ) : QuestItem {
 
-        private val itemBuilder: ItemBuilder = NexoItems.itemFromId(itemId)
+        private val itemBuilder = NexoItems.itemFromId(itemId)
             ?: throw QuestException("Invalid Nexo Item: $itemId")
 
         override fun getName(): Component =
