@@ -48,10 +48,9 @@ dependencies {
 //        exclude(group = "de.themoep", module = "minedown-adventure")
 //    }
 
-    // compileOnly("su.nightexpress.coinsengine","CoinsEngine","2.5.0")
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
-
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["world_guard_version"]}")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:${rootProject.properties["coins_engine_version"]}")
 
     compileOnly(fileTree("lib") {
         include("*.jar")

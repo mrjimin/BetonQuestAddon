@@ -1,6 +1,8 @@
 package com.github.mrjimin.betonquestaddon.compatibility
 
 import com.github.mrjimin.betonquestaddon.betonquest.BetonQuestIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.coinsengine.CoinsEngineIntegrator
+import com.github.mrjimin.betonquestaddon.compatibility.cosmeticscore.CosmeticsCoreIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.customcrops.CustomCropsIntegrator
 import com.github.mrjimin.betonquestaddon.compatibility.customfishing.CustomFishingIntegrator
@@ -23,7 +25,7 @@ class CompatibilityManager(
     private val integrators = mutableMapOf<String, ICompatibility>()
 
     fun registerCompatiblePlugins() {
-        registerBetonQuestIntegrator()
+        BetonQuestIntegrator(api).hook()
         register("Nexo") { NexoIntegrator() }
         register("CraftEngine") { CraftEngineIntegrator() }
         register("ItemsAdder") { ItemsAdderIntegrator() }
@@ -31,8 +33,10 @@ class CompatibilityManager(
         register("CustomFishing") { CustomFishingIntegrator() }
         register("CustomNameplates") { CustomNameplatesIntegrator() }
         register("HMCCosmetics") { HMCCosmeticsIntegrator(plugin) }
+        register("CosmeticsCore") { CosmeticsCoreIntegrator() }
         register("TypeWriter") { TypeWriterIntegrator() }
         register("WorldGuard") { WorldGuardIntegrator() }
+        register("CoinsEngine") { CoinsEngineIntegrator() }
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {
@@ -44,9 +48,5 @@ class CompatibilityManager(
 
         val version = registerPlugin.pluginMeta.version
         Logger.info("<green>Successfully hooked into <gray>$name <dark_gray>v$version")
-    }
-
-    private fun registerBetonQuestIntegrator() {
-        BetonQuestIntegrator(api).hook()
     }
 }

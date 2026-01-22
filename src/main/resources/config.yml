@@ -15,5 +15,7 @@ hook:
   CustomFishing: true
   CustomNameplates: true
   HMCCosmetics: true
+  CosmeticsCore: true
   TypeWriter: true
   WorldGuard: true
+  CoinsEngine: true

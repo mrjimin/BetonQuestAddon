@@ -7,6 +7,7 @@ import org.bukkit.entity.Player
 
 class CCInWardrobeCondition : PlayerCondition {
     override fun check(profile: Profile): Boolean {
-        return CosmeticsCoreProvider.isInWardrobe(profile.player as Player)
+        val player = profile.player as Player
+        return CosmeticsCoreProvider.isInWardrobe(player)
     }
 }

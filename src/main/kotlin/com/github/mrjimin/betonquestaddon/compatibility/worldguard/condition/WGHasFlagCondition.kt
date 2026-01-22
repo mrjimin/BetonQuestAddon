@@ -1,24 +1,18 @@
 package com.github.mrjimin.betonquestaddon.compatibility.worldguard.condition
 
-import com.github.mrjimin.betonquestaddon.compatibility.worldguard.TargetType
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.bukkit.World
 
-class WGHasCondition(
-    private val targetType: TargetType,
+class WGHasFlagCondition(
+    private val flag: Argument<String>,
     world: Argument<World>,
     region: Argument<String>?
 ) : AbstractWGCondition(world, region) {
-
     override fun check(profile: Profile?): Boolean {
+        val targetFlag = flag.getValue(profile) ?: return false
         val targetRegion = getTargetRegion(profile) ?: return false
 
-        return when (targetType) {
-            TargetType.OWNER -> (targetRegion.owners?.size() ?: 0) > 0
-            TargetType.MEMBER -> (targetRegion.members?.size() ?: 0) > 0
-        }
+        return targetRegion.flags.keys.any { it.name.equals(targetFlag, ignoreCase = true) }
     }
-
-    override fun isPrimaryThreadEnforced(): Boolean = true
 }

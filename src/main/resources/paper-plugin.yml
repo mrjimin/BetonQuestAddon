@@ -36,9 +36,15 @@ dependencies:
     HMCCosmetics:
       load: BEFORE
       required: false
+    CosmeticsCore:
+      load: BEFORE
+      required: false
     TypeWriter:
       load: BEFORE
       required: false
     WorldGuard:
+      load: BEFORE
+      required: false
+    CoinsEngine:
       load: BEFORE
       required: false
