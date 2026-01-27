@@ -9,7 +9,7 @@ plugins {
 
 val isDev: Boolean = false
 
-group = "com.github.mrjimin.betonquestaddon"
+group = "kr.mrjimin.betonquestaddon"
 version = if (isDev) {
     "${rootProject.properties["project_version"]}-dev"
 } else {
@@ -59,6 +59,11 @@ dependencies {
     // compileOnly("dev.dejvokep:boosted-yaml:${rootProject.properties["boosted_yaml_version"]}")
     implementation("dev.dejvokep:boosted-yaml:${rootProject.properties["boosted_yaml_version"]}")
     implementation("org.bstats:bstats-bukkit:${rootProject.properties["bstats_version"]}")
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 kotlin {
@@ -79,8 +84,8 @@ val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
 
     exclude("kotlin/**", "kotlinx/**")
 
-    relocate("org.bstats", "com.github.mrjimin.betonquestaddon.libraries.bstats")
-    relocate("dev.dejvokep.boostedyaml", "com.github.mrjimin.betonquestaddon.libraries.boostedyaml")
+    relocate("org.bstats", "kr.mrjimin.betonquestaddon.libraries.bstats")
+    relocate("dev.dejvokep.boostedyaml", "kr.mrjimin.betonquestaddon.libraries.boostedyaml")
 }
 
 tasks.named("build") {
