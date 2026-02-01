@@ -1,7 +1,7 @@
 package kr.mrjimin.betonquestaddon.compatibility.craftengine.action
 
-import kr.mrjimin.betonquestaddon.compatibility.craftengine.asCraftKey
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
+import net.momirealms.craftengine.core.util.Key
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
@@ -17,10 +17,10 @@ class CraftEngineSetBlockAction(
     override fun execute(profile: Profile) {
         val id = itemId.getValue(profile)
 
-        id.takeIf { CraftEngineBlocks.byId(id.asCraftKey()) != null }
+        id.takeIf { CraftEngineBlocks.byId(Key.of(id)) != null }
             ?: throw QuestException("CraftEngine item is not a block: $id")
 
-        CraftEngineBlocks.place(location.getValue(profile), id.asCraftKey(), playSound.getValue(profile))
+        CraftEngineBlocks.place(location.getValue(profile), Key.of(id), playSound.getValue(profile))
     }
 
     override fun isPrimaryThreadEnforced(): Boolean = true

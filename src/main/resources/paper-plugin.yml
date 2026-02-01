@@ -48,3 +48,6 @@ dependencies:
     CoinsEngine:
       load: BEFORE
       required: false
+    AdvancedEnchantments:
+      load: BEFORE
+      required: false

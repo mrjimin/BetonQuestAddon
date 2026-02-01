@@ -1,13 +1,15 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
     kotlin("jvm") version "2.3.0"
     id("com.gradleup.shadow") version "9.2.2"
     id("java")
     `java-library`
+    id("io.papermc.hangar-publish-plugin") version "0.1.4"
 }
 
-val isDev: Boolean = false
+val isDev: Boolean = true
 
 group = "kr.mrjimin.betonquestaddon"
 version = if (isDev) {
@@ -28,9 +30,10 @@ repositories {
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
     maven("https://maven.enginehub.org/repo/")
-//    maven("https://repo.betonquest.org/betonquest")
+    maven("https://repo.betonquest.org/betonquest")
     maven("https://repo.hibiscusmc.com/releases")
     maven("https://maven.enginehub.org/repo/")
+    maven("https://repo.nekroplex.com/releases")
 }
 
 dependencies {
@@ -44,13 +47,15 @@ dependencies {
     compileOnly("net.momirealms:custom-fishing:${rootProject.properties["custom_fishing_version"]}")
     compileOnly("net.momirealms:custom-nameplates:${rootProject.properties["custom_nameplates_version"]}")
 
-//    compileOnly("org.betonquest:betonquest:${rootProject.properties["betonquest_version"]}") {
-//        exclude(group = "de.themoep", module = "minedown-adventure")
-//    }
+    compileOnly("org.betonquest:betonquest:${rootProject.properties["beton_quest_version"]}") {
+        exclude("de.themoep", "minedown-adventure")
+        exclude("com.google.guava", "guava")
+    }
 
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["world_guard_version"]}")
     compileOnly("su.nightexpress.coinsengine:CoinsEngine:${rootProject.properties["coins_engine_version"]}")
+    compileOnly("gg.aquatic:AEAPI:1.0")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
@@ -108,5 +113,30 @@ tasks.processResources {
     val configVersion = project.properties["config_version"]!!
     filesMatching("config.yml") {
         expand("config_version" to configVersion)
+    }
+}
+
+// Auto Publish Hangar
+hangarPublish {
+    publications.register("plugin") {
+        version.set(project.version as String)
+        channel.set("Snapshot")
+        id.set("hangar-project")
+        apiKey.set(System.getenv("HANGAR_API_TOKEN"))
+        platforms {
+            register(Platforms.PAPER) {
+                jar.set(tasks.jar.flatMap { it.archiveFile })
+                val versions: List<String> = (property("paperVersion") as String)
+                    .split(",")
+                    .map { it.trim() }
+                platformVersions.set(versions)
+
+                dependencies {
+                    url("BetonQuest v3", "https://betonquest.org/3.0-DEV/") {
+                        required.set(true)
+                    }
+                }
+            }
+        }
     }
 }

@@ -19,3 +19,4 @@ hook:
   TypeWriter: true
   WorldGuard: true
   CoinsEngine: true
+  AdvancedEnchantments: true

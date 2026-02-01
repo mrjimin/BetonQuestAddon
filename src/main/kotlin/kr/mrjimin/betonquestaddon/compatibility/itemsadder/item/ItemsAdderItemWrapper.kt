@@ -1,8 +1,8 @@
 package kr.mrjimin.betonquestaddon.compatibility.itemsadder.item
 
 import dev.lone.itemsadder.api.CustomStack
+import kr.mrjimin.betonquestaddon.item.ItemHandler
 import net.kyori.adventure.text.Component
-import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.item.QuestItem
 import org.betonquest.betonquest.api.profile.Profile
@@ -16,24 +16,24 @@ class ItemsAdderItemWrapper(
     override fun getItem(profile: Profile?): QuestItem =
         ItemsAdderItem(itemId.getValue(profile))
 
-    class ItemsAdderItem(
-        itemId: String
+    data class ItemsAdderItem(
+        private val itemId: String
     ) : QuestItem {
 
-        private val customStack = CustomStack.getInstance(itemId)
-            ?: throw QuestException("Invalid ItemsAdder Item: $itemId")
+        private val customItem = ItemHandler.createItem("ITEMSADDER:$itemId")
+        private val customItemMeta = customItem.itemMeta
 
         override fun getName(): Component =
-            customStack.itemName()
+            customItemMeta.itemName()
 
         override fun getLore(): List<Component> =
-            customStack.itemStack.lore() ?: listOf()
+            customItemMeta.lore() ?: listOf()
 
         override fun generate(stackSize: Int, profile: Profile?): ItemStack =
-            customStack.itemStack.asQuantity(stackSize)
+            customItem.asQuantity(stackSize)
 
         override fun matches(item: ItemStack?): Boolean =
-            item != null && CustomStack.byItemStack(item)?.namespacedID == customStack.namespacedID
+            item != null && itemId == CustomStack.byItemStack(item)?.namespacedID
 
     }
 }
