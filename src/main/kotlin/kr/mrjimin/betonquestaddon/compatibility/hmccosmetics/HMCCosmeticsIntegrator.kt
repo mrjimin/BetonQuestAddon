@@ -14,13 +14,11 @@ class HMCCosmeticsIntegrator(private val plugin: JavaPlugin) : ICompatibility, L
 
     override fun hook(api: BetonQuestApi) {
         Bukkit.getServer().pluginManager.registerEvents(this, plugin)
-        val questRegistries = api.questRegistries
-
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("hmcCosmeticsApplyCosmetic", HMCApplyActionFactory())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             register("hmcCosmeticsInWardrobe", HMCInWardrobeConditionFactory())
         }
     }

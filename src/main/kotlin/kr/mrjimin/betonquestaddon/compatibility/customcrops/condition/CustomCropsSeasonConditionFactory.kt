@@ -7,7 +7,7 @@ import org.betonquest.betonquest.api.quest.condition.PlayerCondition
 import org.betonquest.betonquest.api.quest.condition.PlayerConditionFactory
 import org.betonquest.betonquest.api.quest.condition.PlayerlessCondition
 import org.betonquest.betonquest.api.quest.condition.PlayerlessConditionFactory
-import org.betonquest.betonquest.api.quest.condition.nullable.NullableConditionAdapter
+import org.betonquest.betonquest.api.quest.condition.NullableConditionAdapter
 import org.betonquest.betonquest.quest.condition.ThrowExceptionPlayerlessCondition
 import org.bukkit.World
 

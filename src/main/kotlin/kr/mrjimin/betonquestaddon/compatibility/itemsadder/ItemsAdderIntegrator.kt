@@ -17,15 +17,14 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class ItemsAdderIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-        val loggerFactory = api.loggerFactory
+        val loggerFactory = api.loggerFactory()
 
-        api.featureRegistries.item().apply {
+        api.items().registry().apply {
             register("itemsAdder", ItemsAdderItemFactory())
             registerSerializer("itemsAdder", ItemsAdderQuestItemSerializer())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             registerCombined("itemsAdderBlock", LocationConditionFactory { location ->
                     CustomBlock.byAlreadyPlaced(location.block)?.namespacedID
                 }
@@ -36,13 +35,13 @@ class ItemsAdderIntegrator : ICompatibility {
             )
         }
 
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("itemsAdderBlockAt", ItemsAdderSetBlockActionFactory())
             register("itemsAdderFurnitureAt", ItemsAdderSetFurnitureActionFactory())
             register("itemsAdderPlayAnimation", ItemsAdderPlayAnimationFactory(loggerFactory))
         }
 
-        questRegistries.objective().apply {
+        api.objectives().registry().apply {
             register("itemsAdderBlockPlace", ItemsAdderBlockObjectiveFactory(Action.PLACE, NotifyMessage.BLOCK_PLACE))
             register("itemsAdderBlockBreak", ItemsAdderBlockObjectiveFactory(Action.BREAK, NotifyMessage.BLOCK_BREAK))
             register("itemsAdderBlockInteract", ItemsAdderBlockObjectiveFactory(Action.INTERACT, NotifyMessage.BLOCK_INTERACT))

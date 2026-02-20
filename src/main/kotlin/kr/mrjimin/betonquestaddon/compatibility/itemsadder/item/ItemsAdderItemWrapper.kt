@@ -6,7 +6,7 @@ import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.item.QuestItem
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.item.QuestItemWrapper
+import org.betonquest.betonquest.api.item.QuestItemWrapper
 import org.bukkit.inventory.ItemStack
 
 class ItemsAdderItemWrapper(

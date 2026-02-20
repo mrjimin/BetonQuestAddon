@@ -13,14 +13,12 @@ class CustomFishingIntegrator : ICompatibility {
     private val itemManager = BukkitCustomFishingPlugin.getInstance().itemManager
 
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        api.featureRegistries.item().apply {
+        api.items().registry().apply {
             register("customFishing", CFishingItemFactory(itemManager))
             registerSerializer("customFishing", CFishingQuestItemSerializer(itemManager))
         }
 
-        questRegistries.objective().apply {
+        api.objectives().registry().apply {
             register("customFishingCaughtFish", CaughtFishObjectiveFactory(FishingCaughtType.FISH, NotifyMessage.CUSTOM_FISHING_CAUGHT_FISH))
             register("customFishingCaughtGroup", CaughtFishObjectiveFactory(FishingCaughtType.GROUP, NotifyMessage.CUSTOM_FISHING_CAUGHT_GROUP))
             register("customFishingActivateTotem", ActivateTotemObjectiveFactory())

@@ -2,7 +2,7 @@ package kr.mrjimin.betonquestaddon.compatibility.itemsadder.item
 
 import dev.lone.itemsadder.api.CustomStack
 import org.betonquest.betonquest.api.QuestException
-import org.betonquest.betonquest.item.QuestItemSerializer
+import org.betonquest.betonquest.api.item.QuestItemSerializer
 import org.bukkit.inventory.ItemStack
 
 class ItemsAdderQuestItemSerializer : QuestItemSerializer {

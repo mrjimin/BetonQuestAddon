@@ -17,14 +17,12 @@ import org.betonquest.betonquest.api.BetonQuestApi
 class NexoIntegrator : ICompatibility {
 
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        api.featureRegistries.item().apply {
+        api.items().registry().apply {
             register("nexo", NexoItemFactory())
             registerSerializer("nexo", NexoQuestItemSerializer())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             registerCombined("nexoBlock", LocationConditionFactory { location ->
                     NexoBlocks.customBlockMechanic(location)?.itemID
                 }
@@ -35,12 +33,12 @@ class NexoIntegrator : ICompatibility {
             )
         }
 
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("nexoBlockAt", NexoSetBlockActionFactory())
             register("nexoFurnitureAt", NexoSetFurnitureActionFactory())
         }
 
-        questRegistries.objective().apply {
+        api.objectives().registry().apply {
             register("nexoBlockPlace", NexoBlockObjectiveFactory(Action.PLACE, NotifyMessage.BLOCK_PLACE))
             register("nexoBlockBreak", NexoBlockObjectiveFactory(Action.BREAK, NotifyMessage.BLOCK_BREAK))
             register("nexoBlockInteract", NexoBlockObjectiveFactory(Action.INTERACT, NotifyMessage.BLOCK_INTERACT))

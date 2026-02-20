@@ -9,7 +9,7 @@ plugins {
     id("io.papermc.hangar-publish-plugin") version "0.1.4"
 }
 
-val isDev: Boolean = true
+val isDev: Boolean = false
 
 group = "kr.mrjimin.betonquestaddon"
 version = if (isDev) {

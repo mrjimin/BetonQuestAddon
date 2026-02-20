@@ -6,9 +6,7 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class TypeWriterIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("typeWriterPlayCinematic", TWPlayCinematicActionFactory())
         }
     }

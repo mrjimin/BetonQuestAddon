@@ -17,14 +17,12 @@ import org.betonquest.betonquest.api.BetonQuestApi
 class CraftEngineIntegrator : ICompatibility {
 
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        api.featureRegistries.item().apply {
+        api.items().registry().apply {
             register("craftEngine", CraftEngineItemFactory())
             registerSerializer("craftEngine", CraftEngineQuestItemSerializer())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             registerCombined("craftEngineBlock", LocationConditionFactory { location ->
                     BukkitAdaptors.adapt(location.block).id().toString()
                 }
@@ -38,12 +36,12 @@ class CraftEngineIntegrator : ICompatibility {
             )
         }
 
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("craftEngineBlockAt", CraftEngineSetBlockActionFactory())
             register("craftEngineFurnitureAt", CraftEngineSetFurnitureActionFactory())
         }
 
-        questRegistries.objective().apply {
+        api.objectives().registry().apply {
             register("craftEngineBlockPlace", CraftEngineBlockObjectiveFactory(Action.PLACE, NotifyMessage.BLOCK_PLACE))
             register("craftEngineBlockBreak", CraftEngineBlockObjectiveFactory(Action.BREAK, NotifyMessage.BLOCK_BREAK))
             register("craftEngineBlockInteract", CraftEngineBlockObjectiveFactory(Action.INTERACT, NotifyMessage.BLOCK_INTERACT))

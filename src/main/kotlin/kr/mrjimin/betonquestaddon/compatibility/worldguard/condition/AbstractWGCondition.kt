@@ -4,7 +4,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion
 import kr.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardUtil
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
-import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition
+import org.betonquest.betonquest.api.quest.condition.NullableCondition
 import org.bukkit.World
 import org.bukkit.entity.Player
 

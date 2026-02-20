@@ -7,13 +7,11 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class CoinsEngineIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("coinsEngine", CoinsEngineActionFactory())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             register("coinsEngine", CoinsEngineConditionFactory())
         }
     }

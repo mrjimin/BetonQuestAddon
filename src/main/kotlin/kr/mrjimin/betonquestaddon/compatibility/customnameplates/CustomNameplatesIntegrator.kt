@@ -8,13 +8,11 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class CustomNameplatesIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("customNameplatesApplyNameplate", NpApplyActionFactory())
         }
 
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             register("customNameplatesHasNameplate", NpHasConditionFactory(NpCheckType.NAMEPLATE))
             register("customNameplatesEquippedNameplate", NpEquippedConditionFactory(NpCheckType.NAMEPLATE))
             register("customNameplatesHasBubble", NpHasConditionFactory(NpCheckType.BUBBLE))

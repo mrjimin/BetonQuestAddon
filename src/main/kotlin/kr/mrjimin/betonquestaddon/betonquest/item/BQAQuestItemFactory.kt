@@ -1,14 +1,12 @@
 package kr.mrjimin.betonquestaddon.betonquest.item
 
 import kr.mrjimin.betonquestaddon.betonquest.item.components.BQAComponentRegistry
-import kr.mrjimin.betonquestaddon.betonquest.item.components.DisplayNameComponents
 import kr.mrjimin.betonquestaddon.betonquest.item.components.ItemComponents
 import kr.mrjimin.betonquestaddon.item.ItemHandler
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.item.QuestItem
-import org.betonquest.betonquest.api.kernel.TypeFactory
-import org.betonquest.betonquest.item.QuestItemWrapper
-import org.bukkit.inventory.ItemStack
+import org.betonquest.betonquest.api.item.QuestItemWrapper
+import org.betonquest.betonquest.api.quest.TypeFactory
 
 class BQAQuestItemFactory : TypeFactory<QuestItemWrapper> {
     override fun parseInstruction(instruction: Instruction): QuestItemWrapper {

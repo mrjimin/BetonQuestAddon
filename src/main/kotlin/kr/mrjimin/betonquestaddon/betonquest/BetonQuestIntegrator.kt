@@ -5,9 +5,7 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class BetonQuestIntegrator(private val api: BetonQuestApi) {
     fun hook() {
-        val questRegistries = api.questRegistries
-
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("particleCube", ParticleCubeActionFactory())
         }
     }

@@ -17,17 +17,15 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class CustomCropsIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val questRegistries = api.questRegistries
-
-        questRegistries.condition().apply {
+        api.conditions().registry().apply {
             registerCombined("customCropsSeason", CustomCropsSeasonConditionFactory())
         }
 
-        questRegistries.action().apply {
+        api.actions().registry().apply {
             register("customCropsSetSeason", CustomCropsSetSeasonActionFactory())
         }
 
-        questRegistries.objective().apply {
+        api.objectives().registry().apply {
             register("customCropsCropPlant", CropObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_CROP_PLANT))
             register("customCropsCropHarvest", CropObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_CROP_HARVEST))
 

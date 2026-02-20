@@ -2,7 +2,7 @@ package kr.mrjimin.betonquestaddon.compatibility.customfishing.item
 
 import net.momirealms.customfishing.api.mechanic.item.ItemManager
 import org.betonquest.betonquest.api.QuestException
-import org.betonquest.betonquest.item.QuestItemSerializer
+import org.betonquest.betonquest.api.item.QuestItemSerializer
 import org.bukkit.inventory.ItemStack
 
 class CFishingQuestItemSerializer(
