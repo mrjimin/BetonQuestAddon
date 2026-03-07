@@ -17,8 +17,6 @@ import org.betonquest.betonquest.api.BetonQuestApi
 
 class ItemsAdderIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
-        val loggerFactory = api.loggerFactory()
-
         api.items().registry().apply {
             register("itemsAdder", ItemsAdderItemFactory())
             registerSerializer("itemsAdder", ItemsAdderQuestItemSerializer())
@@ -38,7 +36,7 @@ class ItemsAdderIntegrator : ICompatibility {
         api.actions().registry().apply {
             register("itemsAdderBlockAt", ItemsAdderSetBlockActionFactory())
             register("itemsAdderFurnitureAt", ItemsAdderSetFurnitureActionFactory())
-            register("itemsAdderPlayAnimation", ItemsAdderPlayAnimationFactory(loggerFactory))
+            register("itemsAdderPlayAnimation", ItemsAdderPlayAnimationFactory())
         }
 
         api.objectives().registry().apply {

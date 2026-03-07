@@ -21,7 +21,7 @@ class CustomCropsSeasonConditionFactory : PlayerConditionFactory, PlayerlessCond
 
     override fun parsePlayerless(instruction: Instruction): PlayerlessCondition {
         val world = instruction.world().get("world").orElse(null)
-            ?: return ThrowExceptionPlayerlessCondition()
+            ?: return ThrowExceptionPlayerlessCondition("Player is required but none was found.")
         return NullableConditionAdapter(CustomCropsSeasonCondition(instruction.getSeason(), world))
     }
 
