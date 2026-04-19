@@ -1,7 +1,9 @@
-import org.junit.jupiter.api.Test
+package kr.mrjimin.betonquestaddon
+
 import java.net.URI
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.test.Test
 
 class UpdateCheckTest {
 

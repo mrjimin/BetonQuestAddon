@@ -7,6 +7,7 @@ import net.momirealms.craftengine.bukkit.api.event.FurnitureInteractEvent
 import net.momirealms.craftengine.bukkit.api.event.FurniturePlaceEvent
 import net.momirealms.craftengine.bukkit.entity.furniture.BukkitFurniture
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 
@@ -20,16 +21,16 @@ class CraftEngineFurnitureObjective(
     notifyMessage: NotifyMessage
 ) : AbstractAddonObjective<BukkitFurniture>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
-    fun onPlace(event: FurniturePlaceEvent) {
-        handle(event.player, event.furniture(), event)
+    fun onPlace(event: FurniturePlaceEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture(), event)
     }
 
-    fun onBreak(event: FurnitureBreakEvent) {
-        handle(event.player, event.furniture(), event)
+    fun onBreak(event: FurnitureBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture(), event)
     }
 
-    fun onInteract(event: FurnitureInteractEvent) {
-        handle(event.player, event.furniture(), event)
+    fun onInteract(event: FurnitureInteractEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture(), event)
     }
 
     override fun getId(target: BukkitFurniture): String {

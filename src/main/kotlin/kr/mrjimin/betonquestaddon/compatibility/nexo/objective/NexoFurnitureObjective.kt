@@ -7,6 +7,7 @@ import com.nexomc.nexo.api.events.furniture.NexoFurniturePlaceEvent
 import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.entity.Entity
@@ -21,16 +22,16 @@ class NexoFurnitureObjective(
     notifyMessage: NotifyMessage,
 ) : AbstractAddonObjective<Entity>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
-    fun onPlace(event: NexoFurniturePlaceEvent) {
-        handle(event.player, event.baseEntity, event)
+    fun onPlace(event: NexoFurniturePlaceEvent, profile: OnlineProfile) {
+        handle(profile, event.baseEntity, event)
     }
 
-    fun onBreak(event: NexoFurnitureBreakEvent) {
-        handle(event.player, event.baseEntity, event)
+    fun onBreak(event: NexoFurnitureBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.baseEntity, event)
     }
 
-    fun onInteract(event: NexoFurnitureInteractEvent) {
-        handle(event.player, event.baseEntity, event)
+    fun onInteract(event: NexoFurnitureInteractEvent, profile: OnlineProfile) {
+        handle(profile, event.baseEntity, event)
     }
 
     override fun getId(target: Entity): String? {

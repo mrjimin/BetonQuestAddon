@@ -5,7 +5,8 @@ import kr.mrjimin.betonquestaddon.compatibility.coinsengine.action.CoinsEngineAc
 import kr.mrjimin.betonquestaddon.compatibility.coinsengine.condition.CoinsEngineConditionFactory
 import org.betonquest.betonquest.api.BetonQuestApi
 
-class CoinsEngineIntegrator : ICompatibility {
+class
+CoinsEngineIntegrator : ICompatibility {
     override fun hook(api: BetonQuestApi) {
         api.actions().registry().apply {
             register("coinsEngine", CoinsEngineActionFactory())

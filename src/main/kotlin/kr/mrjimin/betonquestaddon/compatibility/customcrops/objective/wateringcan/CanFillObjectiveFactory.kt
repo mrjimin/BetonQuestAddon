@@ -12,7 +12,10 @@ class CanFillObjectiveFactory : ObjectiveFactory {
         val targetAmount = instruction.number().get("amount", 1)
 
         val objective = CanFillObjective(service, targetAmount, id)
-        service.request(WateringCanFillEvent::class.java).handler(objective::onFillWateringCan).subscribe(true)
+        service.request(WateringCanFillEvent::class.java)
+            .onlineHandler(objective::onFillWateringCan)
+            .player { it.player }
+            .subscribe(true)
         return objective
     }
 }

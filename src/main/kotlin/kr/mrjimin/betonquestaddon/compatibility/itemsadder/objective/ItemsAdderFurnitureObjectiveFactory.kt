@@ -20,9 +20,15 @@ class ItemsAdderFurnitureObjectiveFactory(
         val objective = ItemsAdderFurnitureObjective(service, args.amount, args.ids, args.isCancelled, args.location, args.range, notifyMessage)
 
         return when (action) {
-            Action.PLACE -> service.request(FurniturePlacedEvent::class.java).handler(objective::onPlace)
-            Action.BREAK -> service.request(FurnitureBreakEvent::class.java).handler(objective::onBreak)
-            Action.INTERACT -> service.request(FurnitureInteractEvent::class.java).handler(objective::onInteract)
+            Action.PLACE -> service.request(FurniturePlacedEvent::class.java)
+                .onlineHandler(objective::onPlace)
+                .player { it.player }
+            Action.BREAK -> service.request(FurnitureBreakEvent::class.java)
+                .onlineHandler(objective::onBreak)
+                .player { it.player }
+            Action.INTERACT -> service.request(FurnitureInteractEvent::class.java)
+                .onlineHandler(objective::onInteract)
+                .player { it.player }
         }.subscribe(true).let { objective }
     }
 }

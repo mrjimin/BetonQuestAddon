@@ -9,6 +9,7 @@ import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
+import org.bukkit.entity.Player
 
 class SprinklerObjectiveFactory(
     private val action: Action,
@@ -21,8 +22,11 @@ class SprinklerObjectiveFactory(
         val objective = SprinklerObjective(service, targetAmount, id, notifyMessage)
 
         return when (action) {
-            Action.PLACE -> service.request(SprinklerPlaceEvent::class.java).handler(objective::onPlace)
-            Action.BREAK -> service.request(SprinklerBreakEvent::class.java).handler(objective::onBreak)
+            Action.PLACE -> service.request(SprinklerPlaceEvent::class.java)
+                .onlineHandler(objective::onPlace)
+            Action.BREAK -> service.request(SprinklerBreakEvent::class.java)
+                .onlineHandler(objective::onBreak)
+                .player { it.entityBreaker() as? Player }
             else -> throw QuestException("Sprinkler objective only supports PLACE or BREAK.")
         }.subscribe(true).let { objective }
     }

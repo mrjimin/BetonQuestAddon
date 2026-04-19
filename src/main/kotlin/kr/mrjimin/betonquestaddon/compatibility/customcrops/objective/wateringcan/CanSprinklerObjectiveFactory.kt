@@ -13,7 +13,10 @@ class CanSprinklerObjectiveFactory: ObjectiveFactory {
         val targets = instruction.string().list().get("sprinklers", listOf())
 
         val objective = CanSprinklerObjective(service, targetAmount, id, targets)
-        service.request(WateringCanWaterSprinklerEvent::class.java).handler(objective::onWateringSprinkler).subscribe(true)
+        service.request(WateringCanWaterSprinklerEvent::class.java)
+            .onlineHandler(objective::onWateringSprinkler)
+            .player { it.player }
+            .subscribe(true)
         return objective
     }
 }

@@ -4,6 +4,7 @@ import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
@@ -24,8 +25,7 @@ abstract class AbstractAddonObjective<T>(
     protected abstract fun getLocation(target: T): Location
 
     @Throws(QuestException::class)
-    protected fun handle(player: Player, target: T, event: Cancellable) {
-        val profile = service.profileProvider.getProfile(player) ?: return
+    protected fun handle(profile: OnlineProfile, target: T, event: Cancellable) {
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
         if (!identifier.getValue(profile).contains(getId(target))) return

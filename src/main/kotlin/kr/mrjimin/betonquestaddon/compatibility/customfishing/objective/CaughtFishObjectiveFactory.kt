@@ -19,8 +19,12 @@ class CaughtFishObjectiveFactory(
         val objective = CaughtFishObjective(service, targetAmount, id, notifyMessage)
 
         return when (fishingCaughtType) {
-            FishingCaughtType.FISH -> service.request(FishingResultEvent::class.java).handler(objective::onFish)
-            FishingCaughtType.GROUP -> service.request(FishingResultEvent::class.java).handler(objective::onFishGroup)
+            FishingCaughtType.FISH -> service.request(FishingResultEvent::class.java)
+                .onlineHandler(objective::onFish)
+                .player { it.player }
+            FishingCaughtType.GROUP -> service.request(FishingResultEvent::class.java)
+                .onlineHandler(objective::onFishGroup)
+                .player { it.player }
         }.subscribe(true).let { objective }
     }
 }

@@ -13,7 +13,10 @@ class FertilizerUseObjectiveFactory : ObjectiveFactory {
         val targets = instruction.string().list().get("pots", listOf())
 
         val objective = FertilizerUseObjective(service, targetAmount, id, targets)
-        service.request(FertilizerUseEvent::class.java).handler(objective::onUseFertilizer).subscribe(true)
+        service.request(FertilizerUseEvent::class.java)
+            .onlineHandler(objective::onUseFertilizer)
+            .player { it.player }
+            .subscribe(true)
         return objective
     }
 }

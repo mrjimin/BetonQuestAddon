@@ -5,6 +5,7 @@ import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customcrops.api.event.SprinklerBreakEvent
 import net.momirealms.customcrops.api.event.SprinklerPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.entity.Player
 
@@ -15,12 +16,11 @@ class SprinklerObjective(
     notifyMessage: NotifyMessage
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
-    fun onPlace(event: SprinklerPlaceEvent) {
-        wildcardHandle(event.player, event.sprinklerConfig().id())
+    fun onPlace(event: SprinklerPlaceEvent, profile: OnlineProfile) {
+        wildcardHandle(profile, event.sprinklerConfig().id())
     }
 
-    fun onBreak(event: SprinklerBreakEvent) {
-        val player = event.entityBreaker() as? Player ?: return
-        wildcardHandle(player, event.sprinklerConfig().id())
+    fun onBreak(event: SprinklerBreakEvent, profile: OnlineProfile) {
+        wildcardHandle(profile, event.sprinklerConfig().id())
     }
 }

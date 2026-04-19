@@ -5,6 +5,7 @@ import kr.mrjimin.betonquestaddon.util.matcher.WildcardPatternMatcher
 import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.entity.Player
 
@@ -16,8 +17,7 @@ abstract class SimpleTargetsObjective(
 ) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
 
     @Throws(QuestException::class)
-    protected fun handle(player: Player, id: String) {
-        val profile = service.profileProvider.getProfile(player) ?: return
+    protected fun handle(profile: OnlineProfile, id: String) {
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
         if (identifiers.getValue(profile).contains(id)) {
@@ -29,8 +29,7 @@ abstract class SimpleTargetsObjective(
     private val matcherCache = mutableMapOf<List<String>, WildcardPatternMatcher>()
 
     @Throws(QuestException::class)
-    protected fun wildcardHandle(player: Player, id: String) {
-        val profile = service.profileProvider.getProfile(player) ?: return
+    protected fun wildcardHandle(profile: OnlineProfile, id: String) {
         if (!service.containsProfile(profile) || !service.checkConditions(profile)) return
 
         val patterns = identifiers.getValue(profile)

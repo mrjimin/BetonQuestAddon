@@ -7,6 +7,7 @@ import com.nexomc.nexo.api.events.custom_block.NexoBlockPlaceEvent
 import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.block.Block
@@ -21,22 +22,22 @@ class NexoBlockObjective(
     notifyMessage: NotifyMessage
 ) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
+    fun onPlace(event: NexoBlockPlaceEvent, profile: OnlineProfile) {
+        handle(profile, event.block, event)
+    }
+
+    fun onBreak(event: NexoBlockBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.block, event)
+    }
+
+    fun onInteract(event: NexoBlockInteractEvent, profile: OnlineProfile) {
+        handle(profile, event.block, event)
+    }
+
     override fun getId(target: Block): String? {
         return NexoBlocks.customBlockMechanic(target)?.itemID
     }
     override fun getLocation(target: Block): Location {
         return target.location
-    }
-
-    fun onPlace(event: NexoBlockPlaceEvent) {
-        handle(event.player, event.block, event)
-    }
-
-    fun onBreak(event: NexoBlockBreakEvent) {
-        handle(event.player, event.block, event)
-    }
-
-    fun onInteract(event: NexoBlockInteractEvent) {
-        handle(event.player, event.block, event)
     }
 }

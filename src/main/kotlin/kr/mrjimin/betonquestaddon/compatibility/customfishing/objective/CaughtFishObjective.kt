@@ -4,6 +4,7 @@ import kr.mrjimin.betonquestaddon.betonquest.objective.SimpleTargetsObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customfishing.api.event.FishingResultEvent
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
 class CaughtFishObjective(
@@ -13,16 +14,16 @@ class CaughtFishObjective(
     notifyMessage: NotifyMessage
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
-    fun onFish(event: FishingResultEvent) {
+    fun onFish(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
-        wildcardHandle(event.player, event.loot.id())
+        wildcardHandle(profile, event.loot.id())
     }
 
-    fun onFishGroup(event: FishingResultEvent) {
+    fun onFishGroup(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
         val groups = event.loot.lootGroup()
         for (group in groups) {
-            wildcardHandle(event.player, group)
+            wildcardHandle(profile, group)
         }
     }
 }

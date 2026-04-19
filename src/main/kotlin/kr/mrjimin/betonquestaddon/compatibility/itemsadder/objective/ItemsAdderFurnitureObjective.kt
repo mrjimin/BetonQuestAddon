@@ -7,6 +7,7 @@ import dev.lone.itemsadder.api.Events.FurniturePlacedEvent
 import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 
@@ -20,16 +21,16 @@ class ItemsAdderFurnitureObjective(
     notifyMessage: NotifyMessage
 ) : AbstractAddonObjective<CustomFurniture?>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
-    fun onPlace(event: FurniturePlacedEvent) {
-        handle(event.player, event.furniture, event)
+    fun onPlace(event: FurniturePlacedEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture, event)
     }
 
-    fun onBreak(event: FurnitureBreakEvent) {
-        handle(event.player, event.furniture, event)
+    fun onBreak(event: FurnitureBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture, event)
     }
 
-    fun onInteract(event: FurnitureInteractEvent) {
-        handle(event.player, event.furniture, event)
+    fun onInteract(event: FurnitureInteractEvent, profile: OnlineProfile) {
+        handle(profile, event.furniture, event)
     }
 
     override fun getId(target: CustomFurniture?): String? {

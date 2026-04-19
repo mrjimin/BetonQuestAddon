@@ -13,7 +13,10 @@ class CanPotObjectiveFactory: ObjectiveFactory {
         val targets = instruction.string().list().get("pots", listOf())
 
         val objective = CanPotObjective(service, targetAmount, id, targets)
-        service.request(WateringCanWaterPotEvent::class.java).handler(objective::onWateringPot).subscribe(true)
+        service.request(WateringCanWaterPotEvent::class.java)
+            .onlineHandler(objective::onWateringPot)
+            .player { it.player }
+            .subscribe(true)
         return objective
     }
 }

@@ -12,7 +12,10 @@ class ActivateTotemObjectiveFactory : ObjectiveFactory {
         val targetAmount = instruction.number().get("amount", 1)
 
         val objective = ActivateTotemObjective(service, targetAmount, id)
-        service.request(TotemActivateEvent::class.java).handler(objective::onActivateTotem).subscribe(true)
+        service.request(TotemActivateEvent::class.java)
+            .onlineHandler(objective::onActivateTotem)
+            .player { it.player }
+            .subscribe(true)
         return objective
     }
 }

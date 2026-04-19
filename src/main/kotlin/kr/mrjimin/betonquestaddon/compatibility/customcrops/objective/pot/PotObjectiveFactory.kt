@@ -9,6 +9,7 @@ import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Instruction
 import org.betonquest.betonquest.api.quest.objective.ObjectiveFactory
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
+import org.bukkit.entity.Player
 
 class PotObjectiveFactory(
     private val action: Action,
@@ -21,8 +22,11 @@ class PotObjectiveFactory(
         val objective = PotObjective(service, targetAmount, id, notifyMessage)
 
         return when (action) {
-            Action.PLACE -> service.request(PotPlaceEvent::class.java).handler(objective::onPlace)
-            Action.BREAK -> service.request(PotBreakEvent::class.java).handler(objective::onBreak)
+            Action.PLACE -> service.request(PotPlaceEvent::class.java)
+                .onlineHandler(objective::onPlace)
+            Action.BREAK -> service.request(PotBreakEvent::class.java)
+                .onlineHandler(objective::onBreak)
+                .player { it.entityBreaker() as? Player }
             else -> throw QuestException("Pot objective only supports PLACE or BREAK.")
         }.subscribe(true).let { objective }
     }

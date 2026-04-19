@@ -2,7 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("jvm") version "2.3.20"
     id("com.gradleup.shadow") version "9.2.2"
     id("java")
     `java-library`

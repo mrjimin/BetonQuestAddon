@@ -5,6 +5,7 @@ import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customcrops.api.event.ScarecrowBreakEvent
 import net.momirealms.customcrops.api.event.ScarecrowPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.entity.Player
 
@@ -15,13 +16,12 @@ class ScarecrowObjective(
     notifyMessage: NotifyMessage
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
-    fun onPlace(event: ScarecrowPlaceEvent) {
-        handle(event.player, event.scarecrowItemID())
+    fun onPlace(event: ScarecrowPlaceEvent, profile: OnlineProfile) {
+        handle(profile, event.scarecrowItemID())
     }
 
-    fun onBreak(event: ScarecrowBreakEvent) {
-        val player = event.entityBreaker() as? Player ?: return
-        handle(player, event.scarecrowItemID())
+    fun onBreak(event: ScarecrowBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.scarecrowItemID())
     }
 
 }

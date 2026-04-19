@@ -7,6 +7,7 @@ import net.momirealms.craftengine.bukkit.api.event.CustomBlockBreakEvent
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockInteractEvent
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
 import org.bukkit.block.Block
@@ -21,16 +22,16 @@ class CraftEngineBlockObjective(
     notifyMessage: NotifyMessage
 ) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
 
-    fun onPlace(event: CustomBlockPlaceEvent) {
-        handle(event.player, event.bukkitBlock(), event)
+    fun onPlace(event: CustomBlockPlaceEvent, profile: OnlineProfile) {
+        handle(profile, event.bukkitBlock(), event)
     }
 
-    fun onBreak(event: CustomBlockBreakEvent) {
-        handle(event.player, event.bukkitBlock(), event)
+    fun onBreak(event: CustomBlockBreakEvent, profile: OnlineProfile) {
+        handle(profile, event.bukkitBlock(), event)
     }
 
-    fun onInteract(event: CustomBlockInteractEvent) {
-        handle(event.player, event.bukkitBlock(), event)
+    fun onInteract(event: CustomBlockInteractEvent, profile: OnlineProfile) {
+        handle(profile, event.bukkitBlock(), event)
     }
 
     override fun getId(target: Block): String {

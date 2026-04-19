@@ -4,6 +4,7 @@ import kr.mrjimin.betonquestaddon.betonquest.objective.TargetsObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customcrops.api.event.WateringCanWaterPotEvent
 import org.betonquest.betonquest.api.instruction.Argument
+import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
 class CanPotObjective(
@@ -13,7 +14,7 @@ class CanPotObjective(
     potIds: Argument<List<String>>
 ) : TargetsObjective(service, targetAmount, identifiers, potIds, NotifyMessage.CUSTOM_CROPS_CAN_POT) {
 
-    fun onWateringPot(event: WateringCanWaterPotEvent) {
-        handle(event.player, event.wateringCanConfig().id(), event.potConfig().id())
+    fun onWateringPot(event: WateringCanWaterPotEvent, profile: OnlineProfile) {
+        handle(profile, event.wateringCanConfig().id(), event.potConfig().id())
     }
 }
