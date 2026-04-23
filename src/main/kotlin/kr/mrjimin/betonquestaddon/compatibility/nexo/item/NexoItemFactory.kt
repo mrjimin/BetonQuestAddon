@@ -6,13 +6,7 @@ import org.betonquest.betonquest.item.QuestItemTagAdapterWrapper
 import org.betonquest.betonquest.api.item.QuestItemWrapper
 
 class NexoItemFactory : TypeFactory<QuestItemWrapper> {
-    override fun parseInstruction(instruction: Instruction): QuestItemWrapper? {
-        val wrapper = NexoItemWrapper(instruction.string().get())
-        val questItem = instruction.bool().getFlag("quest-item", true).getValue(null).orElse(false)
-        return if (questItem) {
-            QuestItemTagAdapterWrapper(wrapper)
-        } else {
-            wrapper
-        }
+    override fun parseInstruction(instruction: Instruction): QuestItemWrapper {
+        return NexoItemWrapper(instruction.string().get())
     }
 }

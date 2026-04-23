@@ -9,13 +9,7 @@ import org.betonquest.betonquest.api.item.QuestItemWrapper
 class CFishingItemFactory(
     private val itemManager: ItemManager
 ) : TypeFactory<QuestItemWrapper> {
-    override fun parseInstruction(instruction: Instruction): QuestItemWrapper? {
-        val wrapper = CFishingItemWrapper(instruction.string().get(), itemManager)
-        val questItem = instruction.bool().getFlag("quest-item", true).getValue(null).orElse(false)
-        return if (questItem) {
-            QuestItemTagAdapterWrapper(wrapper)
-        } else {
-            wrapper
-        }
+    override fun parseInstruction(instruction: Instruction): QuestItemWrapper {
+        return CFishingItemWrapper(instruction.string().get(), itemManager)
     }
 }
