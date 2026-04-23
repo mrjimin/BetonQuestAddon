@@ -7,7 +7,6 @@ import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
-import org.bukkit.entity.Player
 
 abstract class SimpleTargetsObjective(
     service: ObjectiveService,

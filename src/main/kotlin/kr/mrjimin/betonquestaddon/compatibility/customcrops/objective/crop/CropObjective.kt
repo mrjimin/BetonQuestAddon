@@ -4,11 +4,9 @@ import kr.mrjimin.betonquestaddon.betonquest.objective.SimpleTargetsObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customcrops.api.event.CropBreakEvent
 import net.momirealms.customcrops.api.event.CropPlantEvent
-import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
-import org.bukkit.entity.Player
 
 class CropObjective(
     service: ObjectiveService,

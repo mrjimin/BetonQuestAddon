@@ -7,7 +7,6 @@ import net.momirealms.customcrops.api.event.SprinklerPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
-import org.bukkit.entity.Player
 
 class SprinklerObjective(
     service: ObjectiveService,

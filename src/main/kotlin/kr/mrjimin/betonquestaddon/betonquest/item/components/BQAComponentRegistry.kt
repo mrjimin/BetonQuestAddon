@@ -1,6 +1,5 @@
 package kr.mrjimin.betonquestaddon.betonquest.item.components
 
-import net.kyori.adventure.text.minimessage.MiniMessage
 import org.betonquest.betonquest.api.QuestException
 
 object BQAComponentRegistry {

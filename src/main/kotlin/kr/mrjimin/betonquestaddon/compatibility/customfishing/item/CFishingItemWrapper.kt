@@ -6,8 +6,8 @@ import net.momirealms.customfishing.api.mechanic.item.ItemManager
 import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.item.QuestItem
-import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.item.QuestItemWrapper
+import org.betonquest.betonquest.api.profile.Profile
 import org.bukkit.inventory.ItemStack
 
 class CFishingItemWrapper(

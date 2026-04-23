@@ -3,7 +3,6 @@ package kr.mrjimin.betonquestaddon.compatibility.customcrops.objective.fertilize
 import kr.mrjimin.betonquestaddon.betonquest.objective.TargetsObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import net.momirealms.customcrops.api.event.FertilizerUseEvent
-import org.betonquest.betonquest.api.QuestException
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService

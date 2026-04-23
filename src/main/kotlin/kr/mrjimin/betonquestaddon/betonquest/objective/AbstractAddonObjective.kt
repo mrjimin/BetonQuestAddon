@@ -8,7 +8,6 @@ import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 import org.bukkit.Location
-import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable
 
 abstract class AbstractAddonObjective<T>(

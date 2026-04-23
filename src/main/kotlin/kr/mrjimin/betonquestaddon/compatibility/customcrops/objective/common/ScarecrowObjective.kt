@@ -7,7 +7,6 @@ import net.momirealms.customcrops.api.event.ScarecrowPlaceEvent
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
-import org.bukkit.entity.Player
 
 class ScarecrowObjective(
     service: ObjectiveService,
