@@ -15,7 +15,7 @@ class FertilizerUseObjective(
 ) : TargetsObjective(service, targetAmount, identifiers, pots, NotifyMessage.CUSTOM_CROPS_USE_FERTILIZER) {
 
     fun onUseFertilizer(event: FertilizerUseEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.fertilizer().id(), event.potConfig().id())
+        handle(profile, event.fertilizer().id(), event.potConfig().id())
     }
 
 }

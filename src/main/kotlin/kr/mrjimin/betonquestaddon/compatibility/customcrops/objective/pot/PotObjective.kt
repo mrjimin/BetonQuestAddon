@@ -16,11 +16,11 @@ class PotObjective(
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: PotPlaceEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.potConfig().id())
+        handle(profile, event.potConfig().id())
     }
 
     fun onBreak(event: PotBreakEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.potConfig().id())
+        handle(profile, event.potConfig().id())
     }
 
 }

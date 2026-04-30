@@ -16,14 +16,14 @@ class CaughtFishObjective(
 
     fun onFish(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
-        wildcardHandle(profile, event.loot.id())
+        handle(profile, event.loot.id())
     }
 
     fun onFishGroup(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
         val groups = event.loot.lootGroup()
         for (group in groups) {
-            wildcardHandle(profile, group)
+            handle(profile, group)
         }
     }
 }

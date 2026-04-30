@@ -54,7 +54,7 @@ dependencies {
 
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["world_guard_version"]}")
-    compileOnly("su.nightexpress.coinsengine:CoinsEngine:${rootProject.properties["coins_engine_version"]}")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:${rootProject.properties["excellent_economy_version"]}")
     compileOnly("gg.aquatic:AEAPI:1.0")
 
     compileOnly(fileTree("lib") {

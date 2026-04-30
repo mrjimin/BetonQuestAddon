@@ -16,7 +16,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         ConfigsManager(this).load()
         enabledMessage()
         CompatibilityManager(BetonQuest.getInstance().betonQuestApi, this).registerCompatiblePlugins()
-        if (ConfigsManager.enabledUpdateChecker()) UpdateChecker(this).checkForUpdates()
+        if (ConfigsManager.enabledUpdateChecker()) UpdateChecker("XvDcVrRl", this).checkForUpdates()
     }
 
     private fun enabledMessage() {

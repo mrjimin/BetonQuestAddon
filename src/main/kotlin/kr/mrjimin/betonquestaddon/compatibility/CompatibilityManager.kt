@@ -1,12 +1,12 @@
 package kr.mrjimin.betonquestaddon.compatibility
 
 import kr.mrjimin.betonquestaddon.betonquest.BetonQuestIntegrator
-import kr.mrjimin.betonquestaddon.compatibility.coinsengine.CoinsEngineIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.cosmeticscore.CosmeticsCoreIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.customcrops.CustomCropsIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.customfishing.CustomFishingIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.customnameplates.CustomNameplatesIntegrator
+import kr.mrjimin.betonquestaddon.compatibility.excellenteconomy.ExcellentEconomyIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.hmccosmetics.HMCCosmeticsIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.itemsadder.ItemsAdderIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
@@ -36,7 +36,7 @@ class CompatibilityManager(
         register("CosmeticsCore") { CosmeticsCoreIntegrator() }
         register("TypeWriter") { TypeWriterIntegrator() }
         register("WorldGuard") { WorldGuardIntegrator() }
-        register("CoinsEngine") { CoinsEngineIntegrator() }
+        register("ExcellentEconomy") { ExcellentEconomyIntegrator() }
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {

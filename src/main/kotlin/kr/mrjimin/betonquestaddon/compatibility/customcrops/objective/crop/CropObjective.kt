@@ -20,7 +20,7 @@ class CropObjective(
     }
 
     fun onBreak(event: CropBreakEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.cropStageItemID())
+        handle(profile, event.cropStageItemID())
     }
 
 }

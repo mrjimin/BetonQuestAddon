@@ -16,10 +16,10 @@ class SprinklerObjective(
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, notifyMessage) {
 
     fun onPlace(event: SprinklerPlaceEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.sprinklerConfig().id())
+        handle(profile, event.sprinklerConfig().id())
     }
 
     fun onBreak(event: SprinklerBreakEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.sprinklerConfig().id())
+        handle(profile, event.sprinklerConfig().id())
     }
 }

@@ -45,7 +45,7 @@ dependencies:
     WorldGuard:
       load: BEFORE
       required: false
-    CoinsEngine:
+    ExcellentEconomy:
       load: BEFORE
       required: false
     AdvancedEnchantments:

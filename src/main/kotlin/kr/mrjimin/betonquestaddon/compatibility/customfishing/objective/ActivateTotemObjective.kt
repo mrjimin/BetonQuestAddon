@@ -14,6 +14,6 @@ class ActivateTotemObjective(
 ) : SimpleTargetsObjective(service, targetAmount, identifiers, NotifyMessage.CUSTOM_FISHING_ACTIVATE_TOTEM) {
 
     fun onActivateTotem(event: TotemActivateEvent, profile: OnlineProfile) {
-        wildcardHandle(profile, event.config.id())
+        handle(profile, event.config.id())
     }
 }
