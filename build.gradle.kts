@@ -29,7 +29,6 @@ repositories {
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
-    maven("https://maven.enginehub.org/repo/")
     maven("https://repo.betonquest.org/betonquest")
     maven("https://repo.hibiscusmc.com/releases")
     maven("https://maven.enginehub.org/repo/")
@@ -117,7 +116,7 @@ hangarPublish {
     publications.register("plugin") {
         version.set(project.version as String)
         channel.set("Snapshot")
-        id.set("hangar-project")
+        id.set("BetonQuestAddon")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
             register(Platforms.PAPER) {
