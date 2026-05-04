@@ -1,4 +1,4 @@
-package kr.mrjimin.betonquestaddon.item.factory
+package kr.mrjimin.betonquestaddon.manager.item.factory
 
 import com.nexomc.nexo.api.NexoItems
 import org.bukkit.inventory.ItemStack

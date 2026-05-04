@@ -1,8 +1,9 @@
 package kr.mrjimin.betonquestaddon.compatibility.craftengine.objective
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
+import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
-import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
+import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
+import net.momirealms.craftengine.bukkit.api.BukkitAdaptor
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockBreakEvent
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockInteractEvent
 import net.momirealms.craftengine.bukkit.api.event.CustomBlockPlaceEvent
@@ -14,13 +15,10 @@ import org.bukkit.block.Block
 
 class CraftEngineBlockObjective(
     service: ObjectiveService,
-    targetAmount: Argument<Number>,
-    identifier: Argument<List<String>>,
-    isCancelled: Argument<Boolean>,
-    location: Argument<Location>?,
-    range: Argument<Number>,
+    amount: Argument<Number>,
+    options: ObjectiveOptions,
     notifyMessage: NotifyMessage
-) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
+) : AddonObjective<Block>(service, amount, options, notifyMessage) {
 
     fun onPlace(event: CustomBlockPlaceEvent, profile: OnlineProfile) {
         handle(profile, event.bukkitBlock(), event)
@@ -35,11 +33,10 @@ class CraftEngineBlockObjective(
     }
 
     override fun getId(target: Block): String {
-        return BukkitAdaptors.adapt(target).id().toString()
+        return BukkitAdaptor.adapt(target).id().toString()
     }
 
     override fun getLocation(target: Block): Location {
         return target.location
     }
-
 }

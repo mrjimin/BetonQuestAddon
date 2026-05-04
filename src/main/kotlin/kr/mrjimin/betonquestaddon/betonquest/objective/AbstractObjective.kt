@@ -7,11 +7,11 @@ import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
-abstract class BaseObjective(
+abstract class AbstractObjective(
     service: ObjectiveService,
-    targetAmount: Argument<Number>,
+    amount: Argument<Number>,
     notifyMessage: NotifyMessage
-) : CountingObjective(service, targetAmount, notifyMessage.toKey()) {
+) : CountingObjective(service, amount, notifyMessage.toKey()) {
 
     private val matcherCache = mutableMapOf<List<String>, WildcardPatternMatcher>()
 

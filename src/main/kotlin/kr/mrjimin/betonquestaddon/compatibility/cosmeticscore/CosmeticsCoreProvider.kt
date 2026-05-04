@@ -2,8 +2,8 @@ package kr.mrjimin.betonquestaddon.compatibility.cosmeticscore
 
 import dev.lone.cosmeticscore.api.temporary.CosmeticAccessor
 import dev.lone.cosmeticscore.api.temporary.CosmeticsCoreApi
-import kr.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
-import kr.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
+import kr.mrjimin.betonquestaddon.manager.cosmetics.CosmeticsProvider
+import kr.mrjimin.betonquestaddon.manager.cosmetics.CosmeticsWrapper
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap

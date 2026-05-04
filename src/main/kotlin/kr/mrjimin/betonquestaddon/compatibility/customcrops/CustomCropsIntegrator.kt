@@ -28,12 +28,15 @@ class CustomCropsIntegrator : ICompatibility {
         api.objectives().registry().apply {
             register("customCropsCropPlant", CropObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_CROP_PLANT))
             register("customCropsCropHarvest", CropObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_CROP_HARVEST))
+            register("customCropsCropInteract", CropObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_CROP_INTERACT))
 
             register("customCropsPotPlace", PotObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_POT_PLACE))
             register("customCropsPotBreak", PotObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_POT_BREAK))
+            register("customCropsPotInteract", PotObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_POT_INTERACT))
 
             register("customCropsScarecrowPlace", ScarecrowObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_SCARECROW_PLACE))
             register("customCropsScarecrowBreak", ScarecrowObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SCARECROW_BREAK))
+            register("customCropsScarecrowInteract", ScarecrowObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SCARECROW_INTERACT))
 
             register("customCropsFertilizerUse", FertilizerUseObjectiveFactory())
 
@@ -43,6 +46,7 @@ class CustomCropsIntegrator : ICompatibility {
 
             register("customCropsSprinklerPlace", SprinklerObjectiveFactory(Action.PLACE, NotifyMessage.CUSTOM_CROPS_SPRINKLER_PLACE))
             register("customCropsSprinklerBreak", SprinklerObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SPRINKLER_BREAK))
+            register("customCropsSprinklerInteract", SprinklerObjectiveFactory(Action.BREAK, NotifyMessage.CUSTOM_CROPS_SPRINKLER_INTERACT))
         }
     }
 }

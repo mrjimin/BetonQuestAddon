@@ -6,7 +6,7 @@ import org.betonquest.betonquest.api.item.QuestItemWrapper
 import org.betonquest.betonquest.api.quest.TypeFactory
 
 class CFishingItemFactory(
-    private val itemManager: ItemManager
+    private val itemManager: ItemManager,
 ) : TypeFactory<QuestItemWrapper> {
     override fun parseInstruction(instruction: Instruction): QuestItemWrapper {
         return CFishingItemWrapper(instruction.string().get(), itemManager)

@@ -26,6 +26,7 @@ repositories {
     maven("https://maven.devs.beer/")
     maven("https://jitpack.io")
     maven("https://repo.nightexpressdev.com/releases")
+    maven("https://repo.momirealms.net/snapshots/")
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
@@ -53,7 +54,7 @@ dependencies {
 
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${rootProject.properties["world_guard_version"]}")
-    compileOnly("su.nightexpress.coinsengine:CoinsEngine:${rootProject.properties["excellent_economy_version"]}")
+    compileOnly("su.nightexpress.excellenteconomy:ExcellentEconomy:${rootProject.properties["excellent_economy_version"]}")
     compileOnly("gg.aquatic:AEAPI:1.0")
 
     compileOnly(fileTree("lib") {

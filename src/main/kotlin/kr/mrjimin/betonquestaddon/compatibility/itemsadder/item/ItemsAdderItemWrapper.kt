@@ -1,7 +1,7 @@
 package kr.mrjimin.betonquestaddon.compatibility.itemsadder.item
 
 import dev.lone.itemsadder.api.CustomStack
-import kr.mrjimin.betonquestaddon.item.ItemHandler
+import kr.mrjimin.betonquestaddon.manager.item.ItemHandler
 import net.kyori.adventure.text.Component
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.item.QuestItem

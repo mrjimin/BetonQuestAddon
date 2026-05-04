@@ -1,8 +1,9 @@
-package kr.mrjimin.betonquestaddon.item
+package kr.mrjimin.betonquestaddon.manager.item
 
-import kr.mrjimin.betonquestaddon.item.factory.CraftEngineItemFactory
-import kr.mrjimin.betonquestaddon.item.factory.IAItemFactory
-import kr.mrjimin.betonquestaddon.item.factory.NexoItemFactory
+import kr.mrjimin.betonquestaddon.manager.item.factory.CraftEngineItemFactory
+import kr.mrjimin.betonquestaddon.manager.item.factory.CustomFishingItemFactory
+import kr.mrjimin.betonquestaddon.manager.item.factory.IAItemFactory
+import kr.mrjimin.betonquestaddon.manager.item.factory.NexoItemFactory
 import org.betonquest.betonquest.api.QuestException
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -12,7 +13,8 @@ object ItemHandler {
     val ITEM_FACTORIES = hashMapOf(
         "ITEMSADDER" to IAItemFactory,
         "CRAFTENGINE" to CraftEngineItemFactory,
-        "NEXO" to NexoItemFactory
+        "NEXO" to NexoItemFactory,
+        "CUSTOMFISHING" to CustomFishingItemFactory
     )
 
     fun createItem(namespace: String): ItemStack {

@@ -1,4 +1,4 @@
-package kr.mrjimin.betonquestaddon.item.factory
+package kr.mrjimin.betonquestaddon.manager.item.factory
 
 import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack

@@ -1,6 +1,6 @@
 package kr.mrjimin.betonquestaddon.betonquest.action
 
-import kr.mrjimin.betonquestaddon.util.drawCube
+import kr.mrjimin.betonquestaddon.manager.drawCube
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile
 import org.betonquest.betonquest.api.quest.action.PlayerAction

@@ -1,4 +1,4 @@
-package kr.mrjimin.betonquestaddon.provider.cosmetics
+package kr.mrjimin.betonquestaddon.manager.cosmetics
 
 import org.bukkit.inventory.ItemStack
 

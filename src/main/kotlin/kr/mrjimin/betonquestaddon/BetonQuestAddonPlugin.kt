@@ -2,6 +2,7 @@ package kr.mrjimin.betonquestaddon
 
 import kr.mrjimin.betonquestaddon.compatibility.CompatibilityManager
 import kr.mrjimin.betonquestaddon.config.ConfigsManager
+import kr.mrjimin.betonquestaddon.manager.EntityManager
 import kr.mrjimin.betonquestaddon.util.Logger
 import kr.mrjimin.betonquestaddon.util.UpdateChecker
 import org.betonquest.betonquest.BetonQuest
@@ -16,6 +17,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         ConfigsManager(this).load()
         enabledMessage()
         CompatibilityManager(BetonQuest.getInstance().betonQuestApi, this).registerCompatiblePlugins()
+        EntityManager.init(this)
         if (ConfigsManager.enabledUpdateChecker()) UpdateChecker("XvDcVrRl", this).checkForUpdates()
     }
 

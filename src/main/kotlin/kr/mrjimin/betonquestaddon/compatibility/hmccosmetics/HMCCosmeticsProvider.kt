@@ -1,8 +1,8 @@
 package kr.mrjimin.betonquestaddon.compatibility.hmccosmetics
 
 import com.hibiscusmc.hmccosmetics.api.HMCCosmeticsAPI
-import kr.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsProvider
-import kr.mrjimin.betonquestaddon.provider.cosmetics.CosmeticsWrapper
+import kr.mrjimin.betonquestaddon.manager.cosmetics.CosmeticsProvider
+import kr.mrjimin.betonquestaddon.manager.cosmetics.CosmeticsWrapper
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap
 

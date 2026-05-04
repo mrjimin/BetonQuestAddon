@@ -9,20 +9,26 @@ betonquestaddon:
   furniture_break: "@[legacy]&2{amount} furniture items left to break"
   furniture_interact: "@[legacy]&2{amount} furniture interactions remaining"
 
+  stone_cutting: "@[legacy]&2{amount} using stone cutting"
+
   # CustomCrops
   customcrops:
-    crop_harvest: "@[legacy]&2{amount} crops left to harvest"
     crop_plant: "@[legacy]&2{amount} seeds left to plant"
+    crop_harvest: "@[legacy]&2{amount} crops left to harvest"
+    crop_interact: "@[legacy]&2{amount} seeds left to interact"
     pot_place: "@[legacy]&2{amount} pots left to place"
     pot_break: "@[legacy]&2{amount} pots left to break"
+    pot_interact: "@[legacy]&2{amount} pots interact"
     can_fill: "@[legacy]&2{amount} watering can refills remaining"
     can_pot: "@[legacy]&2{amount} pots left to water"
     can_sprinkler: "@[legacy]&2{amount} sprinklers left to activate"
     sprinkler_place: "@[legacy]&2{amount} sprinklers left to place"
     sprinkler_break: "@[legacy]&2{amount} sprinklers left to break"
+    sprinkler_interact: "@[legacy]&2{amount} sprinklers interact"
     use_fertilizer: "@[legacy]&2{amount} fertilizers left to use"
     scarecrow_place: "@[legacy]&2{amount} scarecrows left to place"
     scarecrow_break: "@[legacy]&2{amount} scarecrows left to break"
+    scarecrow_interact: "@[legacy]&2{amount} scarecrows interact"
 
   # CustomFishing
   customfishing:

@@ -1,6 +1,6 @@
 package kr.mrjimin.betonquestaddon.compatibility.craftengine.item
 
-import kr.mrjimin.betonquestaddon.item.ItemHandler
+import kr.mrjimin.betonquestaddon.manager.item.ItemHandler
 import net.kyori.adventure.text.Component
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems
 import net.momirealms.craftengine.core.util.Key

@@ -1,7 +1,8 @@
 package kr.mrjimin.betonquestaddon.compatibility.craftengine.objective
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
+import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
+import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
 import net.momirealms.craftengine.bukkit.api.event.FurnitureBreakEvent
 import net.momirealms.craftengine.bukkit.api.event.FurnitureInteractEvent
 import net.momirealms.craftengine.bukkit.api.event.FurniturePlaceEvent
@@ -13,13 +14,10 @@ import org.bukkit.Location
 
 class CraftEngineFurnitureObjective(
     service: ObjectiveService,
-    targetAmount: Argument<Number>,
-    identifier: Argument<List<String>>,
-    isCancelled: Argument<Boolean>,
-    location: Argument<Location>?,
-    range: Argument<Number>,
+    amount: Argument<Number>,
+    options: ObjectiveOptions,
     notifyMessage: NotifyMessage
-) : AbstractAddonObjective<BukkitFurniture>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
+) : AddonObjective<BukkitFurniture>(service, amount, options, notifyMessage) {
 
     fun onPlace(event: FurniturePlaceEvent, profile: OnlineProfile) {
         handle(profile, event.furniture(), event)
@@ -40,5 +38,4 @@ class CraftEngineFurnitureObjective(
     override fun getLocation(target: BukkitFurniture): Location {
         return target.location()
     }
-
 }

@@ -4,8 +4,9 @@ import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.Events.CustomBlockBreakEvent
 import dev.lone.itemsadder.api.Events.CustomBlockInteractEvent
 import dev.lone.itemsadder.api.Events.CustomBlockPlaceEvent
-import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
+import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
+import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
@@ -14,13 +15,10 @@ import org.bukkit.block.Block
 
 class ItemsAdderBlockObjective(
     service: ObjectiveService,
-    targetAmount: Argument<Number>,
-    identifier: Argument<List<String>>,
-    isCancelled: Argument<Boolean>,
-    location: Argument<Location>?,
-    range: Argument<Number>,
+    amount: Argument<Number>,
+    options: ObjectiveOptions,
     notifyMessage: NotifyMessage
-) : AbstractAddonObjective<Block>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
+) : AddonObjective<Block>(service, amount, options, notifyMessage) {
 
     fun onPlace(event: CustomBlockPlaceEvent, profile: OnlineProfile) {
         handle(profile, event.block, event)

@@ -10,7 +10,7 @@ import kr.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngin
 import kr.mrjimin.betonquestaddon.compatibility.craftengine.objective.CraftEngineFurnitureObjectiveFactory
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
 import kr.mrjimin.betonquestaddon.util.action.Action
-import net.momirealms.craftengine.bukkit.api.BukkitAdaptors
+import net.momirealms.craftengine.bukkit.api.BukkitAdaptor
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture
 import org.betonquest.betonquest.api.BetonQuestApi
 
@@ -24,10 +24,11 @@ class CraftEngineIntegrator : ICompatibility {
 
         api.conditions().registry().apply {
             registerCombined("craftEngineBlock", LocationConditionFactory { location ->
-                    BukkitAdaptors.adapt(location.block).id().toString()
+                    // BukkitAdaptors.adapt(location.block).id().toString()
+                BukkitAdaptor.adapt(location.block).id().toString()
                 }
             )
-            registerCombined("craftFurniture", LocationConditionFactory { location ->
+            registerCombined("craftEngineFurniture", LocationConditionFactory { location ->
                     location.world.getNearbyEntities(location, 1.0, 1.0, 1.0).firstNotNullOfOrNull { entity ->
                             CraftEngineFurniture.getLoadedFurnitureByMetaEntity(entity)
                                 ?.id().toString()

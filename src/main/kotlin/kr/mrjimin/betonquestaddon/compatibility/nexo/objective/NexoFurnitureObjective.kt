@@ -4,8 +4,9 @@ import com.nexomc.nexo.api.NexoFurniture
 import com.nexomc.nexo.api.events.furniture.NexoFurnitureBreakEvent
 import com.nexomc.nexo.api.events.furniture.NexoFurnitureInteractEvent
 import com.nexomc.nexo.api.events.furniture.NexoFurniturePlaceEvent
-import kr.mrjimin.betonquestaddon.betonquest.objective.AbstractAddonObjective
+import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
+import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
@@ -14,13 +15,10 @@ import org.bukkit.entity.Entity
 
 class NexoFurnitureObjective(
     service: ObjectiveService,
-    targetAmount: Argument<Number>,
-    identifier: Argument<List<String>>,
-    isCancelled: Argument<Boolean>,
-    location: Argument<Location>?,
-    range: Argument<Number>,
-    notifyMessage: NotifyMessage,
-) : AbstractAddonObjective<Entity>(service, targetAmount, identifier, isCancelled, location, range, notifyMessage) {
+    amount: Argument<Number>,
+    options: ObjectiveOptions,
+    notifyMessage: NotifyMessage
+) : AddonObjective<Entity>(service, amount, options, notifyMessage) {
 
     fun onPlace(event: NexoFurniturePlaceEvent, profile: OnlineProfile) {
         handle(profile, event.baseEntity, event)
