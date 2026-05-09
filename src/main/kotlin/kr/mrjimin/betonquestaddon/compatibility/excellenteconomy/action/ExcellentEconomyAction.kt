@@ -18,7 +18,7 @@ class ExcellentEconomyAction(
     override fun execute(profile: Profile) {
         val player = profile.player as Player
         val currency = excellentEconomyApi.getCurrency(currency.getValue(profile))
-            ?: throw QuestException("Invalid CoinsEngine currency: $currency")
+            ?: throw QuestException("Invalid ExcellentEconomy currency: $currency")
         val amount = amount.getValue(profile).toDouble()
 
         when (actionType.getValue(profile)) {

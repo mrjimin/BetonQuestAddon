@@ -16,7 +16,7 @@ class ExcellentEconomyCondition(
     override fun check(profile: Profile): Boolean {
         val player = profile.player as Player
         val currency = excellentEconomyApi.getCurrency(currency.getValue(profile))
-            ?: throw QuestException("Invalid CoinsEngine currency: $currency")
+            ?: throw QuestException("Invalid ExcellentEconomy currency: $currency")
         val amount = amount.getValue(profile).toDouble()
         return excellentEconomyApi.getBalance(player, currency) >= amount
     }
