@@ -44,8 +44,8 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/lib/
-/lib/**
+#/lib/
+#/lib/**
 
 # Build output directory
 /target/

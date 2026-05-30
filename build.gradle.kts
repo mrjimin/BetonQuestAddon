@@ -2,7 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
-    kotlin("jvm") version "2.3.20"
+    kotlin("jvm") version "2.3.21"
     id("com.gradleup.shadow") version "9.2.2"
     id("java")
     `java-library`
@@ -26,7 +26,6 @@ repositories {
     maven("https://maven.devs.beer/")
     maven("https://jitpack.io")
     maven("https://repo.nightexpressdev.com/releases")
-    maven("https://repo.momirealms.net/snapshots/")
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.xenondevs.xyz/releases")
@@ -50,6 +49,7 @@ dependencies {
     compileOnly("org.betonquest:betonquest:${rootProject.properties["beton_quest_version"]}") {
         exclude("de.themoep", "minedown-adventure")
         exclude("com.google.guava", "guava")
+        exclude("dev.faststats.metrics", "bukkit")
     }
 
     compileOnly("com.hibiscusmc:HMCCosmetics:${rootProject.properties["hmc_cosmetics_version"]}")
@@ -72,8 +72,8 @@ kotlin {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
@@ -95,7 +95,7 @@ tasks.named("build") {
 
 tasks.compileJava {
     options.encoding = "UTF-8"
-    options.release.set(21)
+    options.release.set(25)
 }
 
 tasks.processResources {

@@ -4,17 +4,17 @@ import java.util.regex.Pattern
 
 class WildcardPatternMatcher(patterns: List<String>) : StringMatcher {
 
-    private val combinedPattern: Pattern = patterns
-        .takeIf { it.isNotEmpty() }
-        ?.joinToString("|") { raw ->
-            raw.split('*', '?')
-                .joinToString(separator = "") { Pattern.quote(it) }
-                .let {
-                    raw.replace("?", ".").replace("*", ".*")
-                }
-                .let { "^$it$" }
-        }?.let { Pattern.compile(it) }
-        ?: Pattern.compile("^$")
+    private val combinedPattern: Pattern = if (patterns.isEmpty()) {
+        Pattern.compile("^$")
+    } else {
+        val regexString = patterns.joinToString(separator = "|", prefix = "^(", postfix = ")$") { raw ->
+            Pattern.quote(raw)
+                .replace("*", "\\E.*\\Q")
+                .replace("?", "\\E.\\Q")
+                .replace("\\Q\\E", "")
+        }
+        Pattern.compile(regexString)
+    }
 
     override fun matches(input: String): Boolean = combinedPattern.matcher(input).matches()
 }

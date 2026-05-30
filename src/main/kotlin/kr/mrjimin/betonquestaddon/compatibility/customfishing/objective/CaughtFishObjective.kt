@@ -18,6 +18,7 @@ class CaughtFishObjective(
     fun onFish(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
         handle(profile, event.loot.id(), event)
+        event.player.sendMessage(event.loot.id())
     }
 
     fun onFishGroup(event: FishingResultEvent, profile: OnlineProfile) {
@@ -26,5 +27,6 @@ class CaughtFishObjective(
         for (group in groups) {
             handle(profile, group, event)
         }
+        event.player.sendMessage(event.loot.id())
     }
 }

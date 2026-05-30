@@ -31,7 +31,7 @@ abstract class AbstractObjective(
     protected fun matches(patterns: List<String>, value: String?): Boolean {
         if (value == null) return false
 
-        return if (patterns.any { it.contains("*") }) {
+        return if (patterns.any { it.contains("*") || it.contains("?") }) {
             matcherCache
                 .getOrPut(patterns) { WildcardPatternMatcher(patterns) }
                 .matches(value)

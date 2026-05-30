@@ -16,5 +16,6 @@ class ActivateTotemObjective(
 
     fun onActivateTotem(event: TotemActivateEvent, profile: OnlineProfile) {
         handle(profile, event.config.id(), event)
+        event.player.sendMessage(event.config.id())
     }
 }

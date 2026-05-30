@@ -45,11 +45,23 @@ abstract class AddonObjective<T>(
         profile: OnlineProfile,
         value: String?
     ): Boolean {
-        val targetList = arg?.getValue(profile) ?: return true
-        if (targetList.isEmpty()) return true
+        val targetList = arg?.getValue(profile)
 
-        if (value == null) return false
+        // 디버깅 로그 추가
+        println("[AddonDebug] 목표리스트: $targetList | 들어온값: $value")
 
-        return targetList.contains(value)
+        if (targetList.isNullOrEmpty()) {
+            println("[AddonDebug] -> 목표 리스트가 비어있어서 무조건 통과(true)")
+            return true
+        }
+
+        if (value == null) {
+            println("[AddonDebug] -> 들어온 값이 null이라 실패(false)")
+            return false
+        }
+
+        val result = matches(targetList, value)
+        println("[AddonDebug] -> 매칭 결과: $result")
+        return result
     }
 }
