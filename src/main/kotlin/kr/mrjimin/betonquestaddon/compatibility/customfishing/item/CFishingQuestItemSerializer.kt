@@ -12,5 +12,4 @@ class CFishingQuestItemSerializer(
         return itemManager.getCustomFishingItemID(itemStack)
             ?: throw QuestException("Item is not a CustomFishing Item!")
     }
-
 }
