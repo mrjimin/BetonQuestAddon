@@ -1,24 +1,23 @@
 package kr.mrjimin.betonquestaddon.compatibility.customfishing.objective
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
-import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
+import kr.mrjimin.betonquestaddon.util.DefaultOptions
 import net.momirealms.customfishing.api.event.FishingResultEvent
+import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
 class CaughtFishObjective(
     service: ObjectiveService,
-    amount: Argument<Number>,
-    options: ObjectiveOptions,
-    notifyMessage: NotifyMessage
-) : AddonObjective<String>(service, amount, options, notifyMessage) {
+    private val options: DefaultOptions,
+    notifyMessage: NotifyMessage,
+    private val id: Argument<List<String>>
+) : CountingObjective(service, options.amount, notifyMessage.toKey()) {
 
     fun onFish(event: FishingResultEvent, profile: OnlineProfile) {
         if (event.result == FishingResultEvent.Result.FAILURE) return
         handle(profile, event.loot.id(), event)
-        event.player.sendMessage(event.loot.id())
     }
 
     fun onFishGroup(event: FishingResultEvent, profile: OnlineProfile) {
@@ -27,6 +26,25 @@ class CaughtFishObjective(
         for (group in groups) {
             handle(profile, group, event)
         }
-        event.player.sendMessage(event.loot.id())
+    }
+
+    fun handle(
+        profile: OnlineProfile,
+        target: String,
+        event: FishingResultEvent
+    ) {
+        options.locationFilter?.let { filter ->
+            if (!filter.matches(profile, event.fishHook.location)) return
+        }
+
+        if (options.isCancelled.getValue(profile)) {
+            event.isCancelled = true
+            return
+        }
+
+        if (id.getValue(profile).equals(target)) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
     }
 }

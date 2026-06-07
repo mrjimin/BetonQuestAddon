@@ -1,19 +1,21 @@
 package kr.mrjimin.betonquestaddon.compatibility.customcrops.objective.fertilizer
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
+import kr.mrjimin.betonquestaddon.util.DefaultOptions
 import kr.mrjimin.betonquestaddon.util.DualIdTarget
-import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
 import net.momirealms.customcrops.api.event.FertilizerUseEvent
+import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
 
 class FertilizerUseObjective(
     service: ObjectiveService,
-    amount: Argument<Number>,
-    options: ObjectiveOptions
-) : AddonObjective<DualIdTarget>(service, amount, options, NotifyMessage.CUSTOM_CROPS_USE_FERTILIZER) {
+    private val options: DefaultOptions,
+    notifyMessage: NotifyMessage,
+    private val id: Argument<List<String>>,
+    private val potId: Argument<List<String>>? = null
+) : CountingObjective(service, options.amount, notifyMessage.toKey()) {
 
     fun onUseFertilizer(event: FertilizerUseEvent, profile: OnlineProfile) {
         handle(
@@ -21,12 +23,26 @@ class FertilizerUseObjective(
             DualIdTarget(
                 event.fertilizer().id(),
                 event.potConfig().id()
-            )
+            ),
+            event
         )
     }
 
-    override fun getId(target: DualIdTarget): String = target.id
+    fun handle(profile: OnlineProfile, target: DualIdTarget, event: FertilizerUseEvent) {
+        options.locationFilter?.let { filter ->
+            if (!filter.matches(profile, event.location())) return
+        }
 
-    override fun getTargetId(target: DualIdTarget): String = target.targetId
+        if (options.isCancelled.getValue(profile)) {
+            event.isCancelled = true
+            return
+        }
 
+        potId?.getValue(profile)?.equals(target.targetId)?.let { if (!it) return }
+
+        if (id.getValue(profile).equals(target.id)) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
+    }
 }

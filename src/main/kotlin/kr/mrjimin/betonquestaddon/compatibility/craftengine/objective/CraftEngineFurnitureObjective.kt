@@ -1,23 +1,23 @@
 package kr.mrjimin.betonquestaddon.compatibility.craftengine.objective
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.AddonObjective
 import kr.mrjimin.betonquestaddon.config.NotifyMessage
-import kr.mrjimin.betonquestaddon.util.ObjectiveOptions
+import kr.mrjimin.betonquestaddon.util.DefaultOptions
 import net.momirealms.craftengine.bukkit.api.event.FurnitureBreakEvent
 import net.momirealms.craftengine.bukkit.api.event.FurnitureInteractEvent
 import net.momirealms.craftengine.bukkit.api.event.FurniturePlaceEvent
 import net.momirealms.craftengine.bukkit.entity.furniture.BukkitFurniture
+import org.betonquest.betonquest.api.CountingObjective
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.api.quest.objective.service.ObjectiveService
-import org.bukkit.Location
+import org.bukkit.event.Cancellable
 
 class CraftEngineFurnitureObjective(
     service: ObjectiveService,
-    amount: Argument<Number>,
-    options: ObjectiveOptions,
-    notifyMessage: NotifyMessage
-) : AddonObjective<BukkitFurniture>(service, amount, options, notifyMessage) {
+    private val options: DefaultOptions,
+    notifyMessage: NotifyMessage,
+    private val id: Argument<List<String>>
+) : CountingObjective(service, options.amount, notifyMessage.toKey()) {
 
     fun onPlace(event: FurniturePlaceEvent, profile: OnlineProfile) {
         handle(profile, event.furniture(), event)
@@ -31,11 +31,21 @@ class CraftEngineFurnitureObjective(
         handle(profile, event.furniture(), event)
     }
 
-    override fun getId(target: BukkitFurniture): String {
-        return target.id().toString()
-    }
+    fun handle(profile: OnlineProfile, target: BukkitFurniture, event: Cancellable) {
+        val targetId = target.id().toString()
 
-    override fun getLocation(target: BukkitFurniture): Location {
-        return target.location()
+        options.locationFilter?.let { filter ->
+            if (!filter.matches(profile, target.location())) return
+        }
+
+        if (options.isCancelled.getValue(profile)) {
+            event.isCancelled = true
+            return
+        }
+
+        if (id.getValue(profile).equals(targetId)) {
+            getCountingData(profile)?.progress()
+            completeIfDoneOrNotify(profile)
+        }
     }
 }

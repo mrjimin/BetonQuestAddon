@@ -1,5 +1,5 @@
 [versions]
-project_version = "1.2.0"
+project_version = "1.2.1"
 config_version = "8"
 kotlin = "2.3.21"
 shadow = "9.2.2"
