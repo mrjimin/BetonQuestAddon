@@ -7,6 +7,14 @@ object Logger {
         Bukkit.getConsoleSender().sendMessage("[BetonQuestAddon] $string".toMMComponent())
     }
 
+    fun warning(string: String) {
+        Bukkit.getConsoleSender().sendMessage("<yellow>[BetonQuestAddon] $string".toMMComponent())
+    }
+
+    fun error(string: String) {
+        Bukkit.getConsoleSender().sendMessage("<red>[BetonQuestAddon] $string".toMMComponent())
+    }
+
     fun debug(string: String) {
         Bukkit.getConsoleSender().sendMessage("<gray>[BetonQuestAddon] $string".toMMComponent())
     }

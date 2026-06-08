@@ -13,13 +13,13 @@ import kr.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.typewriter.TypeWriterIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardIntegrator
 import kr.mrjimin.betonquestaddon.util.Logger
+import net.momirealms.customcrops.api.util.PluginUtils.getPluginVersion
 import org.betonquest.betonquest.api.BetonQuestApi
-import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 class CompatibilityManager(
-    private val api: BetonQuestApi,
-    private val plugin: JavaPlugin
+    private val plugin: JavaPlugin,
+    private val api: BetonQuestApi
 ) {
 
     private val integrators = mutableMapOf<String, ICompatibility>()
@@ -43,10 +43,13 @@ class CompatibilityManager(
         if (name in integrators) return
         if (!plugin.config.getBoolean("hook.$name", true)) return
 
-        val registerPlugin = Bukkit.getPluginManager().getPlugin(name)?.takeIf { it.isEnabled } ?: return
+        val version = getPluginVersion(name) ?: run {
+            Logger.debug("Skip hooking $name")
+            return
+        }
+
         integrators[name] = factory().apply { hook(api) }
 
-        val version = registerPlugin.pluginMeta.version
         Logger.info("<green>Successfully hooked into <gray>$name <dark_gray>v$version")
     }
 }
