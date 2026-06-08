@@ -1,4 +1,4 @@
-package kr.mrjimin.betonquestaddon.betonquest.objective
+package kr.mrjimin.betonquestaddon.util
 
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.profile.Profile

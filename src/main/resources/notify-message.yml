@@ -9,7 +9,8 @@ betonquestaddon:
   furniture_break: "@[legacy]&2{amount} furniture items left to break"
   furniture_interact: "@[legacy]&2{amount} furniture interactions remaining"
 
-  stone_cutting: "@[legacy]&2{amount} using stone cutting"
+  stone_cut: "@[legacy]&2{amount} using stone cut"
+  smith: "@[legacy]&2{amount} using smith"
 
   # CustomCrops
   customcrops:

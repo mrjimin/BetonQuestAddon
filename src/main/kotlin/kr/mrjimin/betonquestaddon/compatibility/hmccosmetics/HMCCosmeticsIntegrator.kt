@@ -4,6 +4,7 @@ import com.hibiscusmc.hmccosmetics.api.events.HMCCosmeticSetupEvent
 import kr.mrjimin.betonquestaddon.compatibility.ICompatibility
 import kr.mrjimin.betonquestaddon.compatibility.hmccosmetics.action.HMCApplyActionFactory
 import kr.mrjimin.betonquestaddon.compatibility.hmccosmetics.condition.HMCInWardrobeConditionFactory
+import kr.mrjimin.betonquestaddon.compatibility.hmccosmetics.objective.HMCCosmeticEquipObjectiveFactory
 import org.betonquest.betonquest.api.BetonQuestApi
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -20,6 +21,10 @@ class HMCCosmeticsIntegrator(private val plugin: JavaPlugin) : ICompatibility, L
 
         api.conditions().registry().apply {
             register("hmcCosmeticsInWardrobe", HMCInWardrobeConditionFactory())
+        }
+
+        api.objectives().registry().apply {
+            register("hmcCosmeticsEquipCosmetic", HMCCosmeticEquipObjectiveFactory())
         }
     }
 

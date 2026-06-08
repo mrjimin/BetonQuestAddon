@@ -32,7 +32,8 @@ enum class NotifyMessage(private val key: String) {
     CUSTOM_FISHING_CAUGHT_GROUP("customfishing.caught_group"),
     CUSTOM_FISHING_ACTIVATE_TOTEM("customfishing.activate_totem"),
 
-    BQA_STONE_CUT("stone_cutting"),
+    BQA_STONE_CUT("stone_cut"),
+    BQA_SMITH("smith"),
     ;
 
     fun toKey(): String = "betonquestaddon.$key"

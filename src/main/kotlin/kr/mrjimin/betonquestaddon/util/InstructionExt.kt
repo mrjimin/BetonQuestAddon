@@ -1,6 +1,5 @@
 package kr.mrjimin.betonquestaddon.util
 
-import kr.mrjimin.betonquestaddon.betonquest.objective.LocationFilter
 import org.betonquest.betonquest.api.instruction.Argument
 import org.betonquest.betonquest.api.instruction.Instruction
 

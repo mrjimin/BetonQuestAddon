@@ -37,7 +37,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
     private fun enabledMessage() {
         Logger.info("<color:#707070>========================================</color>")
         Logger.info("BetonQuestAddon <color:#00d2ff>v${pluginMeta.version}</color>")
-        Logger.info("BetonQuest <color:#00d2ff>v${getPluginVersion("BetonQuest")}</color>")
+        Logger.info("BetonQuest <dark_gray>v${getPluginVersion("BetonQuest")}</dark_gray>")
         Logger.info("Server <color:#e3a814>${server.name}</color> <gray>(MC ${server.minecraftVersion})</gray>")
         Logger.info("Status: <color:#50fa7b>Successfully enabled</color>")
         Logger.info("<color:#707070>========================================</color>")
