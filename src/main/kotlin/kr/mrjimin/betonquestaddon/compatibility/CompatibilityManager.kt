@@ -13,7 +13,7 @@ import kr.mrjimin.betonquestaddon.compatibility.nexo.NexoIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.typewriter.TypeWriterIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardIntegrator
 import kr.mrjimin.betonquestaddon.util.Logger
-import net.momirealms.customcrops.api.util.PluginUtils.getPluginVersion
+import kr.mrjimin.betonquestaddon.util.getPluginVersion
 import org.betonquest.betonquest.api.BetonQuestApi
 import org.bukkit.plugin.java.JavaPlugin
 

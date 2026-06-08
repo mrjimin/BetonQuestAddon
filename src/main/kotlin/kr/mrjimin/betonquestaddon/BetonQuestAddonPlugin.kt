@@ -4,7 +4,7 @@ import kr.mrjimin.betonquestaddon.compatibility.CompatibilityManager
 import kr.mrjimin.betonquestaddon.config.ConfigsManager
 import kr.mrjimin.betonquestaddon.util.Logger
 import kr.mrjimin.betonquestaddon.util.UpdateChecker
-import net.momirealms.customcrops.api.util.PluginUtils.getPluginVersion
+import kr.mrjimin.betonquestaddon.util.getPluginVersion
 import org.betonquest.betonquest.api.BetonQuestApiService
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
