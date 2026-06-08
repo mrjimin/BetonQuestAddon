@@ -4,14 +4,9 @@ import io.papermc.paper.dialog.Dialog
 import io.papermc.paper.registry.data.dialog.ActionButton
 import io.papermc.paper.registry.data.dialog.DialogBase
 import io.papermc.paper.registry.data.dialog.action.DialogAction
-import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.type.DialogType
-import kr.mrjimin.betonquestaddon.util.toMMComponent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickCallback
-import org.betonquest.betonquest.api.config.ConfigAccessor
-import org.betonquest.betonquest.api.config.Localizations
-import org.betonquest.betonquest.api.logger.BetonQuestLogger
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.conversation.Conversation
 import org.betonquest.betonquest.conversation.ConversationColors
@@ -22,7 +17,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
-import kotlin.run
 
 class DialogConvIO(
     private val plugin: Plugin,

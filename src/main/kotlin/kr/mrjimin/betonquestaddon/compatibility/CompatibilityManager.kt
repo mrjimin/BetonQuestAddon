@@ -25,7 +25,7 @@ class CompatibilityManager(
     private val integrators = mutableMapOf<String, ICompatibility>()
 
     fun registerCompatiblePlugins() {
-        BetonQuestIntegrator(api).hook()
+        BetonQuestIntegrator(plugin, api).hook()
         register("Nexo") { NexoIntegrator() }
         register("CraftEngine") { CraftEngineIntegrator() }
         register("ItemsAdder") { ItemsAdderIntegrator() }
