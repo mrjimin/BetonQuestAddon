@@ -43,10 +43,7 @@ class CompatibilityManager(
         if (name in integrators) return
         if (!plugin.config.getBoolean("hook.$name", true)) return
 
-        val version = getPluginVersion(name) ?: run {
-            Logger.debug("Skip hooking $name")
-            return
-        }
+        val version = getPluginVersion(name) ?: return
 
         integrators[name] = factory().apply { hook(api) }
 
