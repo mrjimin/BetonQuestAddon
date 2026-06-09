@@ -8,14 +8,14 @@ conversation:
     # Layout of the dialog
     # NPC_TITLE: Displays only the NPC's name and a short message
     # FULL_BODY: Displays the NPC's name along with full text, images, or other content
-    layout: FULL_BODY
+    layout: NPC_TITLE
 
     # Configuration for the dialog's close button
     close-button:
       # If true, a close button (X) will be shown
       enabled: true
       # Text displayed on the close button
-      text: "Close"
+      text: "<red>Close"
       # If true, pressing the ESC key will also close the dialog
       # Note: This requires 'enabled' to be true; ESC will not work if the button is disabled
       close-with-escape: true
