@@ -4,35 +4,31 @@ import io.papermc.paper.dialog.Dialog
 import io.papermc.paper.registry.data.dialog.ActionButton
 import io.papermc.paper.registry.data.dialog.DialogBase
 import io.papermc.paper.registry.data.dialog.action.DialogAction
+import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.type.DialogType
+import kr.mrjimin.betonquestaddon.util.toMMComponent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickCallback
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.conversation.Conversation
 import org.betonquest.betonquest.conversation.ConversationColors
 import org.betonquest.betonquest.conversation.ConversationIO
-import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
-import org.bukkit.event.EventHandler
-import org.bukkit.event.HandlerList
-import org.bukkit.event.Listener
-import org.bukkit.plugin.Plugin
 
 class DialogConvIO(
-    private val plugin: Plugin,
     private val conv: Conversation,
     private val profile: OnlineProfile,
-    private val colors: ConversationColors
-) : ConversationIO, Listener {
+    private val colors: ConversationColors,
+    private val settings: DialogSettings
+) : ConversationIO {
 
-    private val options: MutableMap<Int, Component> = mutableMapOf()
-    private var optionsCount: Int = 0
-    private var npcName: Component = Component.empty()
-    private var npcText: Component = Component.empty()
+    private val options = mutableListOf<Component>()
+    private var npcName: Component? = null
+    private var npcText: Component? = null
 
-    override fun begin() {
-        Bukkit.getPluginManager().registerEvents(this, plugin)
-    }
+    private val EMPTY = Component.empty()
+
+    override fun begin() {}
 
     override fun setNpcResponse(npcName: Component, response: Component) {
         this.npcName = npcName
@@ -40,56 +36,97 @@ class DialogConvIO(
     }
 
     override fun addPlayerOption(option: Component, properties: ConfigurationSection) {
-        optionsCount++
-        options[optionsCount] = option
+        options.add(option)
     }
 
     override fun display() {
-        if (npcText == Component.empty() && options.isEmpty()) {
-            end { }
+        if (npcText == null && options.isEmpty()) {
+            end {}
             return
         }
 
-        val title = colors.text
-            .append(colors.npc.append(npcName))
-            .append(Component.text(": "))
-            .append(npcText)
+        profile.player.showDialog(
+            Dialog.create { builder -> builder.empty()
+                .base(buildDialogBase())
+                .type(buildDialogType())
+            }
+        )
+    }
 
-        val actionButtons: List<ActionButton> = options.map { (index, text) ->
+    private fun escapeAllowed(): Boolean =
+        settings.closeButton.enabled && settings.closeButton.closeWithEscape
+
+    private fun buildDialogBase(): DialogBase {
+        val name = npcName ?: EMPTY
+        val text = npcText ?: EMPTY
+
+        val body = when (settings.layout) {
+            DialogLayout.NPC_TITLE ->
+                DialogBody.plainMessage(colors.text.append(text))
+
+            DialogLayout.FULL_BODY ->
+                DialogBody.plainMessage(
+                    colors.text
+                        .append(colors.npc.append(name))
+                        .append(Component.text(": "))
+                        .append(text)
+                )
+        }
+
+        val title = if (settings.layout == DialogLayout.NPC_TITLE) colors.npc.append(name) else EMPTY
+
+        return DialogBase.builder(title)
+            .canCloseWithEscape(escapeAllowed())
+            .body(listOf(body))
+            .build()
+    }
+
+    private fun buildDialogType(): DialogType {
+        if (options.isEmpty()) return DialogType.notice()
+
+        val buttons = options.mapIndexed { index, text ->
             ActionButton.builder(text)
                 .action(
-                    DialogAction.customClick({ _, _ ->
-                        conv.passPlayerAnswer(index)
-                        display()
-                    },   ClickCallback.Options.builder()
-                        .uses(1)
-                        .lifetime(ClickCallback.DEFAULT_LIFETIME)
-                        .build()
+                    DialogAction.customClick(
+                        { _, _ -> conv.passPlayerAnswer(index + 1) },
+                        clickOptions()
                     )
                 )
                 .build()
         }
 
-        val dialog = Dialog.create { builder -> builder.empty()
-            .base(DialogBase.builder(title).build())
-            .type(
-                DialogType.multiAction(actionButtons).build()
-            )
-        }
-        profile.player.showDialog(dialog)
+        return DialogType.multiAction(buttons)
+            .columns(1)
+            .apply {
+                if (settings.closeButton.enabled) exitAction(buildExitButton())
+            }
+            .build()
     }
+
+    private fun buildExitButton(): ActionButton =
+        ActionButton.builder(settings.closeButton.text.toMMComponent())
+            .action(
+                DialogAction.customClick(
+                    { _, _ ->
+                        profile.player.sendMessage("closed dialog io")
+                        conv.endConversation()
+                    },
+                    clickOptions()
+                )
+            )
+            .build()
+
+    private fun clickOptions(): ClickCallback.Options =
+        ClickCallback.Options.builder()
+            .uses(1)
+            .lifetime(ClickCallback.DEFAULT_LIFETIME)
+            .build()
 
     override fun clear() {
-        optionsCount = 0
         options.clear()
-        npcText = Component.empty()
+        npcName = null
+        npcText = null
     }
 
-    override fun end(callback: Runnable) {
-        HandlerList.unregisterAll(this)
-        callback.run()
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    fun dialog() {}
+    override fun end(callback: Runnable) = callback.run()
 }

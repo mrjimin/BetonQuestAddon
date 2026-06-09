@@ -1,5 +1,6 @@
 package kr.mrjimin.betonquestaddon.compatibility
 
+import kr.mrjimin.betonquestaddon.BetonQuestAddonPlugin
 import kr.mrjimin.betonquestaddon.betonquest.BetonQuestIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.cosmeticscore.CosmeticsCoreIntegrator
 import kr.mrjimin.betonquestaddon.compatibility.craftengine.CraftEngineIntegrator
@@ -15,14 +16,13 @@ import kr.mrjimin.betonquestaddon.compatibility.worldguard.WorldGuardIntegrator
 import kr.mrjimin.betonquestaddon.util.Logger
 import kr.mrjimin.betonquestaddon.util.getPluginVersion
 import org.betonquest.betonquest.api.BetonQuestApi
-import org.bukkit.plugin.java.JavaPlugin
 
 class CompatibilityManager(
-    private val plugin: JavaPlugin,
+    private val plugin: BetonQuestAddonPlugin,
     private val api: BetonQuestApi
 ) {
 
-    private val integrators = mutableMapOf<String, ICompatibility>()
+    private val compatMap = mutableMapOf<String, CompatibilityEntry>()
 
     fun registerCompatiblePlugins() {
         BetonQuestIntegrator(plugin, api).hook()
@@ -32,7 +32,7 @@ class CompatibilityManager(
         register("CustomCrops") { CustomCropsIntegrator() }
         register("CustomFishing") { CustomFishingIntegrator() }
         register("CustomNameplates") { CustomNameplatesIntegrator() }
-        register("HMCCosmetics") { HMCCosmeticsIntegrator(plugin) }
+        register("HMCCosmetics") { HMCCosmeticsIntegrator() }
         register("CosmeticsCore") { CosmeticsCoreIntegrator() }
         register("TypeWriter") { TypeWriterIntegrator() }
         register("WorldGuard") { WorldGuardIntegrator() }
@@ -40,13 +40,25 @@ class CompatibilityManager(
     }
 
     private fun register(name: String, factory: () -> ICompatibility) {
-        if (name in integrators) return
+        if (compatMap.containsKey(name)) return
         if (!plugin.config.getBoolean("hook.$name", true)) return
 
         val version = getPluginVersion(name) ?: return
+        val compat = factory().apply { hook(api) }
 
-        integrators[name] = factory().apply { hook(api) }
+        compatMap[name] = CompatibilityEntry(
+            name,
+            version,
+            compat,
+            true
+        )
 
         Logger.info("<green>Successfully hooked into <gray>$name <dark_gray>v$version")
     }
+
+    fun getHookedPlugins(): List<CompatibilityEntry> =
+        compatMap.values.toList()
+
+    fun isHooked(name: String): Boolean =
+        compatMap.containsKey(name)
 }

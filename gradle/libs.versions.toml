@@ -1,6 +1,5 @@
 [versions]
-project_version = "1.3.2-beta"
-config_version = "8"
+project_version = "1.4.0-beta"
 kotlin = "2.3.21"
 shadow = "9.2.2"
 hangar-publish = "0.1.4"

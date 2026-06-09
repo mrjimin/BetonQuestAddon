@@ -1,5 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.papermc.hangarpublishplugin.model.Platforms
+import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -94,17 +95,6 @@ tasks.compileJava {
     options.release.set(25)
 }
 
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-
-    val configVersion = libs.versions.config.version.get()
-    filesMatching("config.yml") {
-        expand("config_version" to configVersion)
-    }
-}
-
 // Auto Publish Hangar
 hangarPublish {
     publications.register("plugin") {
@@ -154,5 +144,10 @@ paper {
         register("WorldGuard") { required = false }
         register("ExcellentEconomy") { required = false }
         register("AdvancedEnchantments") { required = false }
+    }
+    permissions {
+        register("betonquestaddon.command") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
     }
 }
