@@ -29,7 +29,7 @@ class BetonQuestIntegrator(
         val componentLoader = betonQuest.componentLoader
         componentLoader.get(ConversationIORegistry::class.java).register(
             "dialog", DialogConvIOFactory(
-                plugin.configsManager.dialog,
+                plugin.configsManager,
                 componentLoader.get(ConversationColors::class.java)
             )
         )

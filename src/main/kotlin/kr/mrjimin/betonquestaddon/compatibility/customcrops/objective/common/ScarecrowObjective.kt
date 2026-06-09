@@ -38,7 +38,7 @@ class ScarecrowObjective(
         targetLocation: Location,
         event: Cancellable
     ) {
-        success(profile, id.getValue(profile).equals(target), event, targetLocation)
+        success(profile, id.getValue(profile).contains(target), event, targetLocation)
     }
 
 }

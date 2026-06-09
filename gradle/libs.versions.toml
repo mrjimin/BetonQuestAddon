@@ -1,5 +1,5 @@
 [versions]
-project_version = "1.4.0-beta"
+project_version = "1.4.0"
 kotlin = "2.3.21"
 shadow = "9.2.2"
 hangar-publish = "0.1.4"
@@ -19,8 +19,7 @@ hmc-cosmetics = "2.8.3-e88b8461"
 world-guard = "7.0.14"
 excellent-economy = "2.8.0"
 
-boosted-yaml = "1.3.7"
-bstats = "3.1.0"
+bstats = "3.2.1"
 
 [libraries]
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
@@ -38,7 +37,6 @@ worldguard = { group = "com.sk89q.worldguard", name = "worldguard-bukkit", versi
 excellent-economy = { group = "su.nightexpress.excellenteconomy", name = "ExcellentEconomy", version.ref = "excellent-economy" }
 ae-api = { group = "gg.aquatic", name = "AEAPI", version = "1.0" }
 
-boosted-yaml = { group = "dev.dejvokep", name = "boosted-yaml", version.ref = "boosted-yaml" }
 bstats = { group = "org.bstats", name = "bstats-bukkit", version.ref = "bstats" }
 
 [plugins]

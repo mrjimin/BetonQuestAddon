@@ -1,3 +1,8 @@
+## [1.4.0] - 2026-06-10
+
+#### Added
+- Dialog IO system `button-width` setting
+
 ## [1.4.0 - beta] - 2026-06-09
 
 #### Added

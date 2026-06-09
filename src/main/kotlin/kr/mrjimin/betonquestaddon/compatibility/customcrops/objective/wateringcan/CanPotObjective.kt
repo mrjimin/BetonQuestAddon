@@ -30,6 +30,6 @@ class CanPotObjective(
 
     private fun handle(profile: OnlineProfile, target: DualIdTarget, event: WateringCanWaterPotEvent) {
         potId?.getValue(profile)?.equals(target.targetId)?.let { if (!it) return }
-        success(profile, id.getValue(profile).equals(target.id), event)
+        success(profile, id.getValue(profile).contains(target.id), event)
     }
 }

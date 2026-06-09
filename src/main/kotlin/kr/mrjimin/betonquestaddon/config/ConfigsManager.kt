@@ -5,24 +5,19 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class ConfigsManager(private val plugin: JavaPlugin) {
 
-    lateinit var dialog: DialogConfig
-        private set
+    val config: FileConfiguration
+        get() = plugin.config
 
-//    lateinit var hooks: HookConfig
-//        private set
-
-    private var config: FileConfiguration = plugin.config
-
-    fun load() {
+    fun init() {
         plugin.saveDefaultConfig()
-        plugin.reloadConfig()
-        config = plugin.config
-
-        dialog = DialogConfig(config)
-        // hooks = HookConfig(config)
+        reload()
     }
 
-    fun reload() = load()
+    fun reload() {
+        plugin.reloadConfig()
+    }
+
+    fun dialog(): DialogConfig = DialogConfig(config)
 
     fun updateChecker(): Boolean =
         config.getBoolean("setting.update-checker", true)

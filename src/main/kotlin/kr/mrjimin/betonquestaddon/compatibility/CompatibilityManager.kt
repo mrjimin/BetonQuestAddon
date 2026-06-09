@@ -59,6 +59,9 @@ class CompatibilityManager(
     fun getHookedPlugins(): List<CompatibilityEntry> =
         compatMap.values.toList()
 
+    fun getHookedPluginNames(): Set<String> =
+        compatMap.keys
+
     fun isHooked(name: String): Boolean =
         compatMap.containsKey(name)
 }

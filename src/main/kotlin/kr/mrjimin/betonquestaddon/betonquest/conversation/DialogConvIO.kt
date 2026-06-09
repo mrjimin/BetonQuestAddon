@@ -6,6 +6,7 @@ import io.papermc.paper.registry.data.dialog.DialogBase
 import io.papermc.paper.registry.data.dialog.action.DialogAction
 import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.type.DialogType
+import kr.mrjimin.betonquestaddon.config.ConfigsManager
 import kr.mrjimin.betonquestaddon.util.toMMComponent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickCallback
@@ -19,7 +20,7 @@ class DialogConvIO(
     private val conv: Conversation,
     private val profile: OnlineProfile,
     private val colors: ConversationColors,
-    private val settings: DialogSettings
+    private val configsManager: ConfigsManager
 ) : ConversationIO {
 
     private val options = mutableListOf<Component>()
@@ -53,14 +54,17 @@ class DialogConvIO(
         )
     }
 
+    private fun settings(): DialogSettings =
+        configsManager.dialog().settings
+
     private fun escapeAllowed(): Boolean =
-        settings.closeButton.enabled && settings.closeButton.closeWithEscape
+        settings().closeButton.enabled && settings().closeButton.closeWithEscape
 
     private fun buildDialogBase(): DialogBase {
         val name = npcName ?: EMPTY
         val text = npcText ?: EMPTY
 
-        val body = when (settings.layout) {
+        val body = when (settings().layout) {
             DialogLayout.NPC_TITLE ->
                 DialogBody.plainMessage(colors.text.append(text))
 
@@ -73,7 +77,7 @@ class DialogConvIO(
                 )
         }
 
-        val title = if (settings.layout == DialogLayout.NPC_TITLE) colors.npc.append(name) else EMPTY
+        val title = if (settings().layout == DialogLayout.NPC_TITLE) colors.npc.append(name) else EMPTY
 
         return DialogBase.builder(title)
             .canCloseWithEscape(escapeAllowed())
@@ -86,6 +90,7 @@ class DialogConvIO(
 
         val buttons = options.mapIndexed { index, text ->
             ActionButton.builder(text)
+                .width(settings().defaultButtonWidth)
                 .action(
                     DialogAction.customClick(
                         { _, _ -> conv.passPlayerAnswer(index + 1) },
@@ -98,13 +103,14 @@ class DialogConvIO(
         return DialogType.multiAction(buttons)
             .columns(1)
             .apply {
-                if (settings.closeButton.enabled) exitAction(buildExitButton())
+                if (settings().closeButton.enabled) exitAction(buildExitButton())
             }
             .build()
     }
 
     private fun buildExitButton(): ActionButton =
-        ActionButton.builder(settings.closeButton.text.toMMComponent())
+        ActionButton.builder(settings().closeButton.text.toMMComponent())
+            .width(settings().closeButton.buttonWidth)
             .action(
                 DialogAction.customClick(
                     { _, _ ->

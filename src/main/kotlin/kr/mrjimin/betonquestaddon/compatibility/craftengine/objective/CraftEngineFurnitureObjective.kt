@@ -33,6 +33,6 @@ class CraftEngineFurnitureObjective(
 
     private fun handle(profile: OnlineProfile, target: BukkitFurniture, event: Cancellable) {
         val targetId = target.id().toString()
-        success(profile, id.getValue(profile).equals(targetId), event)
+        success(profile, id.getValue(profile).contains(targetId), event)
     }
 }

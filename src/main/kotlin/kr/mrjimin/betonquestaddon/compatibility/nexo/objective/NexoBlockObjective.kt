@@ -34,7 +34,7 @@ class NexoBlockObjective(
 
     private fun handle(profile: OnlineProfile, target: Block, event: Cancellable) {
         val targetId = NexoBlocks.customBlockMechanic(target)?.itemID
-        success(profile, id.getValue(profile).equals(targetId), event)
+        success(profile, id.getValue(profile).contains(targetId), event)
     }
 
 }

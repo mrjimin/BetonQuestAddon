@@ -10,6 +10,7 @@ import kr.mrjimin.betonquestaddon.util.getPluginVersion
 import org.betonquest.betonquest.api.BetonQuestApi
 import org.betonquest.betonquest.api.BetonQuestApiService
 import org.bstats.bukkit.Metrics
+import org.bstats.charts.AdvancedPie
 import org.bukkit.plugin.java.JavaPlugin
 
 class BetonQuestAddonPlugin : JavaPlugin() {
@@ -22,14 +23,13 @@ class BetonQuestAddonPlugin : JavaPlugin() {
     override fun onEnable() {
         val betonQuestApi = loadBetonQuestApi() ?: return
 
-        Metrics(this, 26421)
-
         printEnabledMessage()
 
         initConfigs()
         initCompatibility(betonQuestApi)
         registerCommands()
 
+        initMetrics()
         checkForUpdates()
     }
 
@@ -48,7 +48,7 @@ class BetonQuestAddonPlugin : JavaPlugin() {
 
     private fun initConfigs() {
         configsManager = ConfigsManager(this)
-        configsManager.load()
+        configsManager.init()
     }
 
     private fun initCompatibility(api: BetonQuestApi) {
@@ -60,6 +60,25 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         CommandsHandler(this).register("betonquestaddon")
     }
 
+    private fun initMetrics() {
+        val metrics = Metrics(this, 26421)
+
+        metrics.addCustomChart(
+            AdvancedPie("hooks") {
+                compatManager.getHookedPluginNames()
+                    .associateWith { 1 }
+                    .toMutableMap()
+                    .ifEmpty { mutableMapOf("None" to 1) }
+            }
+        )
+    }
+
+    private fun checkForUpdates() {
+        if (configsManager.updateChecker()) {
+            UpdateChecker("XvDcVrRl", this).checkForUpdates()
+        }
+    }
+
     private fun printEnabledMessage() {
         Logger.info("<color:#707070>========================================</color>")
         Logger.info("BetonQuestAddon <color:#00d2ff>v${pluginMeta.version}</color>")
@@ -67,11 +86,5 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         Logger.info("Server <color:#e3a814>${server.name}</color> <gray>(MC ${server.minecraftVersion})</gray>")
         Logger.info("Status: <color:#50fa7b>Successfully enabled</color>")
         Logger.info("<color:#707070>========================================</color>")
-    }
-
-    private fun checkForUpdates() {
-        if (configsManager.updateChecker()) {
-            UpdateChecker("XvDcVrRl", this).checkForUpdates()
-        }
     }
 }

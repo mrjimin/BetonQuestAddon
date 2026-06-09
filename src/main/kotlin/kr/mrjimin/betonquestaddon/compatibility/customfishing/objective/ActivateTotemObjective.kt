@@ -24,6 +24,6 @@ class ActivateTotemObjective(
         target: String,
         event: TotemActivateEvent
     ) {
-        success(profile, id.getValue(profile).equals(target), event, event.coreLocation)
+        success(profile, id.getValue(profile).contains(target), event, event.coreLocation)
     }
 }

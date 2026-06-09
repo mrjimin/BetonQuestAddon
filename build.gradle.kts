@@ -1,6 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.papermc.hangarpublishplugin.model.Platforms
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
+import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -62,7 +63,6 @@ dependencies {
         include("*.jar")
     })
 
-    implementation(libs.boosted.yaml)
     implementation(libs.bstats)
 
     testImplementation(kotlin("test"))
@@ -83,7 +83,6 @@ val shadowJarPlugin = tasks.register<ShadowJar>("shadowJarPlugin") {
     exclude("kotlin/**", "kotlinx/**")
 
     relocate("org.bstats", "kr.mrjimin.betonquestaddon.libraries.bstats")
-    relocate("dev.dejvokep.boostedyaml", "kr.mrjimin.betonquestaddon.libraries.boostedyaml")
 }
 
 tasks.named("build") {

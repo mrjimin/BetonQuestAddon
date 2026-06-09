@@ -16,7 +16,7 @@ class HMCCosmeticEquipObjective(
     fun onCosmeticEquip(event: PlayerCosmeticEquipEvent, profile: OnlineProfile) {
         val cosmeticsId = event.cosmetic.id ?: return
 
-        if (id.getValue(profile).equals(cosmeticsId)) {
+        if (id.getValue(profile).contains(cosmeticsId)) {
             getCountingData(profile)?.progress()
             completeIfDoneOrNotify(profile)
         }

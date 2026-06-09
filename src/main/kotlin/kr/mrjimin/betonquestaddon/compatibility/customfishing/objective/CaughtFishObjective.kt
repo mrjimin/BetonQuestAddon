@@ -33,6 +33,6 @@ class CaughtFishObjective(
         target: String,
         event: FishingResultEvent
     ) {
-        success(profile, id.getValue(profile).equals(target), event, event.fishHook.location)
+        success(profile, id.getValue(profile).contains(target), event, event.fishHook.location)
     }
 }

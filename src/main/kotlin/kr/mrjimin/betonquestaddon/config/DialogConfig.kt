@@ -15,13 +15,16 @@ class DialogConfig(private val config: FileConfiguration) {
                 ?.let { runCatching { DialogLayout.valueOf(it) }.getOrDefault(DialogLayout.NPC_TITLE) }
                 ?: DialogLayout.NPC_TITLE
 
+            val defaultButtonWidth = section?.getInt("default-button-width") ?: 250
+
             val closeSection = section?.getConfigurationSection("close-button")
             val closeButton = CloseButtonSettings(
-                enabled = closeSection?.getBoolean("enabled") ?: true,
-                text = closeSection?.getString("text") ?: "Close",
-                closeWithEscape = closeSection?.getBoolean("close-with-escape") ?: true
+                closeSection?.getBoolean("enabled") ?: true,
+                closeSection?.getString("text") ?: "Close",
+                closeSection?.getBoolean("close-with-escape") ?: true,
+                closeSection?.getInt("button-width") ?: defaultButtonWidth,
             )
 
-            return DialogSettings(layout = layout, closeButton = closeButton)
+            return DialogSettings(layout, closeButton, defaultButtonWidth)
         }
 }

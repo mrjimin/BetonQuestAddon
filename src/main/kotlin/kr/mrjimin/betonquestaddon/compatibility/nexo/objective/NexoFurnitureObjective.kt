@@ -34,7 +34,7 @@ class NexoFurnitureObjective(
 
     private fun handle(profile: OnlineProfile, target: Entity, event: Cancellable) {
         val targetId = NexoFurniture.furnitureMechanic(target)?.itemID
-        success(profile, id.getValue(profile).equals(targetId), event)
+        success(profile, id.getValue(profile).contains(targetId), event)
     }
 
 }

@@ -34,6 +34,6 @@ class ItemsAdderBlockObjective(
 
     private fun handle(profile: OnlineProfile, target: Block, event: Cancellable) {
         val targetId = CustomBlock.byAlreadyPlaced(target)?.namespacedID
-        success(profile, id.getValue(profile).equals(targetId), event)
+        success(profile, id.getValue(profile).contains(targetId), event)
     }
 }

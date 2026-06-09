@@ -30,6 +30,6 @@ class FertilizerUseObjective(
 
     private fun handle(profile: OnlineProfile, target: DualIdTarget, event: FertilizerUseEvent) {
         potId?.getValue(profile)?.equals(target.targetId)?.let { if (!it) return }
-        success(profile, id.getValue(profile).equals(target.id), event, event.location())
+        success(profile, id.getValue(profile).contains(target.id), event, event.location())
     }
 }

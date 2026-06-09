@@ -33,7 +33,7 @@ class ItemsAdderFurnitureObjective(
 
     private fun handle(profile: OnlineProfile, target: CustomFurniture?, event: Cancellable) {
         val targetId = target?.namespacedID
-        success(profile, id.getValue(profile).equals(targetId), event)
+        success(profile, id.getValue(profile).contains(targetId), event)
     }
 
 }

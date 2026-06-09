@@ -29,7 +29,7 @@ class CanSprinklerObjective(
 
     private fun handle(profile: OnlineProfile, target: DualIdTarget, event: WateringCanWaterSprinklerEvent) {
         sprinklerId?.getValue(profile)?.equals(target.targetId)?.let { if (!it) return }
-        success(profile, id.getValue(profile).equals(target.id), event, event.location())
+        success(profile, id.getValue(profile).contains(target.id), event, event.location())
     }
 
 }
