@@ -8,8 +8,8 @@ class ConfigsManager(private val plugin: JavaPlugin) {
     lateinit var dialog: DialogConfig
         private set
 
-    lateinit var hooks: HookConfig
-        private set
+//    lateinit var hooks: HookConfig
+//        private set
 
     private var config: FileConfiguration = plugin.config
 
@@ -19,12 +19,10 @@ class ConfigsManager(private val plugin: JavaPlugin) {
         config = plugin.config
 
         dialog = DialogConfig(config)
-        hooks = HookConfig(config)
+        // hooks = HookConfig(config)
     }
 
     fun reload() = load()
-
-    fun rawConfig(): FileConfiguration = config
 
     fun updateChecker(): Boolean =
         config.getBoolean("setting.update-checker", true)

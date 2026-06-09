@@ -108,7 +108,7 @@ class DialogConvIO(
             .action(
                 DialogAction.customClick(
                     { _, _ ->
-                        profile.player.sendMessage("closed dialog io")
+                        // profile.player.sendMessage("closed dialog io")
                         conv.endConversation()
                     },
                     clickOptions()
