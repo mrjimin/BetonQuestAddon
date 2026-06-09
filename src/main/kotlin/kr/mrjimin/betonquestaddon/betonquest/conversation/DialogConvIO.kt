@@ -110,7 +110,7 @@ class DialogConvIO(
 
     private fun buildExitButton(): ActionButton =
         ActionButton.builder(settings().closeButton.text.toMMComponent())
-            .width(settings().closeButton.buttonWidth)
+            .width(settings().closeButton.width)
             .action(
                 DialogAction.customClick(
                     { _, _ ->

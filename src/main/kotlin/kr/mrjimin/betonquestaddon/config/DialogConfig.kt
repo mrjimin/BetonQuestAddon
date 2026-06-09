@@ -21,8 +21,8 @@ class DialogConfig(private val config: FileConfiguration) {
             val closeButton = CloseButtonSettings(
                 closeSection?.getBoolean("enabled") ?: true,
                 closeSection?.getString("text") ?: "Close",
+                closeSection?.getInt("width") ?: defaultButtonWidth,
                 closeSection?.getBoolean("close-with-escape") ?: true,
-                closeSection?.getInt("button-width") ?: defaultButtonWidth,
             )
 
             return DialogSettings(layout, closeButton, defaultButtonWidth)

@@ -9,6 +9,6 @@ data class DialogSettings(
 data class CloseButtonSettings(
     val enabled: Boolean = true,
     val text: String = "Close",
-    val closeWithEscape: Boolean = true,
-    val buttonWidth: Int = 250
+    val width: Int = 250,
+    val closeWithEscape: Boolean = true
 )
