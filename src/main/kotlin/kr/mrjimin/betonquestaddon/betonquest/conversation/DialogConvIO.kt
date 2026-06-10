@@ -10,6 +10,7 @@ import kr.mrjimin.betonquestaddon.config.ConfigsManager
 import kr.mrjimin.betonquestaddon.util.toMMComponent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickCallback
+import org.betonquest.betonquest.api.common.component.ComponentLineWrapper
 import org.betonquest.betonquest.api.profile.OnlineProfile
 import org.betonquest.betonquest.conversation.Conversation
 import org.betonquest.betonquest.conversation.ConversationColors
@@ -20,6 +21,7 @@ class DialogConvIO(
     private val conv: Conversation,
     private val profile: OnlineProfile,
     private val colors: ConversationColors,
+    private val componentLineWrapper: ComponentLineWrapper,
     private val configsManager: ConfigsManager
 ) : ConversationIO {
 
@@ -88,9 +90,13 @@ class DialogConvIO(
     private fun buildDialogType(): DialogType {
         if (options.isEmpty()) return DialogType.notice()
 
+        val targetWidth = if (settings().defaultButtonWidth == -1) {
+            options.maxOfOrNull { componentLineWrapper.width(it) } ?: 100
+        } else settings().defaultButtonWidth
+
         val buttons = options.mapIndexed { index, text ->
             ActionButton.builder(text)
-                .width(settings().defaultButtonWidth)
+                .width(targetWidth)
                 .action(
                     DialogAction.customClick(
                         { _, _ -> conv.passPlayerAnswer(index + 1) },
@@ -108,19 +114,26 @@ class DialogConvIO(
             .build()
     }
 
-    private fun buildExitButton(): ActionButton =
-        ActionButton.builder(settings().closeButton.text.toMMComponent())
-            .width(settings().closeButton.width)
+    private fun buildExitButton(): ActionButton {
+        val closeSettings = settings().closeButton
+        val closeText = closeSettings.text.toMMComponent()
+
+        val finalCloseWidth = if (closeSettings.width == -1) {
+            if (settings().defaultButtonWidth == -1) {
+                componentLineWrapper.width(closeText)
+            } else settings().defaultButtonWidth
+        } else closeSettings.width
+
+        return ActionButton.builder(closeText)
+            .width(finalCloseWidth)
             .action(
                 DialogAction.customClick(
-                    { _, _ ->
-                        // profile.player.sendMessage("closed dialog io")
-                        conv.endConversation()
-                    },
+                    { _, _ -> conv.endConversation() },
                     clickOptions()
                 )
             )
             .build()
+        }
 
     private fun clickOptions(): ClickCallback.Options =
         ClickCallback.Options.builder()
