@@ -1,3 +1,8 @@
+## [1.4.1] - 2026-06-10
+
+#### Added
+- Dialog IO system `button-render-padding`, `default-button-width`(auto) setting
+
 ## [1.4.0] - 2026-06-10
 
 #### Added

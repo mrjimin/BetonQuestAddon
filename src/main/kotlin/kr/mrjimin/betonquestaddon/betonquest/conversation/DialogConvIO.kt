@@ -147,27 +147,6 @@ class DialogConvIO(
             .build()
     }
 
-//    private fun buildExitButton(): ActionButton {
-//        val closeSettings = settings().closeButton
-//        val closeText = closeSettings.text.toMMComponent()
-//
-//        val finalCloseWidth = if (closeSettings.width == -1) {
-//            if (settings().defaultButtonWidth == -1) {
-//                componentLineWrapper.width(closeText)
-//            } else settings().defaultButtonWidth
-//        } else closeSettings.width
-//
-//        return ActionButton.builder(closeText)
-//            .width(finalCloseWidth)
-//            .action(
-//                DialogAction.customClick(
-//                    { _, _ -> conv.endConversation() },
-//                    clickOptions()
-//                )
-//            )
-//            .build()
-//        }
-
     private fun clickOptions(): ClickCallback.Options =
         ClickCallback.Options.builder()
             .uses(1)
