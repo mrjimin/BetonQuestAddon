@@ -16,6 +16,7 @@ import org.betonquest.betonquest.conversation.Conversation
 import org.betonquest.betonquest.conversation.ConversationColors
 import org.betonquest.betonquest.conversation.ConversationIO
 import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.event.Listener
 
 class DialogConvIO(
     private val conv: Conversation,
@@ -23,7 +24,7 @@ class DialogConvIO(
     private val colors: ConversationColors,
     private val componentLineWrapper: ComponentLineWrapper,
     private val configsManager: ConfigsManager
-) : ConversationIO {
+) : ConversationIO, Listener {
 
     private val options = mutableListOf<Component>()
     private var npcName: Component? = null
@@ -90,42 +91,53 @@ class DialogConvIO(
     private fun buildDialogType(): DialogType {
         if (options.isEmpty()) return DialogType.notice()
 
-        val targetWidth = if (settings().defaultButtonWidth == -1) {
-            options.maxOfOrNull { componentLineWrapper.width(it) } ?: 100
-        } else settings().defaultButtonWidth
+        val width = computeDialogWidth()
 
-        val buttons = options.mapIndexed { index, text ->
-            ActionButton.builder(text)
-                .width(targetWidth)
-                .action(
-                    DialogAction.customClick(
-                        { _, _ -> conv.passPlayerAnswer(index + 1) },
-                        clickOptions()
-                    )
-                )
-                .build()
+        val buttons = options.mapIndexed { index, option ->
+            buildPlayerOptionButton(option, index, width)
         }
 
         return DialogType.multiAction(buttons)
             .columns(1)
             .apply {
-                if (settings().closeButton.enabled) exitAction(buildExitButton())
+                if (settings().closeButton.enabled) {
+                    exitAction((buildExitButton(width)))
+                }
             }
             .build()
     }
 
-    private fun buildExitButton(): ActionButton {
+    private fun buildPlayerOptionButton(option: Component, index: Int, width: Int): ActionButton {
+        return ActionButton.builder(option)
+            .width(width)
+            .action(
+                DialogAction.customClick(
+                    { _, _ -> conv.passPlayerAnswer(index + 1) },
+                    clickOptions()
+                )
+            )
+            .build()
+    }
+
+    private fun computeDialogWidth(): Int {
+        val settings = settings()
+        val optionWidth = options.maxOfOrNull { componentLineWrapper.width(it) + settings().buttonRenderPadding } ?: 0
+        val defaultWidth = settings.defaultButtonWidth.takeIf { it > 0 } ?: 0
+        return maxOf(optionWidth, defaultWidth, 100)
+    }
+
+    private fun buildExitButton(width: Int): ActionButton {
         val closeSettings = settings().closeButton
         val closeText = closeSettings.text.toMMComponent()
 
-        val finalCloseWidth = if (closeSettings.width == -1) {
-            if (settings().defaultButtonWidth == -1) {
-                componentLineWrapper.width(closeText)
-            } else settings().defaultButtonWidth
-        } else closeSettings.width
+        val finalWidth = when {
+            closeSettings.width > 0 -> closeSettings.width
+            closeSettings.width == -1 -> width
+            else -> componentLineWrapper.width(closeText) + settings().buttonRenderPadding
+        }
 
         return ActionButton.builder(closeText)
-            .width(finalCloseWidth)
+            .width(finalWidth)
             .action(
                 DialogAction.customClick(
                     { _, _ -> conv.endConversation() },
@@ -133,7 +145,28 @@ class DialogConvIO(
                 )
             )
             .build()
-        }
+    }
+
+//    private fun buildExitButton(): ActionButton {
+//        val closeSettings = settings().closeButton
+//        val closeText = closeSettings.text.toMMComponent()
+//
+//        val finalCloseWidth = if (closeSettings.width == -1) {
+//            if (settings().defaultButtonWidth == -1) {
+//                componentLineWrapper.width(closeText)
+//            } else settings().defaultButtonWidth
+//        } else closeSettings.width
+//
+//        return ActionButton.builder(closeText)
+//            .width(finalCloseWidth)
+//            .action(
+//                DialogAction.customClick(
+//                    { _, _ -> conv.endConversation() },
+//                    clickOptions()
+//                )
+//            )
+//            .build()
+//        }
 
     private fun clickOptions(): ClickCallback.Options =
         ClickCallback.Options.builder()

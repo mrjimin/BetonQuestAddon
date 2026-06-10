@@ -15,6 +15,7 @@ class DialogConfig(private val config: FileConfiguration) {
                 ?.let { runCatching { DialogLayout.valueOf(it) }.getOrDefault(DialogLayout.NPC_TITLE) }
                 ?: DialogLayout.NPC_TITLE
 
+            val buttonRenderPadding = section?.getInt("button-render-padding") ?: 13
             val defaultButtonWidth = section?.getInt("default-button-width") ?: 250
 
             val closeSection = section?.getConfigurationSection("close-button")
@@ -25,6 +26,6 @@ class DialogConfig(private val config: FileConfiguration) {
                 closeSection?.getBoolean("close-with-escape") ?: true,
             )
 
-            return DialogSettings(layout, closeButton, defaultButtonWidth)
+            return DialogSettings(layout, closeButton, buttonRenderPadding, defaultButtonWidth)
         }
 }

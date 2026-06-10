@@ -7,6 +7,8 @@ import kr.mrjimin.betonquestaddon.betonquest.objective.smith.SmithObjectiveFacto
 import kr.mrjimin.betonquestaddon.betonquest.objective.stonecut.StoneCutObjectiveFactory
 import org.betonquest.betonquest.BetonQuest
 import org.betonquest.betonquest.api.BetonQuestApi
+import org.betonquest.betonquest.api.common.component.ComponentLineWrapper
+import org.betonquest.betonquest.api.common.component.font.FontRegistry
 import org.betonquest.betonquest.conversation.ConversationColors
 import org.betonquest.betonquest.kernel.registry.feature.ConversationIORegistry
 
@@ -29,8 +31,9 @@ class BetonQuestIntegrator(
         val componentLoader = betonQuest.componentLoader
         componentLoader.get(ConversationIORegistry::class.java).register(
             "dialog", DialogConvIOFactory(
+                componentLoader.get(ConversationColors::class.java),
+                ComponentLineWrapper(componentLoader.get(FontRegistry::class.java)),
                 plugin.configsManager,
-                componentLoader.get(ConversationColors::class.java)
             )
         )
     }

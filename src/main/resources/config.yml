@@ -10,18 +10,31 @@ conversation:
     # FULL_BODY: Displays the NPC's name along with full text, images, or other content
     layout: NPC_TITLE
 
+    # Internal UI adjustment added to button width calculation
+    # Used to compensate for Minecraft dialog rendering spacing
+    button-render-padding: 13
+
     # The default width for action buttons in the dialog.
+    # If set to -1, the width will be automatically calculated
+    # based on the longest button (NPC options or close button).
     # Min: 1, Max: 1024
-    default-button-width: 250
+    default-button-width: -1
 
     # Configuration for the dialog's close button
     close-button:
       # If true, a close button (X) will be shown
       enabled: true
+
       # Text displayed on the close button
       text: "<red>Close"
-      # Min: 1, Max: 1024
-      width: 100
+
+      # Button width for the close button.
+      # 0: Auto (based on text width)
+      # -1: Match dialog unified width
+      # >0: Fixed width
+      # Min: 0, Max: 1024
+      width: -1
+
       # If true, pressing the ESC key will also close the dialog
       # Note: This requires 'enabled' to be true; ESC will not work if the button is disabled
       close-with-escape: true

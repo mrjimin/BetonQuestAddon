@@ -64,11 +64,10 @@ class BetonQuestAddonPlugin : JavaPlugin() {
         val metrics = Metrics(this, 26421)
 
         metrics.addCustomChart(
-            AdvancedPie("hooks") {
+            AdvancedPie("compatibility_plugins") {
                 compatManager.getHookedPluginNames()
                     .associateWith { 1 }
-                    .toMutableMap()
-                    .ifEmpty { mutableMapOf("None" to 1) }
+                    .ifEmpty { mapOf("None" to 1) }
             }
         )
     }
